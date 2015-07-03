@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.harishkannarao.angularjs</groupId>
+        <artifactId>qa-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>wildfly-setup</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <wildfly.extract.dirName>wildfly-8.2.0.Final</wildfly.extract.dirName>
+        <wildfly.home>${project.basedir}/server/${wildfly.extract.dirName}</wildfly.home>
+        <wildfly.server>${wildfly.home}/standalone</wildfly.server>
+        <wildfly.deployments>${wildfly.server}/deployments</wildfly.deployments>
+        <wildfly.configuration>${wildfly.server}/configuration</wildfly.configuration>
+        <wildfly.log>${wildfly.server}/log</wildfly.log>
+        <skip.wildfly.unpack>false</skip.wildfly.unpack>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>check-wildfly-exists</id>
+            <activation>
+                <file>
+                    <exists>server/wildfly-8.2.0.Final</exists>
+                </file>
+            </activation>
+            <properties>
+                <skip.wildfly.unpack>true</skip.wildfly.unpack>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>clear-existing-wildfly</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skip.wildfly.unpack}</skip>
+                            <target name="clear-existing-wildfly">
+                                <delete dir="${wildfly.home}" />
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>unpack-wildfly</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skip.wildfly.unpack}</skip>
+                            <target name="unpack-wildfly">
+                                <dependencyfilesets prefix="mydeps."/>
+                                <unzip dest="${project.basedir}/server" overwrite="false">
+                                    <fileset refid="mydeps.org.wildfly:wildfly-dist:zip" />
+                                </unzip>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>delete-wildfly-standalone-configurations</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipServerSetup}</skip>
+                            <target name="delete-wildfly-standalone-configurations">
+                                <delete>
+                                    <fileset dir="${wildfly.configuration}" includes="standalone.xml" />
+                                    <fileset dir="${wildfly.configuration}" includes="standalone-full.xml" />
+                                    <fileset dir="${wildfly.configuration}" includes="standalone-full-ha.xml" />
+                                    <fileset dir="${wildfly.configuration}" includes="standalone-ha.xml" />
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-wildfly-standalone-full-configurations</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipServerSetup}</skip>
+                            <target name="copy and rename file wildfly configuration files">
+                                <copy file="${project.basedir}/conf/standalone-full.xml" tofile="${wildfly.configuration}/standalone-full.xml" />
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>clear-deployments</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipServerSetup}</skip>
+                            <target name="clear-deployments">
+                                <delete>
+                                    <fileset dir="${wildfly.deployments}" includes="**/*" />
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+                      <execution>
+                        <id>copy-ear</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipServerSetup}</skip>
+                            <target name="copy-ear">
+                                <dependencyfilesets prefix="mydeps."/>
+                                <copy tofile="${wildfly.deployments}/angularjs-ear.ear">
+                                    <fileset refid="mydeps.com.harishkannarao.angularjs:angularjs-ear:ear" />
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>start-wildfly</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>${cargo.goal}</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipServerStartup}</skip>
+                            <configuration>
+                                <properties>
+                                    <cargo.jvmargs>
+                                        -Xms512M
+                                        -Xmx1024M
+                                        -XX:MaxPermSize=512M
+                                        -Djboss.socket.binding.port-offset=${serverPortOffset}
+                                        -agentlib:jdwp=transport=dt_socket,address=${serverDebugPort},server=y,suspend=n
+                                        -DappServerUrl=${appServerUrl}
+                                    </cargo.jvmargs>
+                                    <cargo.jboss.configuration>standalone-full</cargo.jboss.configuration>
+                                    <cargo.servlet.port>${serverHttpPort}</cargo.servlet.port>
+                                    <cargo.jboss.management-http.port>${serverManagementPort}</cargo.jboss.management-http.port>
+                                </properties>
+                            </configuration>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <container>
+                        <containerId>wildfly8x</containerId>
+                        <home>${wildfly.home}</home>
+                        <timeout>400000</timeout>
+                        <output>${wildfly.log}/maven_cargo.log</output>
+                    </container>
+                    <configuration>
+                        <type>existing</type>
+                        <home>${wildfly.server}</home>
+                    </configuration>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-dist</artifactId>
+            <type>zip</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.harishkannarao.angularjs</groupId>
+            <artifactId>angularjs-ear</artifactId>
+            <type>ear</type>
+        </dependency>
+    </dependencies>
+</project>

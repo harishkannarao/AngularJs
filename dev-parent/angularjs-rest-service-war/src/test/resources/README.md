@@ -1,0 +1,1 @@
+This file is created to check in empty folder to git.  Should be deleted once files are added to this folder.
