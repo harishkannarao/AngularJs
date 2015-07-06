@@ -29,7 +29,7 @@ public class SingletonWebDriver {
 
             private WebDriver createWebDriver() {
                 WebDriver driver = null;
-                String driverType = System.getProperty(DRIVER_KEY, HTML_UNIT_DRIVER);
+                String driverType = System.getProperty(DRIVER_KEY, FIREFOX_DRIVER);
                 if (HTML_UNIT_DRIVER.equals(driverType)) {
                     driver = new HtmlUnitDriver(true);
                 } else if(HTML_UNIT_DRIVER_IGNORE_JS_ERROR.equals(driverType)) {

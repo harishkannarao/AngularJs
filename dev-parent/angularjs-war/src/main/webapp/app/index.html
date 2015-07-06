@@ -1,19 +1,21 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en" ng-app="phonecatApp" ng-controller="PhoneListCtrl">
 <head>
     <meta charset="utf-8">
-    <title>Google Phone Gallery</title>
+    <title ng-bind-template="Google Phone Gallery: {{query}}">Google Phone Gallery</title>
     <link rel="stylesheet" href="../css/app.css">
     <script src="../js/angular-1.4.1/angular.js"></script>
     <script src="../js/custom/controllers.js"></script>
 </head>
-<body ng-controller="PhoneListCtrl">
-
+<body>
+<p>Hello, <span id="name">{{name}}</span>!</p>
+<br/>
+Search: <input id="query" ng-model="query">
+<br/>
 <ul>
-    <li ng-repeat="phone in phones">
-        <span>{{phone.name}}</span>
-
-        <p>{{phone.snippet}}</p>
+    <li ng-repeat="phone in phones | filter:query">
+        <span class="phone-name">{{phone.name}}</span>
+        <p class="phone-snippet">{{phone.snippet}}</p>
     </li>
 </ul>
 

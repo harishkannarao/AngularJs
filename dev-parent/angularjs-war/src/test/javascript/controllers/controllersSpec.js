@@ -9,4 +9,12 @@ describe('PhoneListCtrl', function(){
     expect(scope.phones.length).toBe(3);
   }));
 
+  it('should set "name" as "World"', inject(function($controller) {
+    var scope = {};
+    var ctrl = $controller('PhoneListCtrl', {$scope: scope});
+    expect(scope.name).toBe('World');
+  }
+
+  ));
+
 });
