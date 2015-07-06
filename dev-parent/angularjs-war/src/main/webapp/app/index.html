@@ -12,8 +12,14 @@
 <br/>
 Search: <input id="query" ng-model="query">
 <br/>
+Sort by:
+<select id="orderProp" ng-model="orderProp">
+    <option value="name">Alphabetical</option>
+    <option value="age">Newest</option>
+    <option value="-age">Oldest</option>
+</select>
 <ul>
-    <li ng-repeat="phone in phones | filter:query">
+    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
         <span class="phone-name">{{phone.name}}</span>
         <p class="phone-snippet">{{phone.snippet}}</p>
     </li>

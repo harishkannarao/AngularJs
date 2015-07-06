@@ -2,6 +2,10 @@ package com.harishkannarao.angularjs.webapp.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PhoneCatalogueIndexPage extends PageBase {
 
@@ -21,5 +25,19 @@ public class PhoneCatalogueIndexPage extends PageBase {
 
     public String getName() {
         return webDriver.findElement(By.id("name")).getText();
+    }
+
+    public String getSortByValue() {
+        Select select = new Select(webDriver.findElement(By.id("orderProp")));
+        return select.getFirstSelectedOption().getAttribute("value");
+    }
+
+    public void setSortByValue(String sortByValue) {
+        Select select = new Select(webDriver.findElement(By.id("orderProp")));
+        select.selectByValue(sortByValue);
+    }
+
+    public List<String> getDisplayedPhoneNames() {
+        return webDriver.findElements(By.className("phone-name")).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 }

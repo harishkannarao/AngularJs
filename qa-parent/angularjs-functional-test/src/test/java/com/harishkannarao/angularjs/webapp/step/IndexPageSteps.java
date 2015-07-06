@@ -9,6 +9,8 @@ import cucumber.api.java.en.When;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static org.testng.Assert.assertEquals;
 
 @ApplicationScoped
@@ -40,5 +42,20 @@ public class IndexPageSteps {
     @Then("^I should see the title as (.*) on index page$")
     public void I_should_see_the_title_as_on_index_page(String expectedTitle) throws Throwable {
         assertEquals(indexPage.getTitle(), expectedTitle);
+    }
+
+    @Then("^I should see the value of sort by as (.*) on index page$")
+    public void I_should_see_the_value_of_sort_by_as_on_index_page(String sortByValue) throws Throwable {
+        assertEquals(indexPage.getSortByValue(), sortByValue);
+    }
+
+    @When("^I set sort by as (.*) on index page$")
+    public void I_set_sort_by_as_on_index_page(String sortByValue) throws Throwable {
+        indexPage.setSortByValue(sortByValue);
+    }
+
+    @Then("^I should see the list of phone names as below on index page$")
+    public void I_should_see_the_list_of_phone_names_as_below_on_index_page(List<String> expectedPhoneNames) throws Throwable {
+        assertEquals(indexPage.getDisplayedPhoneNames(), expectedPhoneNames);
     }
 }
