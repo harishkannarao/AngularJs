@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class SingletonWebDriver {
@@ -41,6 +42,7 @@ public class SingletonWebDriver {
                     };
                 } else if (FIREFOX_DRIVER.equals(driverType)) {
                     driver = new FirefoxDriver();
+                    driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
                 }
                 return driver;
             }

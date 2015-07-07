@@ -42,8 +42,18 @@
                     <jsTestSrcDir>${basedir}/src/test/javascript</jsTestSrcDir>
                     <preloadSources>
                         <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular.js</source>
-                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-resource.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-animate.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-aria.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-cookies.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-loader.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-message-format.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-messages.js</source>
                         <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-mocks.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-resource.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-route.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-sanitize.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-scenario.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-touch.js</source>
                         <!-- js file containing angular js application declaration -->
                         <source>${project.basedir}/src/main/webapp/js/custom/controllers.js</source>
                     </preloadSources>

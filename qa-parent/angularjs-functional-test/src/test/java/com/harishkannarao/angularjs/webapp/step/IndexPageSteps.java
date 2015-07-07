@@ -22,6 +22,7 @@ public class IndexPageSteps {
     @Given("^I go to index page$")
     public void I_go_to_index_page() throws Throwable {
         indexPage.navigate();
+        indexPage.waitForAngularRequestsToFinish();
     }
 
     @Then("^I should see total number of phones as (\\d+) on index page$")
