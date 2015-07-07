@@ -13,6 +13,6 @@ public class BaseSteps {
     protected static final String PATH_SEPARATOR = "/";
     protected static final String APPLICATION_URL = APP_SERVER_URL + PATH_SEPARATOR + APPLICATION_CONTEXT;
 
-    private JacksonJsonProvider jacksonJsonProvider = new JacksonJaxbJsonProvider().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    protected Client restClient = ClientBuilder.newClient().register(jacksonJsonProvider);
+    private static final JacksonJsonProvider jacksonJsonProvider = new JacksonJaxbJsonProvider().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    protected static final Client restClient = ClientBuilder.newClient().register(jacksonJsonProvider);
 }

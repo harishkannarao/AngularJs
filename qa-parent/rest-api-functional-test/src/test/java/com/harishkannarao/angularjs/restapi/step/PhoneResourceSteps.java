@@ -20,12 +20,14 @@ import static org.testng.Assert.assertEquals;
 @ApplicationScoped
 public class PhoneResourceSteps extends BaseSteps {
 
+    private static final WebTarget allPhonesTarget = restClient.target(APPLICATION_URL + "/service/phones");
+
     private WebTarget target;
     private Response response;
 
     @Given("^I set the url to get all phones on phone resource$")
     public void I_set_the_url_to_get_all_phones_on_phone_resource() throws Throwable {
-        target = restClient.target(APPLICATION_URL + "/service/phones");
+        target = allPhonesTarget;
     }
 
     @And("^I make a GET request on phone resource$")
