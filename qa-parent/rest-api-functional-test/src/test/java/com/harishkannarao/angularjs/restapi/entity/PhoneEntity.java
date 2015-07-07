@@ -1,8 +1,8 @@
-package com.harishkannarao.angularjs.model;
+package com.harishkannarao.angularjs.restapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Phone {
+public class PhoneEntity {
 
     @JsonProperty(value = "name")
     private String name;

@@ -1,5 +1,9 @@
 package com.harishkannarao.angularjs.restapi.step;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
@@ -9,5 +13,6 @@ public class BaseSteps {
     protected static final String PATH_SEPARATOR = "/";
     protected static final String APPLICATION_URL = APP_SERVER_URL + PATH_SEPARATOR + APPLICATION_CONTEXT;
 
-    protected Client restClient = ClientBuilder.newClient();
+    private JacksonJsonProvider jacksonJsonProvider = new JacksonJaxbJsonProvider().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    protected Client restClient = ClientBuilder.newClient().register(jacksonJsonProvider);
 }

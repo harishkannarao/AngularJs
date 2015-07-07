@@ -1,8 +1,7 @@
 package com.harishkannarao.angularjs.restapi.step;
 
 import com.harishkannarao.angularjs.restapi.datatable.PhoneDataTable;
-import com.harishkannarao.angularjs.restapi.model.PhoneEntity;
-import cucumber.api.PendingException;
+import com.harishkannarao.angularjs.restapi.entity.PhoneEntity;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -54,7 +53,7 @@ public class PhoneResourceSteps extends BaseSteps {
             PhoneEntity phoneEntity = mappedPhoneList.get(phoneDataTable.getName());
             assertEquals(phoneEntity.getName(), phoneDataTable.getName());
             assertEquals(phoneEntity.getAge(), phoneDataTable.getAge());
-            assertEquals(phoneEntity.getSnippet(), phoneDataTable.getSnippet());
+            assertEquals(phoneEntity.getDescription(), phoneDataTable.getSnippet());
         });
     }
 }

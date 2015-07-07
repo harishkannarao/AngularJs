@@ -31,6 +31,7 @@
         <testng.version>6.9.4</testng.version>
         <junit.version>4.12</junit.version>
         <jersey.client.version>2.14</jersey.client.version>
+        <jackson.version>2.5.4</jackson.version>
         <weld.se.version>2.2.8.Final</weld.se.version>
         <weld.jandex.version>1.2.1.Final</weld.jandex.version>
         <postgresql.driver.version>9.2-1004-jdbc4</postgresql.driver.version>
@@ -261,6 +262,30 @@
                 <artifactId>jersey-media-json-jackson</artifactId>
                 <version>${jersey.client.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-json-provider</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
 
             <dependency>

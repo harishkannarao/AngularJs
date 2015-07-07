@@ -13,9 +13,9 @@ public class PhoneService {
     private List<Phone> phones;
 
     public PhoneService() {
-        Phone phone1 = new PhoneBuilder().setName("Nexus S").setAge(1L).setSnippet("Fast just got faster with Nexus S.").build();
-        Phone phone2 = new PhoneBuilder().setName("Motorola XOOM with Wi-Fi").setAge(2L).setSnippet("The Next, Next Generation tablet.").build();
-        Phone phone3 = new PhoneBuilder().setName("MOTOROLA XOOM").setAge(3L).setSnippet("The Next, Next Generation tablet.").build();
+        Phone phone1 = new PhoneBuilder().setName("Nexus S").setAge(1L).setDescription("Fast just got faster with Nexus S.").build();
+        Phone phone2 = new PhoneBuilder().setName("Motorola XOOM with Wi-Fi").setAge(2L).setDescription("The Next, Next Generation tablet.").build();
+        Phone phone3 = new PhoneBuilder().setName("MOTOROLA XOOM").setAge(3L).setDescription("The Next, Next Generation tablet.").build();
 
         phones = Arrays.asList(phone1, phone2, phone3);
     }
