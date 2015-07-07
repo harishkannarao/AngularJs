@@ -1,7 +1,6 @@
 package com.harishkannarao.angularjs.webapp.step;
 
-import com.harishkannarao.angularjs.webapp.page.PhoneCatalogueIndexPage;
-import cucumber.api.PendingException;
+import com.harishkannarao.angularjs.webapp.page.IndexPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -17,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 public class IndexPageSteps {
 
     @Inject
-    private PhoneCatalogueIndexPage indexPage;
+    private IndexPage indexPage;
 
     @Given("^I go to index page$")
     public void I_go_to_index_page() throws Throwable {

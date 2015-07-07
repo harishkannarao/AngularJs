@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import javax.inject.Inject;
 
-public class PageBase {
+public class BasePage {
     @Inject
     protected WebDriver webDriver;
     @Inject
