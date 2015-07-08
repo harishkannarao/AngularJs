@@ -1,11 +1,8 @@
 package com.harishkannarao.angularjs.restapi.step;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import com.harishkannarao.angularjs.restapi.client.SingletonRestClient;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 
 public class BaseSteps {
     protected static final String APP_SERVER_URL = System.getProperty("appServerUrl", "http://localhost:8080");
@@ -13,6 +10,5 @@ public class BaseSteps {
     protected static final String PATH_SEPARATOR = "/";
     protected static final String APPLICATION_URL = APP_SERVER_URL + PATH_SEPARATOR + APPLICATION_CONTEXT;
 
-    private static final JacksonJsonProvider jacksonJsonProvider = new JacksonJaxbJsonProvider().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    protected static final Client restClient = ClientBuilder.newClient().register(jacksonJsonProvider);
+    protected static final WebTarget baseTarget = SingletonRestClient.getInstance().target(APPLICATION_URL + "/service");
 }

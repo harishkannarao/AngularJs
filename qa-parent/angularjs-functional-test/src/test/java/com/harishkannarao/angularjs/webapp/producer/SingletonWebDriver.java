@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public class SingletonWebDriver {
 
-    private static synchronized WebDriver createAndCacheWebDriver() {
+    private static synchronized WebDriver   createAndCacheWebDriver() {
         class WebDriverFactory implements Supplier<WebDriver> {
             private final WebDriver webDriverInstance;
 
