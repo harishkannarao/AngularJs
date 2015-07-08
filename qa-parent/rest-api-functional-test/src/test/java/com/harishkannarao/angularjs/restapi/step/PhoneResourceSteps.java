@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 @ApplicationScoped
 public class PhoneResourceSteps extends BaseSteps {
 
-    private static final WebTarget phonesTarget = baseTarget.path("/phones");
+    private static final WebTarget phonesTarget = restApiBaseTarget.path("/phones");
 
     private WebTarget target;
     private Response response;
@@ -56,6 +56,17 @@ public class PhoneResourceSteps extends BaseSteps {
             assertEquals(phoneEntity.getName(), phoneDataTable.getName());
             assertEquals(phoneEntity.getAge(), phoneDataTable.getAge());
             assertEquals(phoneEntity.getDescription(), phoneDataTable.getSnippet());
+        });
+    }
+
+    @Then("^I should be able to get image for every phone from phone resource$")
+    public void I_should_be_able_to_get_image_for_every_phone_from_phone_resource() throws Throwable {
+        List<PhoneEntity> phoneList = response.readEntity(new GenericType<List<PhoneEntity>>() {});
+        phoneList.forEach(phoneEntity -> {
+            Response imageResponse = serverTarget.path(phoneEntity.getImageUrl()).request().get();
+            assertEquals(imageResponse.getStatus(), 200);
+            assertEquals(imageResponse.getHeaderString("Content-Type"), "image/jpeg");
+            imageResponse.close();
         });
     }
 }

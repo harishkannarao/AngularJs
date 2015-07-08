@@ -18,9 +18,10 @@ Sort by:
     <option value="age">Newest</option>
     <option value="-age">Oldest</option>
 </select>
-<ul>
+<ul class="phone-thumbs">
     <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-        <span class="phone-name">{{phone.name}}</span>
+        <a href="#/phones/{{phone.id}}" class="thumb"><img class="qa-phone-list-img" ng-src="{{phone.imageUrl}}"></a>
+        <a href="#/phones/{{phone.id}}"><span class="phone-name">{{phone.name}}</span></a>
         <p class="phone-snippet">{{phone.snippet}}</p>
     </li>
 </ul>

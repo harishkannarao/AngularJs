@@ -41,4 +41,11 @@ public class IndexPage extends BasePage {
         return webDriver.findElements(By.className("phone-name")).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
+    public List<String> getDisplayedPhoneSnippets() {
+        return webDriver.findElements(By.className("phone-snippet")).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    public List<String> getPhoneListImageSources() {
+        return webDriver.findElements(By.className("qa-phone-list-img")).stream().map(webElement -> webElement.getAttribute("src")).collect(Collectors.toList());
+    }
 }

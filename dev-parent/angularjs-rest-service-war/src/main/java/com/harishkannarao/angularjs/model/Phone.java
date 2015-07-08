@@ -10,6 +10,8 @@ public class Phone {
     private Long age;
     @JsonProperty(value = "snippet")
     private String description;
+    @JsonProperty(value = "imageUrl")
+    private String imageUrl;
 
     public String getName() {
         return name;
@@ -33,5 +35,13 @@ public class Phone {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

@@ -54,3 +54,14 @@ Feature: Phone Catalogue Features
     Then I should see the list of phone names as below on index page
       | MOTOROLA XOOM |
       | Motorola XOOM with Wi-Fi |
+
+  Scenario: should display the description on phone list view
+    Given I go to index page
+    Then I should see the list of phone snippet as below on index page
+      | Fast just got faster with Nexus S.  |
+      | The Next, Next Generation tablet.   |
+      | The Next, Next Generation tablet.   |
+
+  Scenario: should display image on phone list view
+    Given I go to index page
+    Then I should see image for every phone on index page
