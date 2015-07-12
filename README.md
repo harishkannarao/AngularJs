@@ -9,10 +9,10 @@ Repository to learn AngularJs with Maven and Java EE rest service
 * IDE: IntelliJ Idea or Eclipse
 
 ### Running full build
-mvn clean install
+**mvn clean install**
 
 ### Running AngularJs unit test using Jasmine
-mvn jasmine:bdd -pl :angularjs-war
+**mvn jasmine:bdd -pl :angularjs-war**
 
 Then go to http:localhost:8234 in browser
 
