@@ -1,6 +1,10 @@
 # AngularJs
 Repository to learn AngularJs with Maven and Java EE rest service
 
+### Required Software and Tools
+Java Version: Oracle Java 1.8.0_31
+Apache Maven Version: 3.2.5
+
 ### Running full build
 mvn clean install
 
