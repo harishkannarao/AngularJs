@@ -26,6 +26,7 @@
         <appServerHost>localhost</appServerHost>
         <appServerUrl>http://${appServerHost}:${serverHttpPort}</appServerUrl>
         <cargo.goal>start</cargo.goal>
+        <jasmine.runner.port>8234</jasmine.runner.port>
 
         <java.ee.version>7.0</java.ee.version>
         <testng.version>6.9.4</testng.version>

@@ -55,7 +55,7 @@
                         <!-- js file containing angular js application declaration -->
                         <source>${project.basedir}/src/main/webapp/js/custom/controllers.js</source>
                     </preloadSources>
-                    <serverPort>8234</serverPort>
+                    <serverPort>${jasmine.runner.port}</serverPort>
                 </configuration>
             </plugin>
         </plugins>
