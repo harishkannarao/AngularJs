@@ -8,6 +8,10 @@ Apache Maven Version: 3.2.5
 
 Mozilla Firefox Browser: Any version
 
+Git Client: Any version
+
+IDE: IntelliJ Idea or Eclipse
+
 ### Running full build
 mvn clean install
 
