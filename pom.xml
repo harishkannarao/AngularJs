@@ -18,13 +18,15 @@
         <skipUnitTest>false</skipUnitTest>
         <skipServerSetup>false</skipServerSetup>
         <skipServerStartup>false</skipServerStartup>
+        <skipServerStartupCheck>false</skipServerStartupCheck>
         <skipFunctionalTest>false</skipFunctionalTest>
         <serverHttpPort>8080</serverHttpPort>
         <serverManagementPort>9990</serverManagementPort>
         <serverDebugPort>8787</serverDebugPort>
         <serverPortOffset>0</serverPortOffset>
+        <appServerProtocol>http</appServerProtocol>
         <appServerHost>localhost</appServerHost>
-        <appServerUrl>http://${appServerHost}:${serverHttpPort}</appServerUrl>
+        <appServerUrl>${appServerProtocol}://${appServerHost}:${serverHttpPort}</appServerUrl>
         <cargo.goal>start</cargo.goal>
         <jasmine.runner.port>8234</jasmine.runner.port>
 
@@ -48,6 +50,7 @@
                 <skipUnitTest>false</skipUnitTest>
                 <skipServerSetup>true</skipServerSetup>
                 <skipServerStartup>true</skipServerStartup>
+                <skipServerStartupCheck>true</skipServerStartupCheck>
                 <skipFunctionalTest>true</skipFunctionalTest>
             </properties>
         </profile>
@@ -58,6 +61,7 @@
                 <skipUnitTest>true</skipUnitTest>
                 <skipServerSetup>false</skipServerSetup>
                 <skipServerStartup>false</skipServerStartup>
+                <skipServerStartupCheck>true</skipServerStartupCheck>
                 <skipFunctionalTest>true</skipFunctionalTest>
                 <cargo.goal>run</cargo.goal>
             </properties>
@@ -69,6 +73,7 @@
                 <skipUnitTest>true</skipUnitTest>
                 <skipServerSetup>true</skipServerSetup>
                 <skipServerStartup>true</skipServerStartup>
+                <skipServerStartupCheck>false</skipServerStartupCheck>
                 <skipFunctionalTest>false</skipFunctionalTest>
             </properties>
         </profile>
@@ -79,6 +84,7 @@
                 <skipUnitTest>true</skipUnitTest>
                 <skipServerSetup>false</skipServerSetup>
                 <skipServerStartup>false</skipServerStartup>
+                <skipServerStartupCheck>false</skipServerStartupCheck>
                 <skipFunctionalTest>false</skipFunctionalTest>
             </properties>
         </profile>
@@ -151,6 +157,12 @@
                     <groupId>org.codehaus.cargo</groupId>
                     <artifactId>cargo-maven2-plugin</artifactId>
                     <version>1.4.13</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.tacitknowledge.maven.plugins</groupId>
+                    <artifactId>tk-maven-wait-plugin</artifactId>
+                    <version>1.0</version>
                 </plugin>
 
                 <plugin>

@@ -179,6 +179,51 @@
                     </configuration>
                 </configuration>
             </plugin>
+
+<!--            <plugin>
+                <groupId>com.tacitknowledge.maven.plugins</groupId>
+                <artifactId>tk-maven-wait-plugin</artifactId>
+                <configuration>
+                    <skip>${skipServerStartupCheck}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>rest-service</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>wait</goal>
+                        </goals>
+                        <configuration>
+                            <protocol>${appServerProtocol}</protocol>
+                            <host>${appServerHost}</host>
+                            <port>${serverHttpPort}</port>
+                            <file>/restapi/service/phones</file>
+                            &lt;!&ndash; max. number of trials (0 = unlimited) &ndash;&gt;
+                            <maxcount>10</maxcount>
+                            &lt;!&ndash; timeout in milliseconds &ndash;&gt;
+                            <timeout>2000</timeout>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>angularjs-app</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>wait</goal>
+                        </goals>
+                        <configuration>
+                            <protocol>${appServerProtocol}</protocol>
+                            <host>${appServerHost}</host>
+                            <port>${serverHttpPort}</port>
+                            <file>/angularjs/app/index.html</file>
+                            &lt;!&ndash; max. number of trials (0 = unlimited) &ndash;&gt;
+                            <maxcount>10</maxcount>
+                            &lt;!&ndash; timeout in milliseconds &ndash;&gt;
+                            <timeout>2000</timeout>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
     </build>
 
