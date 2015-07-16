@@ -4,6 +4,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -18,6 +19,7 @@ public class SingletonWebDriver {
             private static final String HTML_UNIT_DRIVER = "htmlunit";
             private static final String HTML_UNIT_DRIVER_IGNORE_JS_ERROR = "htmlunit_ignore_js_error";
             private static final String FIREFOX_DRIVER = "firefox";
+            private static final String PHANTOMJS_DRIVER = "phantomjs";
 
             public WebDriverFactory() {
                 webDriverInstance = createWebDriver();
@@ -42,6 +44,9 @@ public class SingletonWebDriver {
                     };
                 } else if (FIREFOX_DRIVER.equals(driverType)) {
                     driver = new FirefoxDriver();
+                    driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+                } else if (PHANTOMJS_DRIVER.equals(driverType)) {
+                    driver = new PhantomJSDriver();
                     driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
                 }
                 return driver;
