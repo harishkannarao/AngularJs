@@ -5,6 +5,7 @@ Repository to learn AngularJs with Maven and Java EE rest service
 * Java Version: Oracle Java 1.8.0_31
 * Apache Maven Version: 3.2.5
 * Mozilla Firefox Browser: Any version
+* PhantomJS Browser: Any version
 * Git Client: Any version
 * IDE: IntelliJ Idea or Eclipse
 
