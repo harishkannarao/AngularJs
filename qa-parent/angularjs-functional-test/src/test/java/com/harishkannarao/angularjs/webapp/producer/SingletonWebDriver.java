@@ -1,6 +1,7 @@
 package com.harishkannarao.angularjs.webapp.producer;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.harishkannarao.angularjs.webapp.util.PropertiesReference;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -32,7 +33,7 @@ public class SingletonWebDriver {
 
             private WebDriver createWebDriver() {
                 WebDriver driver = null;
-                String driverType = System.getProperty(DRIVER_KEY, FIREFOX_DRIVER);
+                String driverType = PropertiesReference.MAVEN_PROPERTIES.getProperty(DRIVER_KEY);
                 if (HTML_UNIT_DRIVER.equals(driverType)) {
                     driver = new HtmlUnitDriver(true);
                 } else if(HTML_UNIT_DRIVER_IGNORE_JS_ERROR.equals(driverType)) {

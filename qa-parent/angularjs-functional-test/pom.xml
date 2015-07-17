@@ -12,5 +12,13 @@
     <artifactId>angularjs-functional-test</artifactId>
     <packaging>jar</packaging>
 
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+    </build>
 
 </project>
