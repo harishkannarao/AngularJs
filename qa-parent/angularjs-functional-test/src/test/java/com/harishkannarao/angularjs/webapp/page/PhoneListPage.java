@@ -7,10 +7,11 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class IndexPage extends BasePage {
+public class PhoneListPage extends BasePage {
 
     public void navigate() {
-        webDriver.get(APPLICATION_URL + "/app/index.html");
+        webDriver.navigate().to(APPLICATION_URL + "/app/index.html#/phones");
+        webDriver.navigate().refresh();
     }
 
     public int getPhoneCount() {
@@ -21,6 +22,11 @@ public class IndexPage extends BasePage {
         WebElement queryInput = webDriver.findElement(By.id("query"));
         queryInput.clear();
         queryInput.sendKeys(query);
+    }
+
+    public void clearQuery() {
+        WebElement queryInput = webDriver.findElement(By.id("query"));
+        queryInput.clear();
     }
 
     public String getName() {
@@ -48,4 +54,5 @@ public class IndexPage extends BasePage {
     public List<String> getPhoneListImageSources() {
         return webDriver.findElements(By.className("qa-phone-list-img")).stream().map(webElement -> webElement.getAttribute("src")).collect(Collectors.toList());
     }
+
 }
