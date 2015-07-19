@@ -5,14 +5,21 @@ public class PhoneBuilder {
     private Long age;
     private String description;
     private String imageUrl;
+    private Long id;
 
     public Phone build() {
         Phone result = new Phone();
+        result.setId(id);
         result.setAge(age);
         result.setName(name);
         result.setDescription(description);
         result.setImageUrl(imageUrl);
         return result;
+    }
+
+    public PhoneBuilder setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public PhoneBuilder setName(String name) {

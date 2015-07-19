@@ -50,10 +50,11 @@
                     <jsTestSrcDir>${basedir}/src/test/javascript</jsTestSrcDir>
                     <preloadSources>
                         <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-route.js</source>
                         <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-resource.js</source>
                         <source>${project.basedir}/src/main/webapp/js/angular-1.4.1/angular-mocks.js</source>
                         <!-- js file containing angular js application declaration -->
-                        <source>${project.basedir}/src/main/webapp/js/custom/controllers.js</source>
+                        <source>${project.basedir}/src/main/webapp/js/custom/app.js</source>
                     </preloadSources>
                     <serverPort>${jasmine.runner.port}</serverPort>
                 </configuration>

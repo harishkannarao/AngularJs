@@ -35,4 +35,8 @@ describe('PhoneCat controllers', function() {
       expect(scope.name).toBe('World');
     });
   });
+
+  describe('PhoneDetailCtrl', function(){
+
+  });
 });
