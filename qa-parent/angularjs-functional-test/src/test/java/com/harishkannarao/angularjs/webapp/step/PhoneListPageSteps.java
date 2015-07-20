@@ -1,7 +1,9 @@
 package com.harishkannarao.angularjs.webapp.step;
 
+import com.harishkannarao.angularjs.webapp.page.GenericPage;
 import com.harishkannarao.angularjs.webapp.page.PhoneListPage;
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,6 +22,8 @@ public class PhoneListPageSteps {
 
     @Inject
     private PhoneListPage phoneListPage;
+    @Inject
+    private GenericPage genericPage;
 
     @Given("^I go to phone list page$")
     public void I_go_to_phone_list_page() throws Throwable {
@@ -79,5 +83,21 @@ public class PhoneListPageSteps {
     @When("^I clear the query on phone list page$")
     public void I_clear_the_query_on_phone_list_page() throws Throwable {
         phoneListPage.clearQuery();
+    }
+
+    @Then("^I should be on phone list page$")
+    public void I_should_be_on_phone_list_page() throws Throwable {
+        assertTrue(phoneListPage.isOnValidPage(), "Is not on Phone List page. Current url is " + genericPage.getCurrentUrl());
+    }
+
+    @And("^I click on phone image with id as (\\d+) on phone list page$")
+    public void I_click_on_phone_image_with_id_as_on_phone_list_page(Long phoneId) throws Throwable {
+//        phoneListPage.clickPhoneImage(phoneId);
+    }
+
+    @And("^I click on phone name with id as (\\d+) on phone list page$")
+    public void I_click_on_phone_name_with_id_as_on_phone_list_page(Long phoneId) throws Throwable {
+//        // Express the Regexp above with the code you wish you had
+//        throw new PendingException();
     }
 }

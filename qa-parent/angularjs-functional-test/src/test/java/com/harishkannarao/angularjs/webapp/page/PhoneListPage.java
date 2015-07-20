@@ -55,4 +55,8 @@ public class PhoneListPage extends BasePage {
         return webDriver.findElements(By.className("qa-phone-list-img")).stream().map(webElement -> webElement.getAttribute("src")).collect(Collectors.toList());
     }
 
+    public boolean isOnValidPage() {
+        return !webDriver.findElements(By.id("qa-phone-list-page-id")).isEmpty();
+    }
+
 }

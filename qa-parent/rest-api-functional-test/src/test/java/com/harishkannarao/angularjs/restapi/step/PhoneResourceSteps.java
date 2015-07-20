@@ -53,6 +53,7 @@ public class PhoneResourceSteps extends BaseSteps {
         Map<String, PhoneEntity> mappedPhoneList = phoneList.stream().collect(Collectors.toMap(PhoneEntity::getName, phoneEntity -> phoneEntity));
         phoneDataTableList.stream().forEach(phoneDataTable -> {
             PhoneEntity phoneEntity = mappedPhoneList.get(phoneDataTable.getName());
+            assertEquals(phoneEntity.getId(), phoneDataTable.getId());
             assertEquals(phoneEntity.getName(), phoneDataTable.getName());
             assertEquals(phoneEntity.getAge(), phoneDataTable.getAge());
             assertEquals(phoneEntity.getDescription(), phoneDataTable.getSnippet());

@@ -67,3 +67,15 @@ Feature: Phone List Page Features
   Scenario: should display image on phone list view
     Given I go to phone list page
     Then I should see image for every phone on phone list page
+
+  Scenario: should go to phone details page by clicking on phone image
+    Given I go to phone list page
+    And I click on phone image with id as 2 on phone list page
+    Then I should be on phone details page
+    And I should see the phone id as 2 on phone details page
+
+  Scenario: should go to phone details page by clicking on phone name
+    Given I go to phone list page
+    And I click on phone name with id as 2 on phone list page
+    Then I should be on phone details page
+    And I should see the phone id as 2 on phone details page
