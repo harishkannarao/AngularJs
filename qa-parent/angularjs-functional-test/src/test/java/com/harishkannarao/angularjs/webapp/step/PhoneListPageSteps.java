@@ -92,12 +92,11 @@ public class PhoneListPageSteps {
 
     @And("^I click on phone image with id as (\\d+) on phone list page$")
     public void I_click_on_phone_image_with_id_as_on_phone_list_page(Long phoneId) throws Throwable {
-//        phoneListPage.clickPhoneImage(phoneId);
+        phoneListPage.clickPhoneImage(phoneId);
     }
 
     @And("^I click on phone name with id as (\\d+) on phone list page$")
     public void I_click_on_phone_name_with_id_as_on_phone_list_page(Long phoneId) throws Throwable {
-//        // Express the Regexp above with the code you wish you had
-//        throw new PendingException();
+        phoneListPage.clickPhoneName(phoneId);
     }
 }

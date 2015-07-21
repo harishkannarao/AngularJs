@@ -20,8 +20,8 @@
 
             <ul class="phone-thumbs">
                 <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
-                    <a href="#/phones/{{phone.id}}" class="thumb"><img class="qa-phone-list-img" ng-src="{{phone.imageUrl}}"></a>
-                    <a href="#/phones/{{phone.id}}"><span class="phone-name">{{phone.name}}</span></a>
+                    <a id="qa-phone-image-{{phone.id}}" href="#/phones/{{phone.id}}" class="thumb"><img class="qa-phone-list-img" ng-src="{{phone.imageUrl}}"></a>
+                    <a id="qa-phone-name-{{phone.id}}" href="#/phones/{{phone.id}}"><span class="phone-name">{{phone.name}}</span></a>
                     <p class="phone-snippet">{{phone.snippet}}</p>
                 </li>
             </ul>

@@ -59,4 +59,11 @@ public class PhoneListPage extends BasePage {
         return !webDriver.findElements(By.id("qa-phone-list-page-id")).isEmpty();
     }
 
+    public void clickPhoneImage(Long phoneId) {
+        webDriver.findElement(By.id("qa-phone-image-"+phoneId)).click();
+    }
+
+    public void clickPhoneName(Long phoneId) {
+        webDriver.findElement(By.id("qa-phone-name-"+phoneId)).click();
+    }
 }
