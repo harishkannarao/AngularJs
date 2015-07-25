@@ -21,7 +21,7 @@ public class PhoneResource {
     private PhoneService phoneService;
 
     @GET
-    public Response getAllPhones() {
+    public Response getAllPhoneSummaries() {
         return Response.ok(phoneService.getAllPhoneSummaries()).build();
     }
 }
