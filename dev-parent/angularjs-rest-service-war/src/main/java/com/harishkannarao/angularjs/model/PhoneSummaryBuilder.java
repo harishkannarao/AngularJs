@@ -1,14 +1,14 @@
 package com.harishkannarao.angularjs.model;
 
-public class PhoneBuilder {
+public class PhoneSummaryBuilder {
     private String name;
     private Long age;
     private String description;
     private String imageUrl;
     private Long id;
 
-    public Phone build() {
-        Phone result = new Phone();
+    public PhoneSummary build() {
+        PhoneSummary result = new PhoneSummary();
         result.setId(id);
         result.setAge(age);
         result.setName(name);
@@ -17,27 +17,27 @@ public class PhoneBuilder {
         return result;
     }
 
-    public PhoneBuilder setId(Long id) {
+    public PhoneSummaryBuilder setId(Long id) {
         this.id = id;
         return this;
     }
 
-    public PhoneBuilder setName(String name) {
+    public PhoneSummaryBuilder setName(String name) {
         this.name = name;
         return this;
     }
 
-    public PhoneBuilder setAge(Long age) {
+    public PhoneSummaryBuilder setAge(Long age) {
         this.age = age;
         return this;
     }
 
-    public PhoneBuilder setDescription(String description) {
+    public PhoneSummaryBuilder setDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public PhoneBuilder setImageUrl(String imageUrl) {
+    public PhoneSummaryBuilder setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }

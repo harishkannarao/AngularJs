@@ -2,7 +2,7 @@ package com.harishkannarao.angularjs.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Phone {
+public class PhoneSummary {
 
     @JsonProperty(value = "id")
     private Long id;
