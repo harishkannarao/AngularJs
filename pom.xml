@@ -28,7 +28,7 @@
         <appServerUrl>${appServerProtocol}://${appServerHost}:${serverHttpPort}</appServerUrl>
         <cargo.goal>start</cargo.goal>
         <jasmine.runner.port>8234</jasmine.runner.port>
-        <driver>firefox</driver>
+        <driver>phantomjs</driver>
 
         <java.ee.version>7.0</java.ee.version>
         <testng.version>6.9.4</testng.version>
@@ -46,9 +46,9 @@
 
     <profiles>
         <profile>
-            <id>driver-phantomjs</id>
+            <id>driver-firefox</id>
             <properties>
-                <driver>phantomjs</driver>
+                <driver>firefox</driver>
             </properties>
         </profile>
         <profile>

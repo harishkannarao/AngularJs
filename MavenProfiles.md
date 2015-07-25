@@ -15,3 +15,6 @@ This article explains the available profile and the steps executed with each pro
 
 ###Compile and Functional Test
 **mvn clean install -P functional-tests**
+
+###Full build with GUI testing in Firefox Webdriver
+**mvn clean install -P driver-firefox**
