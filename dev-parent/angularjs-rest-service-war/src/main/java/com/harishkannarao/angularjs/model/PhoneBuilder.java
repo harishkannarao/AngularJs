@@ -25,6 +25,25 @@ public class PhoneBuilder {
         return new PhoneBuilder();
     }
 
+    public Phone build() {
+        Phone result = new Phone();
+        result.setAdditionalFeatures(additionalFeatures);
+        result.setAndroidDetails(androidDetails);
+        result.setAvailability(availability);
+        result.setBatteryDetails(batteryDetails);
+        result.setCameraDetails(cameraDetails);
+        result.setConnectivityDetails(connectivityDetails);
+        result.setDescription(description);
+        result.setDisplayDetails(displayDetails);
+        result.setHardwareDetails(hardwareDetails);
+        result.setId(id);
+        result.setImages(images);
+        result.setName(name);
+        result.setSizeAndWeightDetails(sizeAndWeightDetails);
+        result.setStorageDetails(storageDetails);
+        return result;
+    }
+
     public PhoneBuilder setAdditionalFeatures(String additionalFeatures) {
         this.additionalFeatures = additionalFeatures;
         return this;
