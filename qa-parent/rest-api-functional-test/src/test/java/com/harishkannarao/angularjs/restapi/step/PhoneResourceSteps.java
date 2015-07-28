@@ -1,7 +1,7 @@
 package com.harishkannarao.angularjs.restapi.step;
 
-import com.harishkannarao.angularjs.restapi.datatable.PhoneDataTable;
-import com.harishkannarao.angularjs.restapi.entity.PhoneEntity;
+import com.harishkannarao.angularjs.restapi.datatable.PhoneSummaryDataTable;
+import com.harishkannarao.angularjs.restapi.entity.PhoneSummaryEntity;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -25,8 +25,8 @@ public class PhoneResourceSteps extends BaseSteps {
     private WebTarget target;
     private Response response;
 
-    @Given("^I set the url to get all phones on phone resource$")
-    public void I_set_the_url_to_get_all_phones_on_phone_resource() throws Throwable {
+    @Given("^I set the url to getAllPhones on phone resource$")
+    public void I_set_the_url_to_getAllPhones_on_phone_resource() throws Throwable {
         target = phonesTarget;
     }
 
@@ -41,29 +41,29 @@ public class PhoneResourceSteps extends BaseSteps {
         assertEquals(response.getStatus(), status);
     }
 
-    @And("^I should see number of phones as (\\d+) from phone resource$")
-    public void I_should_see_number_of_phones_as_from_phone_resource(int phoneCount) throws Throwable {
-        List<PhoneEntity> phoneList = response.readEntity(new GenericType<List<PhoneEntity>>() {});
-        assertEquals(phoneList.size(), phoneCount);
+    @And("^I should see number of phone summaries as (\\d+) from phone resource$")
+    public void I_should_see_number_of_phone_summaries_as_from_phone_resource(int phoneCount) throws Throwable {
+        List<PhoneSummaryEntity> phoneSummaryList = response.readEntity(new GenericType<List<PhoneSummaryEntity>>() {});
+        assertEquals(phoneSummaryList.size(), phoneCount);
     }
 
-    @And("^I should see the following phone details from phone resource$")
-    public void I_should_see_the_following_phone_details_from_phone_resource(List<PhoneDataTable> phoneDataTableList) throws Throwable {
-        List<PhoneEntity> phoneList = response.readEntity(new GenericType<List<PhoneEntity>>() {});
-        Map<String, PhoneEntity> mappedPhoneList = phoneList.stream().collect(Collectors.toMap(PhoneEntity::getName, phoneEntity -> phoneEntity));
-        phoneDataTableList.stream().forEach(phoneDataTable -> {
-            PhoneEntity phoneEntity = mappedPhoneList.get(phoneDataTable.getName());
-            assertEquals(phoneEntity.getId(), phoneDataTable.getId());
-            assertEquals(phoneEntity.getName(), phoneDataTable.getName());
-            assertEquals(phoneEntity.getAge(), phoneDataTable.getAge());
-            assertEquals(phoneEntity.getDescription(), phoneDataTable.getSnippet());
+    @And("^I should see the following phone summary from phone resource$")
+    public void I_should_see_the_following_phone_summary_from_phone_resource(List<PhoneSummaryDataTable> phoneSummaryDataTableList) throws Throwable {
+        List<PhoneSummaryEntity> phoneSummaryList = response.readEntity(new GenericType<List<PhoneSummaryEntity>>() {});
+        Map<String, PhoneSummaryEntity> mappedPhoneList = phoneSummaryList.stream().collect(Collectors.toMap(PhoneSummaryEntity::getName, phoneEntity -> phoneEntity));
+        phoneSummaryDataTableList.stream().forEach(phoneSummaryDataTable -> {
+            PhoneSummaryEntity phoneSummaryEntity = mappedPhoneList.get(phoneSummaryDataTable.getName());
+            assertEquals(phoneSummaryEntity.getId(), phoneSummaryDataTable.getId());
+            assertEquals(phoneSummaryEntity.getName(), phoneSummaryDataTable.getName());
+            assertEquals(phoneSummaryEntity.getAge(), phoneSummaryDataTable.getAge());
+            assertEquals(phoneSummaryEntity.getDescription(), phoneSummaryDataTable.getSnippet());
         });
     }
 
-    @Then("^I should be able to get image for every phone from phone resource$")
-    public void I_should_be_able_to_get_image_for_every_phone_from_phone_resource() throws Throwable {
-        List<PhoneEntity> phoneList = response.readEntity(new GenericType<List<PhoneEntity>>() {});
-        phoneList.forEach(phoneEntity -> {
+    @Then("^I should be able to get image for every phone summary from phone resource$")
+    public void I_should_be_able_to_get_image_for_every_phone_summary_from_phone_resource() throws Throwable {
+        List<PhoneSummaryEntity> phoneSummaryList = response.readEntity(new GenericType<List<PhoneSummaryEntity>>() {});
+        phoneSummaryList.forEach(phoneEntity -> {
             Response imageResponse = serverTarget.path(phoneEntity.getImageUrl()).request().get();
             assertEquals(imageResponse.getStatus(), 200);
             assertEquals(imageResponse.getHeaderString("Content-Type"), "image/jpeg");

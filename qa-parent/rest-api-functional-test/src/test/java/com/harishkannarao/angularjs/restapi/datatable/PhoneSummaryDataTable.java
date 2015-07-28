@@ -1,13 +1,13 @@
 package com.harishkannarao.angularjs.restapi.datatable;
 
-public class PhoneDataTable {
+public class PhoneSummaryDataTable {
 
     private Long id;
     private String name;
     private Long age;
     private String snippet;
 
-    public PhoneDataTable(Long id, String name, Long age, String snippet) {
+    public PhoneSummaryDataTable(Long id, String name, Long age, String snippet) {
         this.id = id;
         this.name = name;
         this.age = age;

@@ -2,7 +2,7 @@ package com.harishkannarao.angularjs.restapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PhoneEntity {
+public class PhoneSummaryEntity {
 
     @JsonProperty(value = "id")
     private Long id;
