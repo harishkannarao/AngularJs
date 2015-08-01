@@ -49,9 +49,10 @@ public class PhoneByIdResourceSteps extends BaseSteps {
         assertEquals(response.getStatus(), statusCode);;
     }
 
-    @Then("^I should see the additional features as \"(.*)\" from phone by id resource$")
-    public void I_should_see_the_additional_features_as_from_phone_by_id_resource(String additionalFeatures) throws Throwable {
-        assertEquals(getPhoneEntity().getAdditionalFeatures(), additionalFeatures);
+    @Then("^I should see the additional features as below from phone by id resource$")
+    public void I_should_see_the_additional_features_as_below_from_phone_by_id_resource(String additionalFeatures) throws Throwable {
+        String expectedAdditionalFeatures = additionalFeatures.replaceAll("\n", "");
+        assertEquals(getPhoneEntity().getAdditionalFeatures(), expectedAdditionalFeatures);
     }
 
     @Then("^I should see android os as \"(.*)\" from phone by id resource$")
