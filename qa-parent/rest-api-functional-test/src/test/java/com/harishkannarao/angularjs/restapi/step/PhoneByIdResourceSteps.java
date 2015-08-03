@@ -51,8 +51,9 @@ public class PhoneByIdResourceSteps extends BaseSteps {
 
     @Then("^I should see the additional features as below from phone by id resource$")
     public void I_should_see_the_additional_features_as_below_from_phone_by_id_resource(String additionalFeatures) throws Throwable {
-        String expectedAdditionalFeatures = additionalFeatures.replaceAll("\n", "");
-        assertEquals(getPhoneEntity().getAdditionalFeatures(), expectedAdditionalFeatures);
+        String expectedAdditionalFeatures = additionalFeatures.replaceAll("[\r\n]+", "");
+        String actualAdditionalFeatures = getPhoneEntity().getAdditionalFeatures().replaceAll("[\r\n]+", "");
+        assertEquals(actualAdditionalFeatures, expectedAdditionalFeatures);
     }
 
     @Then("^I should see android os as \"(.*)\" from phone by id resource$")
@@ -130,7 +131,23 @@ public class PhoneByIdResourceSteps extends BaseSteps {
 
     @Then("^I should see description as below from phone by id resource$")
     public void I_should_see_description_as_below_from_phone_by_id_resource(String description) throws Throwable {
-        String expectedDescription = description.replaceAll("\n", "");
-        assertEquals(getPhoneEntity().getDescription(), expectedDescription);
+        String expectedDescription = description.replaceAll("[\r\n]+", "");
+        String actualDescription = getPhoneEntity().getDescription().replaceAll("[\r\n]+", "");
+        assertEquals(actualDescription, expectedDescription);
+    }
+
+    @Then("^I should see display screen resolution as \"(.*)\" from phone by id resource$")
+    public void I_should_see_display_screen_resolution_as_from_phone_by_id_resource(String screenResolution) throws Throwable {
+        assertEquals(getPhoneEntity().getDisplayDetails().getScreenResolution(), screenResolution);
+    }
+
+    @Then("^I should see display screen size as \"(.*)\" from phone by id resource$")
+    public void I_should_see_display_screen_size_as_from_phone_by_id_resource(String screenSize) throws Throwable {
+        assertEquals(getPhoneEntity().getDisplayDetails().getScreenSize(), screenSize);
+    }
+
+    @Then("^I should see display touch screen as (.*) from phone by id resource$")
+    public void I_should_see_display_touch_screen_as_from_phone_by_id_resource(Boolean touchScreen) throws Throwable {
+        assertEquals(getPhoneEntity().getDisplayDetails().getTouchScreen(), touchScreen);
     }
 }

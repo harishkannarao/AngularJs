@@ -83,3 +83,11 @@ Feature: Phone by id resource
      software upgrades and new Google mobile apps as soon as they become available. For more details,
      visit http://www.google.com/nexus.
     """
+
+  Scenario: should get display details of phone by id
+    Given I set the url to phone by id resource
+    And I set the phone id as 1 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see display screen resolution as "WVGA (800 x 480)" from phone by id resource
+    Then I should see display screen size as "4.0 inches" from phone by id resource
+    Then I should see display touch screen as true from phone by id resource
