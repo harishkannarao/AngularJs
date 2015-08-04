@@ -150,4 +150,84 @@ public class PhoneByIdResourceSteps extends BaseSteps {
     public void I_should_see_display_touch_screen_as_from_phone_by_id_resource(Boolean touchScreen) throws Throwable {
         assertEquals(getPhoneEntity().getDisplayDetails().getTouchScreen(), touchScreen);
     }
+
+    @Then("^I should see hardware accelerometer as (.*) from phone by id resource$")
+    public void I_should_see_hardware_accelerometer_as_from_phone_by_id_resource(Boolean accelerometer) throws Throwable {
+        assertEquals(getPhoneEntity().getHardwareDetails().getAccelerometer(), accelerometer);
+    }
+
+    @Then("^I should see hardware audioJack as \"(.*)\" from phone by id resource$")
+    public void I_should_see_hardware_audioJack_as_from_phone_by_id_resource(String audioJack) throws Throwable {
+        assertEquals(getPhoneEntity().getHardwareDetails().getAudioJack(), audioJack);
+    }
+
+    @Then("^I should see hardware cpu as \"(.*)\" from phone by id resource$")
+    public void I_should_see_hardware_cpu_as_from_phone_by_id_resource(String cpu) throws Throwable {
+        assertEquals(getPhoneEntity().getHardwareDetails().getCpu(), cpu);
+    }
+
+    @Then("^I should see hardware fmRadio as (.*) from phone by id resource$")
+    public void I_should_see_hardware_fmRadio_as_from_phone_by_id_resource(Boolean fmRadio) throws Throwable {
+        assertEquals(getPhoneEntity().getHardwareDetails().getFmRadio(), fmRadio);
+    }
+
+    @Then("^I should see hardware physicalKeyboard as (.*) from phone by id resource$")
+    public void I_should_see_hardware_physicalKeyboard_as_from_phone_by_id_resource(Boolean physicalKeyboard) throws Throwable {
+        assertEquals(getPhoneEntity().getHardwareDetails().getPhysicalKeyboard(), physicalKeyboard);
+    }
+
+    @Then("^I should see hardware usb as \"(.*)\" from phone by id resource$")
+    public void I_should_see_hardware_usb_as_from_phone_by_id_resource(String usb) throws Throwable {
+        assertEquals(getPhoneEntity().getHardwareDetails().getUsb(), usb);
+    }
+
+    @Then("^I should see id as (\\d+) from phone by id resource$")
+    public void I_should_see_id_as_from_phone_by_id_resource(Long phoneId) throws Throwable {
+        assertEquals(getPhoneEntity().getId(), phoneId);
+    }
+
+    @Then("^I should see image list as below from phone by id resource$")
+    public void I_should_see_image_list_as_below_from_phone_by_id_resource(List<String> imageList) throws Throwable {
+        PhoneEntity phoneEntity = getPhoneEntity();
+        assertEquals(phoneEntity.getImages().size(), imageList.size());
+        assertEquals(phoneEntity.getImages(), imageList);
+    }
+
+    @And("^I should be able to get every image in the list from phone by id resource$")
+    public void I_should_be_able_to_get_every_image_in_the_list_from_phone_by_id_resource() throws Throwable {
+        PhoneEntity phoneEntity = getPhoneEntity();
+        phoneEntity.getImages().forEach((String imageUrl) -> {
+            Response imageResponse = serverTarget.path(imageUrl).request().get();
+            assertEquals(imageResponse.getStatus(), 200);
+            assertEquals(imageResponse.getHeaderString("Content-Type"), "image/jpeg");
+            imageResponse.close();
+        });
+    }
+
+    @Then("^I should see name as \"(.*)\" from phone by id resource$")
+    public void I_should_see_name_as_from_phone_by_id_resource(String name) throws Throwable {
+        assertEquals(getPhoneEntity().getName(), name);
+    }
+
+    @Then("^I should see dimensions list as below from phone by id resource$")
+    public void I_should_see_dimensions_list_as_below_from_phone_by_id_resource(List<String> dimensions) throws Throwable {
+        PhoneEntity phoneEntity = getPhoneEntity();
+        assertEquals(phoneEntity.getSizeAndWeightDetails().getDimensions().size(), dimensions.size());
+        assertEquals(phoneEntity.getSizeAndWeightDetails().getDimensions(), dimensions);
+    }
+
+    @Then("^I should see weight as \"(.*)\" from phone by id resource$")
+    public void I_should_see_weight_as_from_phone_by_id_resource(String weight) throws Throwable {
+        assertEquals(getPhoneEntity().getSizeAndWeightDetails().getWeight(), weight);
+    }
+
+    @Then("^I should see storage flash as \"(.*)\" from phone by id resource$")
+    public void I_should_see_storage_flash_as_from_phone_by_id_resource(String storageFlash) throws Throwable {
+        assertEquals(getPhoneEntity().getStorageDetails().getFlash(), storageFlash);
+    }
+
+    @Then("^I should see storage ram as \"(.*)\" from phone by id resource$")
+    public void I_should_see_storage_ram_as_from_phone_by_id_resource(String storageRam) throws Throwable {
+        assertEquals(getPhoneEntity().getStorageDetails().getRam(), storageRam);
+    }
 }

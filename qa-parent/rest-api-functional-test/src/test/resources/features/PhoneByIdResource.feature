@@ -1,10 +1,16 @@
 Feature: Phone by id resource
 
-  Scenario: should get phone by id
+  Scenario: should get 200 for valid phone by id
     Given I set the url to phone by id resource
     And I set the phone id as 1 to phone by id resource
     And I make a GET request on phone by id resource
     Then I should get http response status as 200 from phone by id resource
+
+  Scenario: should get 404 for invalid phone id
+    Given I set the url to phone by id resource
+    And I set the phone id as 0 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should get http response status as 404 from phone by id resource
 
   Scenario: should get additional features of phone by id
     Given I set the url to phone by id resource
@@ -91,3 +97,54 @@ Feature: Phone by id resource
     Then I should see display screen resolution as "WVGA (800 x 480)" from phone by id resource
     Then I should see display screen size as "4.0 inches" from phone by id resource
     Then I should see display touch screen as true from phone by id resource
+
+  Scenario: should get hardware details of phone by id
+    Given I set the url to phone by id resource
+    And I set the phone id as 1 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see hardware accelerometer as true from phone by id resource
+    Then I should see hardware audioJack as "3.5mm" from phone by id resource
+    Then I should see hardware cpu as "1GHz Cortex A8 (Hummingbird) processor" from phone by id resource
+    Then I should see hardware fmRadio as false from phone by id resource
+    Then I should see hardware physicalKeyboard as false from phone by id resource
+    Then I should see hardware usb as "USB 2.0" from phone by id resource
+
+  Scenario: should get id of phone by id
+    Given I set the url to phone by id resource
+    And I set the phone id as 1 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see id as 1 from phone by id resource
+
+  Scenario: should get image list of phone by id
+    Given I set the url to phone by id resource
+    And I set the phone id as 1 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see image list as below from phone by id resource
+      | /restapi/img/phones/nexus-s.0.jpg   |
+      | /restapi/img/phones/nexus-s.1.jpg   |
+      | /restapi/img/phones/nexus-s.2.jpg   |
+      | /restapi/img/phones/nexus-s.3.jpg   |
+    And I should be able to get every image in the list from phone by id resource
+
+  Scenario: should get name of phone by id
+    Given I set the url to phone by id resource
+    And I set the phone id as 1 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see name as "Nexus S" from phone by id resource
+
+  Scenario: should get size and weight details of phone by id
+    Given I set the url to phone by id resource
+    And I set the phone id as 1 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see dimensions list as below from phone by id resource
+      | 63.0 mm (w)  |
+      | 123.9 mm (h) |
+      | 10.88 mm (d) |
+    Then I should see weight as "129.0 grams" from phone by id resource
+
+  Scenario: should get storage details of phone by id
+    Given I set the url to phone by id resource
+    And I set the phone id as 1 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see storage flash as "16384MB" from phone by id resource
+    Then I should see storage ram as "512MB" from phone by id resource
