@@ -43,6 +43,20 @@ Feature: Phone by id resource
       | T-Mobile |
       | Vodafone |
 
+  Scenario: should get availability list with single empty string
+    Given I set the url to phone by id resource
+    And I set the phone id as 2 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see availability list as below from phone by id resource
+      | |
+
+  Scenario: should get availability list with single string value
+    Given I set the url to phone by id resource
+    And I set the phone id as 3 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see availability list as below from phone by id resource
+      | Verizon |
+
   Scenario: should get battery details of phone by id
     Given I set the url to phone by id resource
     And I set the phone id as 1 to phone by id resource
@@ -74,6 +88,14 @@ Feature: Phone by id resource
     Then I should see connectivity gps as true from phone by id resource
     Then I should see connectivity infrared as false from phone by id resource
     Then I should see connectivity wifi as "802.11 b/g/n" from phone by id resource
+
+  Scenario: should get connectivity cell as empty string for phone by id
+    Given I set the url to phone by id resource
+    And I set the phone id as 2 to phone by id resource
+    And I make a GET request on phone by id resource
+    Then I should see connectivity cell as below from phone by id resource
+      """
+      """
 
   Scenario: should get description of phone by id
     Given I set the url to phone by id resource
