@@ -36,4 +36,24 @@ public class PhoneDetailsPage extends BasePage{
     public List<String> getAvailabilityList() {
         return webDriver.findElements(By.className("qa-phone-availability")).stream().map(WebElement::getText).collect(Collectors.toList());
     }
+
+    public String getStandbyTime() {
+        return webDriver.findElement(By.id("qa-phone-battery-standby-time")).getText();
+    }
+
+    public String getTalkTime() {
+        return webDriver.findElement(By.id("qa-phone-battery-talk-time")).getText();
+    }
+
+    public String getBatteryType() {
+        return webDriver.findElement(By.id("qa-phone-battery-type")).getText();
+    }
+
+    public String getCameraFeatures() {
+        return webDriver.findElement(By.id("qa-phone-features")).getText();
+    }
+
+    public String getCameraPrimary() {
+        return webDriver.findElement(By.id("qa-phone-camera-primary")).getText();
+    }
 }

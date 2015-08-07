@@ -65,4 +65,29 @@ public class PhoneDetailsPageSteps {
         assertEquals(phoneDetailsPage.getAvailabilityList().size(), availabilityList.size());
         assertEquals(phoneDetailsPage.getAvailabilityList(), availabilityList);
     }
+
+    @Then("^I should see battery standby time as \"(.*)\" on phone details page$")
+    public void I_should_see_battery_standby_time_as_on_phone_details_page(String standbyTime) throws Throwable {
+        assertEquals(phoneDetailsPage.getStandbyTime(), standbyTime);
+    }
+
+    @Then("^I should see battery talk time as \"(.*)\" on phone details page$")
+    public void I_should_see_battery_talk_time_as_on_phone_details_page(String talkTime) throws Throwable {
+        assertEquals(phoneDetailsPage.getTalkTime(), talkTime);
+    }
+
+    @Then("^I should see battery type as \"(.*)\" on phone details page$")
+    public void I_should_see_battery_type_as_on_phone_details_page(String batteryType) throws Throwable {
+        assertEquals(phoneDetailsPage.getBatteryType(), batteryType);
+    }
+
+    @Then("^I should see camera features as \"(.*)\" on phone details page$")
+    public void I_should_see_camera_features_as_on_phone_details_page(String cameraFeatures) throws Throwable {
+        assertEquals(phoneDetailsPage.getCameraFeatures(), cameraFeatures);
+    }
+
+    @And("^I should see camera primary as \"(.*)\" on phone details page$")
+    public void I_should_see_camera_primary_as_on_phone_details_page(String cameraPrimary) throws Throwable {
+        assertEquals(phoneDetailsPage.getCameraPrimary(), cameraPrimary);
+    }
 }

@@ -39,19 +39,17 @@ Feature: Phone Details Page Features
     Then I should see availability list as below on phone details page
       | Verizon |
 
-#  Scenario: should display battery details on phone details page
-#    Given I go to phone details page with phone id as 1
-#    Then I should see battery standby time as "428 hours" on phone details page
-#    Then I should see battery talk time as "6 hours" on phone details page
-#    Then I should see battery type as "Lithium Ion (Li-Ion) (1500 mAH)" on phone details page
-#
-#  Scenario: should display camera details of phone on phone details page
-#    Given I go to phone details page with phone id as 1
-#    Then I should see camera features as below on phone details page
-#      | Flash   |
-#      | Video   |
-#    And I should see camera primary as "5.0 megapixels" on phone details page
-#
+  Scenario: should display battery details on phone details page
+    Given I go to phone details page with phone id as 1
+    Then I should see battery standby time as "428 hours" on phone details page
+    Then I should see battery talk time as "6 hours" on phone details page
+    Then I should see battery type as "Lithium Ion (Li-Ion) (1500 mAH)" on phone details page
+
+  Scenario: should display camera details of phone on phone details page
+    Given I go to phone details page with phone id as 1
+    Then I should see camera features as "Flash, Video" on phone details page
+    And I should see camera primary as "5.0 megapixels" on phone details page
+
 #  Scenario: should display connectivity details of phone on phone details page
 #    Given I go to phone details page with phone id as 1
 #    Then I should see connectivity bluetooth as "Bluetooth 2.1" on phone details page
