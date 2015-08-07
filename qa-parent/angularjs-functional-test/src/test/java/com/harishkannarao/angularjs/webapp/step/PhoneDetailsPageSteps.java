@@ -10,6 +10,8 @@ import cucumber.api.java.en.Then;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -40,5 +42,27 @@ public class PhoneDetailsPageSteps {
     @Then("^I should see the title as \"(.*)\" on phone details page$")
     public void I_should_see_the_title_as_on_phone_details_page(String pageTitle) throws Throwable {
         assertEquals(phoneDetailsPage.getTitle(), pageTitle);
+    }
+
+    @Then("^I should see the additional features as below on phone details page$")
+    public void I_should_see_the_additional_features_as_below_on_phone_details_page(String additionalFeatures) throws Throwable {
+        String expectedAdditionalFeatures = additionalFeatures.replaceAll("[\r\n]+", "");
+        assertEquals(phoneDetailsPage.getAdditionalFeatures(), expectedAdditionalFeatures);
+    }
+
+    @Then("^I should see android os as \"(.*)\" on phone details page$")
+    public void I_should_see_android_os_as_on_phone_details_page(String androidOs) throws Throwable {
+        assertEquals(phoneDetailsPage.getAndroidOs(), androidOs);
+    }
+
+    @Then("^I should see android ui as \"(.*)\" on phone details page$")
+    public void I_should_see_android_ui_as_on_phone_details_page(String androidUi) throws Throwable {
+        assertEquals(phoneDetailsPage.getAndroidUi(), androidUi);
+    }
+
+    @Then("^I should see availability list as below on phone details page$")
+    public void I_should_see_availability_list_as_below_on_phone_details_page(List<String> availabilityList) throws Throwable {
+        assertEquals(phoneDetailsPage.getAvailabilityList().size(), availabilityList.size());
+        assertEquals(phoneDetailsPage.getAvailabilityList(), availabilityList);
     }
 }

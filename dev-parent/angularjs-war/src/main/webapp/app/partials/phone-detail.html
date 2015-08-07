@@ -2,13 +2,13 @@
 <span id="{{phoneId}}" class="qa-phone-id"></span>
 <img ng-src="{{phone.images[0]}}" class="phone">
 
-<h1>{{phone.name}}</h1>
+<h1 id="qa-phone-name">{{phone.name}}</h1>
 
-<p>{{phone.description}}</p>
+<p id="qa-phone-description">{{phone.description}}</p>
 
 <ul class="phone-thumbs">
     <li ng-repeat="img in phone.images">
-        <img ng-src="{{img}}">
+        <img class="qa-phone-image" ng-src="{{img}}">
     </li>
 </ul>
 
@@ -17,99 +17,99 @@
         <span>Availability and Networks</span>
         <dl>
             <dt>Availability</dt>
-            <dd ng-repeat="availability in phone.availability">{{availability}}</dd>
+            <dd class="qa-phone-availability" ng-repeat="availability in phone.availability">{{availability}}</dd>
         </dl>
     </li>
     <li>
         <span>Battery</span>
         <dl>
             <dt>Type</dt>
-            <dd>{{phone.battery.type}}</dd>
+            <dd id="qa-phone-battery-type">{{phone.battery.type}}</dd>
             <dt>Talk Time</dt>
-            <dd>{{phone.battery.talkTime}}</dd>
+            <dd id="qa-phone-battery-talk-time">{{phone.battery.talkTime}}</dd>
             <dt>Standby time (max)</dt>
-            <dd>{{phone.battery.standbyTime}}</dd>
+            <dd id="qa-phone-battery-standby-time">{{phone.battery.standbyTime}}</dd>
         </dl>
     </li>
     <li>
         <span>Storage and Memory</span>
         <dl>
             <dt>RAM</dt>
-            <dd>{{phone.storage.ram}}</dd>
+            <dd id="qa-phone-storage-ram">{{phone.storage.ram}}</dd>
             <dt>Internal Storage</dt>
-            <dd>{{phone.storage.flash}}</dd>
+            <dd id="qa-phone-storage-flash">{{phone.storage.flash}}</dd>
         </dl>
     </li>
     <li>
         <span>Connectivity</span>
         <dl>
             <dt>Network Support</dt>
-            <dd>{{phone.connectivity.cell}}</dd>
+            <dd id="qa-phone-connectivity-cell">{{phone.connectivity.cell}}</dd>
             <dt>WiFi</dt>
-            <dd>{{phone.connectivity.wifi}}</dd>
+            <dd id="qa-phone-connectivity-wifi">{{phone.connectivity.wifi}}</dd>
             <dt>Bluetooth</dt>
-            <dd>{{phone.connectivity.bluetooth}}</dd>
+            <dd id="qa-phone-connectivity-bluetooth">{{phone.connectivity.bluetooth}}</dd>
             <dt>Infrared</dt>
-            <dd>{{phone.connectivity.infrared}}</dd>
+            <dd id="qa-phone-connectivity-infrared">{{phone.connectivity.infrared}}</dd>
             <dt>GPS</dt>
-            <dd>{{phone.connectivity.gps}}</dd>
+            <dd id="qa-phone-connectivity-gps">{{phone.connectivity.gps}}</dd>
         </dl>
     </li>
     <li>
         <span>Android</span>
         <dl>
             <dt>OS Version</dt>
-            <dd>{{phone.android.os}}</dd>
+            <dd id="qa-phone-android-os">{{phone.android.os}}</dd>
             <dt>UI</dt>
-            <dd>{{phone.android.ui}}</dd>
+            <dd id="qa-phone-android-ui">{{phone.android.ui}}</dd>
         </dl>
     </li>
     <li>
         <span>Size and Weight</span>
         <dl>
             <dt>Dimensions</dt>
-            <dd ng-repeat="dim in phone.sizeAndWeight.dimensions">{{dim}}</dd>
+            <dd class="qa-phone-dimensions" ng-repeat="dim in phone.sizeAndWeight.dimensions">{{dim}}</dd>
             <dt>Weight</dt>
-            <dd>{{phone.sizeAndWeight.weight}}</dd>
+            <dd id="qa-phone-weight">{{phone.sizeAndWeight.weight}}</dd>
         </dl>
     </li>
     <li>
         <span>Display</span>
         <dl>
             <dt>Screen size</dt>
-            <dd>{{phone.display.screenSize}}</dd>
+            <dd id="qa-phone-screen-size">{{phone.display.screenSize}}</dd>
             <dt>Screen resolution</dt>
-            <dd>{{phone.display.screenResolution}}</dd>
+            <dd id="qa-phone-screen-resolution">{{phone.display.screenResolution}}</dd>
             <dt>Touch screen</dt>
-            <dd>{{phone.display.touchScreen}}</dd>
+            <dd id="qa-phone-touch-screen">{{phone.display.touchScreen}}</dd>
         </dl>
     </li>
     <li>
         <span>Hardware</span>
         <dl>
             <dt>CPU</dt>
-            <dd>{{phone.hardware.cpu}}</dd>
+            <dd id="qa-phone-cpu">{{phone.hardware.cpu}}</dd>
             <dt>USB</dt>
-            <dd>{{phone.hardware.usb}}</dd>
+            <dd id="qa-phone-usb">{{phone.hardware.usb}}</dd>
             <dt>Audio / headphone jack</dt>
-            <dd>{{phone.hardware.audioJack}}</dd>
+            <dd id="qa-phone-audiojack">{{phone.hardware.audioJack}}</dd>
             <dt>FM Radio</dt>
-            <dd>{{phone.hardware.fmRadio}}</dd>
+            <dd id="qa-phone-fmradio">{{phone.hardware.fmRadio}}</dd>
             <dt>Accelerometer</dt>
-            <dd>{{phone.hardware.accelerometer}}</dd>
+            <dd id="qa-phone-accelerometer">{{phone.hardware.accelerometer}}</dd>
         </dl>
     </li>
     <li>
         <span>Camera</span>
         <dl>
             <dt>Primary</dt>
-            <dd>{{phone.camera.primary}}</dd>
+            <dd id="qa-phone-camera-primary">{{phone.camera.primary}}</dd>
             <dt>Features</dt>
-            <dd>{{phone.camera.features.join(', ')}}</dd>
+            <dd id="qa-phone-features">{{phone.camera.features.join(', ')}}</dd>
         </dl>
     </li>
     <li>
         <span>Additional Features</span>
-        <dd>{{phone.additionalFeatures}}</dd>
+        <dd id="qa-phone-additional-features">{{phone.additionalFeatures}}</dd>
     </li>
 </ul>
