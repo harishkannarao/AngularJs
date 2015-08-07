@@ -37,6 +37,29 @@ describe('PhoneCat controllers', function() {
   });
 
   describe('PhoneDetailCtrl', function(){
+    var scope, rootScope, $httpBackend, ctrl, routeParams, controller;
 
+    // Load our app module definition before each test.
+    beforeEach(module('phonecatApp'));
+
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+      $httpBackend = _$httpBackend_;
+      rootScope = $rootScope;
+      routeParams = $routeParams;
+      controller = $controller;
+    }));
+
+    it('should fetch phone detail', function() {
+      scope = rootScope.$new();
+      expect(scope.phone).toBeUndefined();
+      routeParams.phoneId = 'xyz';
+      $httpBackend.expectGET('/restapi/service/phones/xyz').respond({name:'phone xyz'});
+      ctrl = controller('PhoneDetailCtrl', {$scope: scope});
+      $httpBackend.flush();
+
+      expect(rootScope.title).toEqual('Google Phone Gallery: phone xyz');
+      expect(scope.phone).toEqual({name:'phone xyz'});
+      expect(scope.phoneId).toEqual('xyz');
+    });
   });
 });

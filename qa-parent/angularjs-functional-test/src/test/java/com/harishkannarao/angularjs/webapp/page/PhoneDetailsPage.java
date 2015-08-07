@@ -14,6 +14,6 @@ public class PhoneDetailsPage extends BasePage{
     }
 
     public Long getPhoneId() {
-        return Long.parseLong(webDriver.findElement(By.id("qa-phone-id")).getText());
+        return Long.parseLong(webDriver.findElement(By.className("qa-phone-id")).getAttribute("id"));
     }
 }

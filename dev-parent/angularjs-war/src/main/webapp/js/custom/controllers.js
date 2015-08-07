@@ -18,9 +18,12 @@ phonecatControllers.controller('PhoneListCtrl', [
         }
 ]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$routeParams',
-  function($scope, $rootScope, $routeParams) {
+phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
+  function($scope, $rootScope, $routeParams, $http) {
     $scope.phoneId = $routeParams.phoneId;
-    $rootScope.title = 'Google Phone Gallery: ' + $scope.phoneId;
-  }
-]);
+    $http.get('/restapi/service/phones/' + $routeParams.phoneId).success(function(data) {
+      $scope.phone = data;
+      $rootScope.title = 'Google Phone Gallery: ' + $scope.phone.name;
+    });
+}]);
+
