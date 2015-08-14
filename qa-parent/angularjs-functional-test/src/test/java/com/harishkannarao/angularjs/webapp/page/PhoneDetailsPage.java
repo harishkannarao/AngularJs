@@ -56,4 +56,84 @@ public class PhoneDetailsPage extends BasePage{
     public String getCameraPrimary() {
         return webDriver.findElement(By.id("qa-phone-camera-primary")).getText();
     }
+
+    public String getConnectivityBluetooth() {
+        return webDriver.findElement(By.id("qa-phone-connectivity-bluetooth")).getText();
+    }
+
+    public String getConnectivityCell() {
+        return webDriver.findElement(By.id("qa-phone-connectivity-cell")).getText();
+    }
+
+    public Boolean getConnectivityGps() {
+        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-connectivity-gps")).getText());
+    }
+
+    public Boolean getConnectivityInfrared() {
+        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-connectivity-infrared")).getText());
+    }
+
+    public String getConnectivityWifi() {
+        return webDriver.findElement(By.id("qa-phone-connectivity-wifi")).getText();
+    }
+
+    public String getDescription() {
+        return webDriver.findElement(By.id("qa-phone-description")).getText();
+    }
+
+    public String getScreenResolution() {
+        return webDriver.findElement(By.id("qa-phone-screen-resolution")).getText();
+    }
+
+    public String getScreenSize() {
+        return webDriver.findElement(By.id("qa-phone-screen-size")).getText();
+    }
+
+    public Boolean getTouchScreen() {
+        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-touch-screen")).getText());
+    }
+
+    public Boolean getHardwareAccelerometer() {
+        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-accelerometer")).getText());
+    }
+
+    public String getAudioJack() {
+        return webDriver.findElement(By.id("qa-phone-audiojack")).getText();
+    }
+
+    public String getCpu() {
+        return webDriver.findElement(By.id("qa-phone-cpu")).getText();
+    }
+
+    public Boolean getFmRadio() {
+        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-fmradio")).getText());
+    }
+
+    public String getUsb() {
+        return webDriver.findElement(By.id("qa-phone-usb")).getText();
+    }
+
+    public List<String> getImages() {
+        return webDriver.findElements(By.className("qa-phone-image")).stream().map(webElement -> webElement.getAttribute("src")).collect(Collectors.toList());
+    }
+
+    public String getPhoneName() {
+        return webDriver.findElement(By.id("qa-phone-name")).getText();
+    }
+
+    public List<String> getDimensions() {
+        return webDriver.findElements(By.className("qa-phone-dimensions")).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    public String getWeight() {
+        return webDriver.findElement(By.id("qa-phone-weight")).getText();
+    }
+
+    public String getStorageFlash() {
+        return webDriver.findElement(By.id("qa-phone-storage-flash")).getText();
+    }
+
+    public String getStorageRam() {
+        return webDriver.findElement(By.id("qa-phone-storage-ram")).getText();
+    }
 }

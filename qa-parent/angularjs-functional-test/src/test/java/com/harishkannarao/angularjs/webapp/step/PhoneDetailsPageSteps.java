@@ -90,4 +90,111 @@ public class PhoneDetailsPageSteps {
     public void I_should_see_camera_primary_as_on_phone_details_page(String cameraPrimary) throws Throwable {
         assertEquals(phoneDetailsPage.getCameraPrimary(), cameraPrimary);
     }
+
+    @Then("^I should see connectivity bluetooth as \"(.*)\" on phone details page$")
+    public void I_should_see_connectivity_bluetooth_as_on_phone_details_page(String bluetooth) throws Throwable {
+        assertEquals(phoneDetailsPage.getConnectivityBluetooth(), bluetooth);
+    }
+
+    @Then("^I should see connectivity cell as below on phone details page$")
+    public void I_should_see_connectivity_cell_as_below_on_phone_details_page(String connectivityCell) throws Throwable {
+        String expectedConnectivityCell = connectivityCell.replaceAll("[\r\n]+", "");
+        assertEquals(phoneDetailsPage.getConnectivityCell(), expectedConnectivityCell);
+    }
+
+    @Then("^I should see connectivity gps as (.*) on phone details page$")
+    public void I_should_see_connectivity_gps_as_on_phone_details_page(Boolean gps) throws Throwable {
+        assertEquals(phoneDetailsPage.getConnectivityGps(), gps);
+    }
+
+    @Then("^I should see connectivity infrared as (.*) on phone details page$")
+    public void I_should_see_connectivity_infrared_as_on_phone_details_page(Boolean infrared) throws Throwable {
+        assertEquals(phoneDetailsPage.getConnectivityInfrared(), infrared);
+    }
+
+    @Then("^I should see connectivity wifi as \"(.*)\" on phone details page$")
+    public void I_should_see_connectivity_wifi_as_on_phone_details_page(String wifi) throws Throwable {
+        assertEquals(phoneDetailsPage.getConnectivityWifi(), wifi);
+    }
+
+    @Then("^I should see description as below on phone details page$")
+    public void I_should_see_description_as_below_on_phone_details_page(String description) throws Throwable {
+        String expectedDescription = description.replaceAll("[\r\n]+", "");
+        assertEquals(phoneDetailsPage.getDescription(), expectedDescription);
+    }
+
+    @Then("^I should see display screen resolution as \"(.*)\" on phone details page$")
+    public void I_should_see_display_screen_resolution_as_on_phone_details_page(String screenResolution) throws Throwable {
+        assertEquals(phoneDetailsPage.getScreenResolution(), screenResolution);
+    }
+
+    @Then("^I should see display screen size as \"(.*)\" on phone details page$")
+    public void I_should_see_display_screen_size_as_on_phone_details_page(String screenSize) throws Throwable {
+        assertEquals(phoneDetailsPage.getScreenSize(), screenSize);
+    }
+
+    @Then("^I should see display touch screen as (.*) on phone details page$")
+    public void I_should_see_display_touch_screen_as_on_phone_details_page(Boolean touchScreen) throws Throwable {
+        assertEquals(phoneDetailsPage.getTouchScreen(), touchScreen);
+    }
+
+    @Then("^I should see hardware accelerometer as (.*) on phone details page$")
+    public void I_should_see_hardware_accelerometer_as_on_phone_details_page(Boolean hardwareAccelerometer) throws Throwable {
+        assertEquals(phoneDetailsPage.getHardwareAccelerometer(), hardwareAccelerometer);
+    }
+
+    @Then("^I should see hardware audioJack as \"(.*)\" on phone details page$")
+    public void I_should_see_hardware_audioJack_as_on_phone_details_page(String audioJack) throws Throwable {
+        assertEquals(phoneDetailsPage.getAudioJack(), audioJack);
+    }
+
+    @Then("^I should see hardware cpu as \"(.*)\" on phone details page$")
+    public void I_should_see_hardware_cpu_as_on_phone_details_page(String cpu) throws Throwable {
+        assertEquals(phoneDetailsPage.getCpu(), cpu);
+    }
+
+    @Then("^I should see hardware fmRadio as (.*) on phone details page$")
+    public void I_should_see_hardware_fmRadio_as_on_phone_details_page(Boolean fmRadio) throws Throwable {
+        assertEquals(phoneDetailsPage.getFmRadio(), fmRadio);
+    }
+
+    @Then("^I should see hardware usb as \"(.*)\" on phone details page$")
+    public void I_should_see_hardware_usb_as_on_phone_details_page(String usb) throws Throwable {
+        assertEquals(phoneDetailsPage.getUsb(), usb);
+    }
+
+    @Then("^I should see id as (.*) on phone details page$")
+    public void I_should_see_id_as_on_phone_details_page(Long phoneId) throws Throwable {
+        assertEquals(phoneDetailsPage.getPhoneId(), phoneId);
+    }
+
+    @Then("^I should see image list as below on phone details page$")
+    public void I_should_see_image_list_as_below_on_phone_details_page(List<String> images) throws Throwable {
+        assertEquals(phoneDetailsPage.getImages(), images);
+    }
+
+    @Then("^I should see name as \"(.*)\" on phone details page$")
+    public void I_should_see_name_as_on_phone_details_page(String phoneName) throws Throwable {
+        assertEquals(phoneDetailsPage.getPhoneName(), phoneName);
+    }
+
+    @Then("^I should see dimensions list as below on phone details page$")
+    public void I_should_see_dimensions_list_as_below_on_phone_details_page(List<String> dimensions) throws Throwable {
+        assertEquals(phoneDetailsPage.getDimensions(), dimensions);
+    }
+
+    @Then("^I should see weight as \"(.*)\" on phone details page$")
+    public void I_should_see_weight_as_on_phone_details_page(String weight) throws Throwable {
+        assertEquals(phoneDetailsPage.getWeight(), weight);
+    }
+
+    @Then("^I should see storage flash as \"(.*)\" on phone details page$")
+    public void I_should_see_storage_flash_as_on_phone_details_page(String storageFlash) throws Throwable {
+        assertEquals(phoneDetailsPage.getStorageFlash(), storageFlash);
+    }
+
+    @Then("^I should see storage ram as \"(.*)\" on phone details page$")
+    public void I_should_see_storage_ram_as_on_phone_details_page(String storageRam) throws Throwable {
+        assertEquals(phoneDetailsPage.getStorageRam(), storageRam);
+    }
 }
