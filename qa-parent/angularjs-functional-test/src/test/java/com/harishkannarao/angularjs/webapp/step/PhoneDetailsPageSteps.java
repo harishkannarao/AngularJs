@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import java.util.List;
 
+import static com.harishkannarao.angularjs.webapp.util.StringUtils.convertToUnicodeString;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -102,14 +103,14 @@ public class PhoneDetailsPageSteps {
         assertEquals(phoneDetailsPage.getConnectivityCell(), expectedConnectivityCell);
     }
 
-    @Then("^I should see connectivity gps as (.*) on phone details page$")
-    public void I_should_see_connectivity_gps_as_on_phone_details_page(Boolean gps) throws Throwable {
-        assertEquals(phoneDetailsPage.getConnectivityGps(), gps);
+    @Then("^I should see connectivity gps as \"(.*)\" on phone details page$")
+    public void I_should_see_connectivity_gps_as_on_phone_details_page(String gps) throws Throwable {
+        assertEquals(convertToUnicodeString(phoneDetailsPage.getConnectivityGps()), gps);
     }
 
-    @Then("^I should see connectivity infrared as (.*) on phone details page$")
-    public void I_should_see_connectivity_infrared_as_on_phone_details_page(Boolean infrared) throws Throwable {
-        assertEquals(phoneDetailsPage.getConnectivityInfrared(), infrared);
+    @Then("^I should see connectivity infrared as \"(.*)\" on phone details page$")
+    public void I_should_see_connectivity_infrared_as_on_phone_details_page(String infrared) throws Throwable {
+        assertEquals(convertToUnicodeString(phoneDetailsPage.getConnectivityInfrared()), infrared);
     }
 
     @Then("^I should see connectivity wifi as \"(.*)\" on phone details page$")
@@ -133,14 +134,14 @@ public class PhoneDetailsPageSteps {
         assertEquals(phoneDetailsPage.getScreenSize(), screenSize);
     }
 
-    @Then("^I should see display touch screen as (.*) on phone details page$")
-    public void I_should_see_display_touch_screen_as_on_phone_details_page(Boolean touchScreen) throws Throwable {
-        assertEquals(phoneDetailsPage.getTouchScreen(), touchScreen);
+    @Then("^I should see display touch screen as \"(.*)\" on phone details page$")
+    public void I_should_see_display_touch_screen_as_on_phone_details_page(String touchScreen) throws Throwable {
+        assertEquals(convertToUnicodeString(phoneDetailsPage.getTouchScreen()), touchScreen);
     }
 
-    @Then("^I should see hardware accelerometer as (.*) on phone details page$")
-    public void I_should_see_hardware_accelerometer_as_on_phone_details_page(Boolean hardwareAccelerometer) throws Throwable {
-        assertEquals(phoneDetailsPage.getHardwareAccelerometer(), hardwareAccelerometer);
+    @Then("^I should see hardware accelerometer as \"(.*)\" on phone details page$")
+    public void I_should_see_hardware_accelerometer_as_on_phone_details_page(String hardwareAccelerometer) throws Throwable {
+        assertEquals(convertToUnicodeString(phoneDetailsPage.getHardwareAccelerometer()), hardwareAccelerometer);
     }
 
     @Then("^I should see hardware audioJack as \"(.*)\" on phone details page$")
@@ -153,9 +154,9 @@ public class PhoneDetailsPageSteps {
         assertEquals(phoneDetailsPage.getCpu(), cpu);
     }
 
-    @Then("^I should see hardware fmRadio as (.*) on phone details page$")
-    public void I_should_see_hardware_fmRadio_as_on_phone_details_page(Boolean fmRadio) throws Throwable {
-        assertEquals(phoneDetailsPage.getFmRadio(), fmRadio);
+    @Then("^I should see hardware fmRadio as \"(.*)\" on phone details page$")
+    public void I_should_see_hardware_fmRadio_as_on_phone_details_page(String fmRadio) throws Throwable {
+        assertEquals(convertToUnicodeString(phoneDetailsPage.getFmRadio()), fmRadio);
     }
 
     @Then("^I should see hardware usb as \"(.*)\" on phone details page$")

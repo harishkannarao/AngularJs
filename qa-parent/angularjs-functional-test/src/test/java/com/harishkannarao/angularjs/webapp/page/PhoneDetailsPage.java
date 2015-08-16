@@ -65,12 +65,12 @@ public class PhoneDetailsPage extends BasePage{
         return webDriver.findElement(By.id("qa-phone-connectivity-cell")).getText();
     }
 
-    public Boolean getConnectivityGps() {
-        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-connectivity-gps")).getText());
+    public String getConnectivityGps() {
+        return webDriver.findElement(By.id("qa-phone-connectivity-gps")).getText();
     }
 
-    public Boolean getConnectivityInfrared() {
-        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-connectivity-infrared")).getText());
+    public String getConnectivityInfrared() {
+        return webDriver.findElement(By.id("qa-phone-connectivity-infrared")).getText();
     }
 
     public String getConnectivityWifi() {
@@ -89,12 +89,12 @@ public class PhoneDetailsPage extends BasePage{
         return webDriver.findElement(By.id("qa-phone-screen-size")).getText();
     }
 
-    public Boolean getTouchScreen() {
-        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-touch-screen")).getText());
+    public String getTouchScreen() {
+        return webDriver.findElement(By.id("qa-phone-touch-screen")).getText();
     }
 
-    public Boolean getHardwareAccelerometer() {
-        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-accelerometer")).getText());
+    public String getHardwareAccelerometer() {
+        return webDriver.findElement(By.id("qa-phone-accelerometer")).getText();
     }
 
     public String getAudioJack() {
@@ -105,8 +105,8 @@ public class PhoneDetailsPage extends BasePage{
         return webDriver.findElement(By.id("qa-phone-cpu")).getText();
     }
 
-    public Boolean getFmRadio() {
-        return Boolean.valueOf(webDriver.findElement(By.id("qa-phone-fmradio")).getText());
+    public String getFmRadio() {
+        return webDriver.findElement(By.id("qa-phone-fmradio")).getText();
     }
 
     public String getUsb() {

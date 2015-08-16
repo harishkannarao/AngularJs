@@ -59,8 +59,8 @@ Feature: Phone Details Page Features
        Tri-band HSPA: 900, 2100, 1700
        HSPA type: HSDPA (7.2Mbps) HSUPA (5.76Mbps)
       """
-    Then I should see connectivity gps as true on phone details page
-    Then I should see connectivity infrared as false on phone details page
+    Then I should see connectivity gps as "\u2713" on phone details page
+    Then I should see connectivity infrared as "\u2718" on phone details page
     Then I should see connectivity wifi as "802.11 b/g/n" on phone details page
 
   Scenario: should display connectivity cell as empty string for phone on phone details page
@@ -86,14 +86,14 @@ Feature: Phone Details Page Features
     Given I go to phone details page with phone id as 1
     Then I should see display screen resolution as "WVGA (800 x 480)" on phone details page
     Then I should see display screen size as "4.0 inches" on phone details page
-    Then I should see display touch screen as true on phone details page
+    Then I should see display touch screen as "\u2713" on phone details page
 
   Scenario: should display hardware details of phone on phone details page
     Given I go to phone details page with phone id as 1
-    Then I should see hardware accelerometer as true on phone details page
+    Then I should see hardware accelerometer as "\u2713" on phone details page
     Then I should see hardware audioJack as "3.5mm" on phone details page
     Then I should see hardware cpu as "1GHz Cortex A8 (Hummingbird) processor" on phone details page
-    Then I should see hardware fmRadio as false on phone details page
+    Then I should see hardware fmRadio as "\u2718" on phone details page
     Then I should see hardware usb as "USB 2.0" on phone details page
 
   Scenario: should display id of phone on phone details page
