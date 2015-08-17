@@ -38,6 +38,12 @@ describe('PhoneCat controllers', function() {
 
   describe('PhoneDetailCtrl', function(){
     var scope, rootScope, $httpBackend, ctrl, routeParams, controller;
+    var xyzPhoneData = function() {
+      return {
+        name: 'phone xyz',
+        images: ['image/url1.png', 'image/url2.png']
+      }
+    };
 
     // Load our app module definition before each test.
     beforeEach(module('phonecatApp'));
@@ -53,13 +59,30 @@ describe('PhoneCat controllers', function() {
       scope = rootScope.$new();
       expect(scope.phone).toBeUndefined();
       routeParams.phoneId = 'xyz';
-      $httpBackend.expectGET('/restapi/service/phones/xyz').respond({name:'phone xyz'});
+      $httpBackend.expectGET('/restapi/service/phones/xyz').respond(xyzPhoneData());
       ctrl = controller('PhoneDetailCtrl', {$scope: scope});
       $httpBackend.flush();
 
       expect(rootScope.title).toEqual('Google Phone Gallery: phone xyz');
-      expect(scope.phone).toEqual({name:'phone xyz'});
+      expect(scope.phone).toEqual(xyzPhoneData());
       expect(scope.phoneId).toEqual('xyz');
+    });
+
+    it('should set first image as default main image', function() {
+      scope = rootScope.$new();
+      routeParams.phoneId = 'xyz';
+      $httpBackend.expectGET('/restapi/service/phones/xyz').respond(xyzPhoneData());
+      ctrl = controller('PhoneDetailCtrl', {$scope: scope});
+      $httpBackend.flush();
+
+      expect(scope.mainImageUrl).toEqual('image/url1.png');
+    });
+
+    it('setImage function should change the main image url', function() {
+      scope = rootScope.$new();
+      ctrl = controller('PhoneDetailCtrl', {$scope: scope});
+      scope.setImage('image/url2.png');
+      expect(scope.mainImageUrl).toEqual('image/url2.png');
     });
   });
 });

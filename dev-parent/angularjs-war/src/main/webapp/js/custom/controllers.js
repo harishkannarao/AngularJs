@@ -24,6 +24,10 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$rou
     $http.get('/restapi/service/phones/' + $routeParams.phoneId).success(function(data) {
       $scope.phone = data;
       $rootScope.title = 'Google Phone Gallery: ' + $scope.phone.name;
+      $scope.mainImageUrl = data.images[0];
     });
+    $scope.setImage = function(imageUrl) {
+      $scope.mainImageUrl = imageUrl;
+    };
 }]);
 

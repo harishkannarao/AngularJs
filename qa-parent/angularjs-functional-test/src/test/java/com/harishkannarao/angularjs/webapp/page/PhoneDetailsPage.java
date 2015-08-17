@@ -136,4 +136,12 @@ public class PhoneDetailsPage extends BasePage{
     public String getStorageRam() {
         return webDriver.findElement(By.id("qa-phone-storage-ram")).getText();
     }
+
+    public String getMainImageUrl() {
+        return webDriver.findElement(By.id("qa-phone-main-image")).getAttribute("src");
+    }
+
+    public void clickOnImageWithUrl(String imageUrl) {
+        webDriver.findElements(By.className("qa-phone-image")).stream().filter(webElement -> imageUrl.equals(webElement.getAttribute("src"))).findFirst().get().click();
+    }
 }

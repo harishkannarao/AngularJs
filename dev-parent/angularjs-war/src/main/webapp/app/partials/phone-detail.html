@@ -1,6 +1,6 @@
 <span id="qa-phone-details-page-id"></span>
 <span id="{{phoneId}}" class="qa-phone-id"></span>
-<img ng-src="{{phone.images[0]}}" class="phone">
+<img id="qa-phone-main-image" ng-src="{{mainImageUrl}}" class="phone"/>
 
 <h1 id="qa-phone-name">{{phone.name}}</h1>
 
@@ -8,7 +8,7 @@
 
 <ul class="phone-thumbs">
     <li ng-repeat="img in phone.images">
-        <img class="qa-phone-image" ng-src="{{img}}">
+        <img class="qa-phone-image" ng-src="{{img}}" ng-click="setImage(img)"/>
     </li>
 </ul>
 

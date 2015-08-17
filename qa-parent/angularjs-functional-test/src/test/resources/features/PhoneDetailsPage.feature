@@ -124,3 +124,12 @@ Feature: Phone Details Page Features
     Given I go to phone details page with phone id as 1
     Then I should see storage flash as "16384MB" on phone details page
     Then I should see storage ram as "512MB" on phone details page
+
+  Scenario: should display first image as default main image on phone details page
+    Given I go to phone details page with phone id as 1
+    Then I should see the main image url as "http://localhost:8080/restapi/img/phones/nexus-s.0.jpg" on phone details page
+
+  Scenario: should change main image by clicking on other image on phone details page
+    Given I go to phone details page with phone id as 1
+    When I click on image with url as "http://localhost:8080/restapi/img/phones/nexus-s.2.jpg" on phone details page
+    Then I should see the main image url as "http://localhost:8080/restapi/img/phones/nexus-s.2.jpg" on phone details page

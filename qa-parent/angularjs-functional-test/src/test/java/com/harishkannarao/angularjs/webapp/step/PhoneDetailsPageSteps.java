@@ -6,6 +6,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -197,5 +198,15 @@ public class PhoneDetailsPageSteps {
     @Then("^I should see storage ram as \"(.*)\" on phone details page$")
     public void I_should_see_storage_ram_as_on_phone_details_page(String storageRam) throws Throwable {
         assertEquals(phoneDetailsPage.getStorageRam(), storageRam);
+    }
+
+    @Then("^I should see the main image url as \"(.*)\" on phone details page$")
+    public void I_should_see_the_main_image_url_as_on_phone_details_page(String mainImageUrl) throws Throwable {
+        assertEquals(phoneDetailsPage.getMainImageUrl(), mainImageUrl);
+    }
+
+    @When("^I click on image with url as \"(.*)\" on phone details page$")
+    public void I_click_on_image_with_url_as_on_phone_details_page(String imageUrl) throws Throwable {
+        phoneDetailsPage.clickOnImageWithUrl(imageUrl);
     }
 }
