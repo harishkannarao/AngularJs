@@ -4,6 +4,17 @@ body {
   padding-top: 20px;
 }
 
+
+.phone-images {
+  background-color: white;
+  width: 450px;
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+}
+
+
 .phones {
   list-style: none;
 }

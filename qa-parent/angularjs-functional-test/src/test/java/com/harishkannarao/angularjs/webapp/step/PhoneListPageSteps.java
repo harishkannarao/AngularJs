@@ -39,6 +39,7 @@ public class PhoneListPageSteps {
     @When("^I enter query as (.*) on phone list page$")
     public void I_enter_query_as_on_index_page(String query) throws Throwable {
         phoneListPage.enterQuery(query);
+        phoneListPage.waitForAngularRequestsToFinish();
     }
 
     @Then("^I should see the name as (.*) on phone list page")
@@ -59,6 +60,7 @@ public class PhoneListPageSteps {
     @When("^I set sort by as (.*) on phone list page$")
     public void I_set_sort_by_as_on_index_page(String sortByValue) throws Throwable {
         phoneListPage.setSortByValue(sortByValue);
+        phoneListPage.waitForAngularRequestsToFinish();
     }
 
     @Then("^I should see the list of phone names as below on phone list page$")

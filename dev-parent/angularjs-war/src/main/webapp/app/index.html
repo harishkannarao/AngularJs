@@ -2,17 +2,21 @@
 <html lang="en" ng-app="phonecatApp">
 <head>
     <meta charset="utf-8">
-    <!--<title ng-bind-template="Google Phone Gallery: {{query}}">Google Phone Gallery</title>-->
     <title ng-bind-template="{{title}}">Google Phone Gallery</title>
-    <!--<title>{{pageTitle}} | Google Phone Gallery</title>-->
-    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/app.css"/>
+    <link rel="stylesheet" href="../css/animations.css"/>
+    <script src="../js/jquery-2.1.4/jquery-2.1.4.min.js"></script>
     <script src="../js/angular-1.4.1/angular.min.js"></script>
     <script src="../js/angular-1.4.1/angular-route.min.js"></script>
+    <script src="../js/angular-1.4.1/angular-animate.min.js"></script>
     <script src="../js/custom/app.js"></script>
     <script src="../js/custom/controllers.js"></script>
     <script src="../js/custom/filters.js"></script>
+    <script src="../js/custom/animations.js"></script>
 </head>
 <body>
-<div ng-view></div>
+<div class="view-container">
+<div ng-view class="view-frame"></div>
+</div>
 </body>
 </html>
