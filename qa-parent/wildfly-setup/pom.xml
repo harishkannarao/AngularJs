@@ -98,7 +98,7 @@
                         <configuration>
                             <skip>${skipServerSetup}</skip>
                             <target name="copy and rename file wildfly configuration files">
-                                <copy file="${project.basedir}/conf/standalone-full.xml" tofile="${wildfly.configuration}/standalone-full.xml" />
+                                <copy file="${project.basedir}/configuration/standalone-full.xml" tofile="${wildfly.configuration}/standalone-full.xml" />
                             </target>
                         </configuration>
                     </execution>
