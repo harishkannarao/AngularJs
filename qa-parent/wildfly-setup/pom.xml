@@ -85,20 +85,22 @@
                                     <fileset dir="${wildfly.configuration}" includes="standalone-full.xml" />
                                     <fileset dir="${wildfly.configuration}" includes="standalone-full-ha.xml" />
                                     <fileset dir="${wildfly.configuration}" includes="standalone-ha.xml" />
+                                    <fileset dir="${wildfly.configuration}" includes="mgmt-users.properties" />
                                 </delete>
                             </target>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-wildfly-standalone-full-configurations</id>
+                        <id>copy-wildfly-standalone-configurations</id>
                         <phase>pre-integration-test</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
                             <skip>${skipServerSetup}</skip>
-                            <target name="copy and rename file wildfly configuration files">
+                            <target name="copy-wildfly-standalone-configurations">
                                 <copy file="${project.basedir}/configuration/standalone-full.xml" tofile="${wildfly.configuration}/standalone-full.xml" />
+                                <copy file="${project.basedir}/configuration/mgmt-users.properties" tofile="${wildfly.configuration}/mgmt-users.properties" />
                             </target>
                         </configuration>
                     </execution>
