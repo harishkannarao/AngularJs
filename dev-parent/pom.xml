@@ -15,6 +15,7 @@
         <module>angularjs-rest-service-war</module>
         <module>angularjs-war</module>
         <module>angularjs-ear</module>
+        <module>angularjs-test-support-war</module>
     </modules>
 
     <build>
