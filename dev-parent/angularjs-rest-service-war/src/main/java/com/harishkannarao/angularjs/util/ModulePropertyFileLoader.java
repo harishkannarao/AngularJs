@@ -1,6 +1,8 @@
 package com.harishkannarao.angularjs.util;
 
 
+import com.harishkannarao.angularjs.listener.ModulePropertyFileListener;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import java.io.IOException;
@@ -13,14 +15,20 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class ModulePropertyFileLoader {
 
-    private String sampleString;
-    private List<String> listOfString;
-    private Long sampleLong;
+    public static final String ANGULARJS_REST_SETTINGS_THROUGH_MODULE_PROPERTIES = "angularjs-rest-settings-through-module.properties";
+    private static String sampleString;
+    private static List<String> listOfString;
+    private static Long sampleLong;
 
     @PostConstruct
-    public void loadProperties() {
+    private void initLoader() {
+        loadProperties();
+        new Thread(new ModulePropertyFileListener()).start();
+    }
+
+    public static void loadProperties() {
         Properties properties = new Properties();
-        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("angularjs-rest-settings-through-module.properties")) {
+        try (InputStream inputStream = ModulePropertyFileLoader.class.getClassLoader().getResourceAsStream(ANGULARJS_REST_SETTINGS_THROUGH_MODULE_PROPERTIES)) {
             properties.load(inputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
