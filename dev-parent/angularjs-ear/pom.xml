@@ -32,6 +32,11 @@
                             <contextRoot>/restapi</contextRoot>
                         </webModule>
                     </modules>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>com.harishkannarao.angularjs.configuration</Dependencies>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

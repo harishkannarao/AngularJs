@@ -16,6 +16,7 @@
         <wildfly.extract.dirName>wildfly-8.2.0.Final</wildfly.extract.dirName>
         <wildfly.home>${project.basedir}/server/${wildfly.extract.dirName}</wildfly.home>
         <wildfly.server>${wildfly.home}/standalone</wildfly.server>
+        <wildfly.modules.base>${wildfly.home}/modules/system/layers/base</wildfly.modules.base>
         <wildfly.deployments>${wildfly.server}/deployments</wildfly.deployments>
         <wildfly.configuration>${wildfly.server}/configuration</wildfly.configuration>
         <wildfly.log>${wildfly.server}/log</wildfly.log>
@@ -102,6 +103,34 @@
                                 <copy file="${project.basedir}/configuration/standalone-full.xml" tofile="${wildfly.configuration}/standalone-full.xml" />
                                 <copy file="${project.basedir}/configuration/mgmt-users.properties" tofile="${wildfly.configuration}/mgmt-users.properties" />
                             </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>delete-wildfly-modules</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="delete-wildfly-modules">
+                                <delete dir="${wildfly.modules.base}/com/harishkannarao/angularjs/configuration" />
+                            </target>
+                            <skip>${skipServerSetup}</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>update-wildfly-modules</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="update wildfly modules">
+                                <copy todir="${wildfly.modules.base}/com/harishkannarao/angularjs/configuration">
+                                    <fileset dir="${project.basedir}/modules/com/harishkannarao/angularjs/configuration" />
+                                </copy>
+                            </target>
+                            <skip>${skipServerSetup}</skip>
                         </configuration>
                     </execution>
                     <execution>
