@@ -10,3 +10,4 @@ Feature: Properties Resource
       | Value 2 |
       | Value 3 |
     And I should see sampleLong as 10 from properties resource
+    And I should see enablePropertyChangeListener as true from properties resource

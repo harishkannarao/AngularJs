@@ -11,6 +11,8 @@ public class ApplicationPropertyEntity {
     List<String> listOfString;
     @JsonProperty(value = "sampleLong")
     Long sampleLong;
+    @JsonProperty(value = "enablePropertyChangeListener")
+    private Boolean enablePropertyChangeListener;
 
     public String getSampleString() {
         return sampleString;
@@ -34,5 +36,13 @@ public class ApplicationPropertyEntity {
 
     public void setSampleLong(Long sampleLong) {
         this.sampleLong = sampleLong;
+    }
+
+    public Boolean getEnablePropertyChangeListener() {
+        return enablePropertyChangeListener;
+    }
+
+    public void setEnablePropertyChangeListener(Boolean enablePropertyChangeListener) {
+        this.enablePropertyChangeListener = enablePropertyChangeListener;
     }
 }

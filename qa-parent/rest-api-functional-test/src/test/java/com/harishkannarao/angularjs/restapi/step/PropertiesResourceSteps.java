@@ -59,4 +59,9 @@ public class PropertiesResourceSteps extends BaseSteps {
     public void I_should_see_sampleLong_as_from_properties_resource(Long sampleLongValue) throws Throwable {
         assertEquals(getApplicationPropertyEntity().getSampleLong(), sampleLongValue);
     }
+
+    @And("^I should see enablePropertyChangeListener as (.*) from properties resource$")
+    public void I_should_see_enablePropertyChangeListener_as_from_properties_resource(Boolean enablePropertyChangeListenerValue) throws Throwable {
+        assertEquals(getApplicationPropertyEntity().getEnablePropertyChangeListener(), enablePropertyChangeListenerValue);
+    }
 }

@@ -19,11 +19,14 @@ public class ModulePropertyFileLoader {
     private static String sampleString;
     private static List<String> listOfString;
     private static Long sampleLong;
+    private static Boolean enablePropertyChangeListener;
 
     @PostConstruct
     private void initLoader() {
         loadProperties();
-        new Thread(new ModulePropertyFileListener()).start();
+        if (enablePropertyChangeListener) {
+            new Thread(new ModulePropertyFileListener()).start();
+        }
     }
 
     public static void loadProperties() {
@@ -37,6 +40,7 @@ public class ModulePropertyFileLoader {
         sampleString = properties.getProperty("sampleString");
         listOfString = Arrays.asList(properties.getProperty("sampleStringArray").split(",")).stream().map(String::trim).collect(Collectors.toList());
         sampleLong = Long.valueOf(properties.getProperty("sampleLong"));
+        enablePropertyChangeListener = Boolean.valueOf(properties.getProperty("enablePropertyChangeListener"));
     }
 
     public String getSampleString() {
@@ -49,5 +53,9 @@ public class ModulePropertyFileLoader {
 
     public Long getSampleLong() {
         return sampleLong;
+    }
+
+    public Boolean getEnablePropertyChangeListener() {
+        return enablePropertyChangeListener;
     }
 }

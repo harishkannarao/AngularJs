@@ -3,9 +3,10 @@ package com.harishkannarao.angularjs.model;
 import java.util.List;
 
 public class ApplicationPropertiesBuilder {
-    String sampleString;
-    List<String> listOfString;
-    Long sampleLong;
+    private String sampleString;
+    private List<String> listOfString;
+    private Long sampleLong;
+    private Boolean enablePropertyChangeListener;
 
     private ApplicationPropertiesBuilder() {}
 
@@ -18,6 +19,7 @@ public class ApplicationPropertiesBuilder {
         result.setSampleString(sampleString);
         result.setListOfString(listOfString);
         result.setSampleLong(sampleLong);
+        result.setEnablePropertyChangeListener(enablePropertyChangeListener);
         return result;
     }
 
@@ -33,6 +35,11 @@ public class ApplicationPropertiesBuilder {
 
     public ApplicationPropertiesBuilder setSampleLong(Long sampleLong) {
         this.sampleLong = sampleLong;
+        return this;
+    }
+
+    public ApplicationPropertiesBuilder setEnablePropertyChangeListener(Boolean enablePropertyChangeListener) {
+        this.enablePropertyChangeListener = enablePropertyChangeListener;
         return this;
     }
 }

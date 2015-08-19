@@ -6,11 +6,13 @@ import java.util.List;
 
 public class ApplicationProperties {
     @JsonProperty(value = "sampleString")
-    String sampleString;
+    private String sampleString;
     @JsonProperty(value = "sampleStringArray")
-    List<String> listOfString;
+    private List<String> listOfString;
     @JsonProperty(value = "sampleLong")
-    Long sampleLong;
+    private Long sampleLong;
+    @JsonProperty(value = "enablePropertyChangeListener")
+    private Boolean enablePropertyChangeListener;
 
     public String getSampleString() {
         return sampleString;
@@ -34,5 +36,13 @@ public class ApplicationProperties {
 
     public void setListOfString(List<String> listOfString) {
         this.listOfString = listOfString;
+    }
+
+    public Boolean getEnablePropertyChangeListener() {
+        return enablePropertyChangeListener;
+    }
+
+    public void setEnablePropertyChangeListener(Boolean enablePropertyChangeListener) {
+        this.enablePropertyChangeListener = enablePropertyChangeListener;
     }
 }

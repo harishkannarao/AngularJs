@@ -27,7 +27,8 @@ public class PropertiesResource {
         ApplicationPropertiesBuilder applicationPropertiesBuilder = ApplicationPropertiesBuilder.newBuilder()
                 .setSampleString(modulePropertyFileLoader.getSampleString())
                 .setListOfString(modulePropertyFileLoader.getListOfString())
-                .setSampleLong(modulePropertyFileLoader.getSampleLong());
+                .setSampleLong(modulePropertyFileLoader.getSampleLong())
+                .setEnablePropertyChangeListener(modulePropertyFileLoader.getEnablePropertyChangeListener());
         return Response.ok(applicationPropertiesBuilder.build()).build();
     }
 }
