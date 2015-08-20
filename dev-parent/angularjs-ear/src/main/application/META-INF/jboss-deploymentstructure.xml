@@ -1,0 +1,14 @@
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <!-- This will enable PicketLink Federation to your deployment. -->
+            <module name="org.picketlink" />
+            <!-- This will enable PicketLink Authentication/Authorization and IDM dependencies to your deployment. -->
+            <module name="org.picketlink.core" meta-inf="import"/>
+            <module name="org.picketlink.core.api" meta-inf="import"/>
+            <module name="org.picketlink.idm.api" meta-inf="import"/>
+            <!-- This will enable only the IDM dependencies to your deployment. -->
+            <module name="org.picketlink.idm" />
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
