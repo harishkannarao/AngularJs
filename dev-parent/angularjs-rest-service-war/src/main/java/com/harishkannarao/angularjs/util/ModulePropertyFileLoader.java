@@ -38,9 +38,21 @@ public class ModulePropertyFileLoader {
         }
 
         sampleString = properties.getProperty("sampleString");
-        listOfString = Arrays.asList(properties.getProperty("sampleStringArray").split(",")).stream().map(String::trim).collect(Collectors.toList());
-        sampleLong = Long.valueOf(properties.getProperty("sampleLong"));
-        enablePropertyChangeListener = Boolean.valueOf(properties.getProperty("enablePropertyChangeListener"));
+        if (properties.getProperty("sampleStringArray") != null) {
+            listOfString = Arrays.asList(properties.getProperty("sampleStringArray").split(",")).stream().map(String::trim).collect(Collectors.toList());
+        } else {
+            listOfString = null;
+        }
+        if (properties.getProperty("sampleLong") != null) {
+            sampleLong = Long.valueOf(properties.getProperty("sampleLong"));
+        } else {
+            sampleLong = null;
+        }
+        if (properties.getProperty("enablePropertyChangeListener") != null) {
+            enablePropertyChangeListener = Boolean.valueOf(properties.getProperty("enablePropertyChangeListener"));
+        } else {
+            enablePropertyChangeListener = null;
+        }
     }
 
     public String getSampleString() {
