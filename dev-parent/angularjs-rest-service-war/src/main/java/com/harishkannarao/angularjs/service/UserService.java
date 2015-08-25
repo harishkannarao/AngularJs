@@ -9,9 +9,11 @@ import java.util.*;
 @Stateless
 public class UserService {
 
-    private Map<String, User> users = new HashMap<>();
+    private static Map<String, User> users = createUsers();
 
-    public UserService() {
+    private static Map<String, User> createUsers() {
+        Map<String, User> users = new HashMap<>();
+
         User user1 = UserBuilder.newBuilder()
                 .setUsername("user1")
                 .setPassword("pass1")
@@ -32,6 +34,8 @@ public class UserService {
         users.put(user1.getUsername(), user1);
         users.put(user2.getUsername(), user2);
         users.put(user3.getUsername(), user3);
+
+        return users;
     }
 
     public Optional<User> findByUsernameAndPassword(String username, String password) {
@@ -43,16 +47,7 @@ public class UserService {
         }
     }
 
-    public void save(User user) {
-        users.put(user.getUsername(), user);
-    }
-
-    public Optional<User> findByUsernameAndAuthToken(String username, String authToken) {
-        User user = users.get(username);
-        if (user != null && user.getAuthToken().equals(authToken)) {
-            return Optional.of(user);
-        } else {
-            return Optional.empty();
-        }
+    public Optional<User> getUser(String username) {
+        return Optional.ofNullable(users.get(username));
     }
 }

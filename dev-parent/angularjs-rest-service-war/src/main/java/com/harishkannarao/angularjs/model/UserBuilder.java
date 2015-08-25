@@ -6,7 +6,6 @@ import java.util.List;
 public class UserBuilder {
     private String username;
     private String password;
-    private String authToken;
     private List<String> authRoles;
 
     private UserBuilder() {}
@@ -19,7 +18,6 @@ public class UserBuilder {
         User result = new User();
         result.setUsername(username);
         result.setPassword(password);
-        result.setAuthToken(authToken);
         result.setAuthRoles(authRoles);
         return result;
     }
@@ -31,11 +29,6 @@ public class UserBuilder {
 
     public UserBuilder setPassword(String password) {
         this.password = password;
-        return this;
-    }
-
-    public UserBuilder setAuthToken(String authToken) {
-        this.authToken = authToken;
         return this;
     }
 

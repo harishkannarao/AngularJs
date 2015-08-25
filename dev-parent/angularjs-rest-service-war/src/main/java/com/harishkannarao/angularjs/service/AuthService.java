@@ -1,9 +1,6 @@
 package com.harishkannarao.angularjs.service;
 
-import com.harishkannarao.angularjs.model.AuthAccessElement;
-import com.harishkannarao.angularjs.model.AuthAccessElementBuilder;
-import com.harishkannarao.angularjs.model.AuthLoginElement;
-import com.harishkannarao.angularjs.model.User;
+import com.harishkannarao.angularjs.model.*;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -17,17 +14,21 @@ public class AuthService {
 
     @Inject
     private UserService userService;
+    @Inject
+    private UserSessionService userSessionService;
 
     public Optional<AuthAccessElement> login(AuthLoginElement loginElement) {
         Optional<User> optionalUser = userService.findByUsernameAndPassword(loginElement.getUsername(), loginElement.getPassword());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            String authToken = UUID.randomUUID().toString();
-            user.setAuthToken(authToken);
-            userService.save(user);
+            UserSession userSession = UserSessionBuilder.newBuilder()
+                    .setUsername(user.getUsername())
+                    .setAuthToken(UUID.randomUUID().toString())
+                    .build();
+            userSessionService.save(userSession);
             AuthAccessElement authAccessElement = AuthAccessElementBuilder.newBuilder()
                     .setAuthId(user.getUsername())
-                    .setAuthToken(authToken)
+                    .setAuthToken(userSession.getAuthToken())
                     .setAuthPermissions(user.getAuthRoles())
                     .build();
             return Optional.of(authAccessElement);
@@ -38,14 +39,34 @@ public class AuthService {
 
     public boolean isAuthorized(String username, String authToken, Set<String> rolesAllowed) {
         boolean authorized = false;
-        Optional<User> optionalUser = userService.findByUsernameAndAuthToken(username, authToken);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
+        Optional<UserSession> optionalUserSession = userSessionService.findByUsernameAndAuthToken(username, authToken);
+        Optional<User> userOptional = userService.getUser(username);
+        if (optionalUserSession.isPresent() && userOptional.isPresent()) {
+            User user = userOptional.get();
             long permittedUserRolesCount = rolesAllowed.stream().filter(role -> user.getAuthRoles().contains(role)).count();
             if (permittedUserRolesCount > 0) {
                 authorized = true;
             }
         }
         return authorized;
+    }
+
+    public Optional<AuthAccessElement> getAuthAccessElement(String username, String authToken) {
+        Optional<UserSession> optionalUserSession = userSessionService.findByUsernameAndAuthToken(username, authToken);
+        Optional<User> userOptional = userService.getUser(username);
+        if (optionalUserSession.isPresent() && userOptional.isPresent()) {
+            AuthAccessElement authAccessElement = AuthAccessElementBuilder.newBuilder()
+                    .setAuthId(userOptional.get().getUsername())
+                    .setAuthToken(optionalUserSession.get().getAuthToken())
+                    .setAuthPermissions(userOptional.get().getAuthRoles())
+                    .build();
+            return Optional.of(authAccessElement);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public void logout(String username, String authtoken) {
+        userSessionService.delete(username, authtoken);
     }
 }

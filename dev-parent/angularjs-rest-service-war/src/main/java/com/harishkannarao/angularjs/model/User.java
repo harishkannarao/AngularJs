@@ -5,7 +5,6 @@ import java.util.List;
 public class User {
     private String username;
     private String password;
-    private String authToken;
     private List<String> authRoles;
 
     public String getUsername() {
@@ -24,13 +23,6 @@ public class User {
         this.password = password;
     }
 
-    public String getAuthToken() {
-        return authToken;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
-    }
 
     public List<String> getAuthRoles() {
         return authRoles;
