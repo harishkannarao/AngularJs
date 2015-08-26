@@ -1,4 +1,4 @@
-package com.harishkannarao.angularjs.interceptor;
+package com.harishkannarao.angularjs.interceptor.security;
 
 import com.harishkannarao.angularjs.model.AuthAccessElement;
 import com.harishkannarao.angularjs.service.AuthService;
@@ -40,13 +40,17 @@ public class AuthSecurityInterceptor implements ContainerRequestFilter {
 
         // Get method invoked.
         Method methodInvoked = resourceInfo.getResourceMethod();
-        if (methodInvoked.isAnnotationPresent(RolesAllowed.class)) {
-            RolesAllowed rolesAllowedAnnotation = methodInvoked.getAnnotation(RolesAllowed.class);
-            Set<String> rolesAllowed = new HashSet<>(Arrays.asList(rolesAllowedAnnotation.value()));
+        if (methodInvoked.isAnnotationPresent(AllowRoles.class)) {
+            AllowRoles allowRolesAnnotation = methodInvoked.getAnnotation(AllowRoles.class);
+            Set<String> rolesAllowed = new HashSet<>(Arrays.asList(allowRolesAnnotation.value()));
 
             if (!authService.isAuthorized(authId, authToken, rolesAllowed)) {
                 containerRequestContext.abortWith(ACCESS_UNAUTHORIZED);
             }
+        } else if (methodInvoked.isAnnotationPresent(DenyAllRoles.class)) {
+            containerRequestContext.abortWith(ACCESS_UNAUTHORIZED);
+        } else if (methodInvoked.isAnnotationPresent(AllowAllRoles.class)) {
+            //do nothing, allow access to every one
         }
     }
 }

@@ -1,12 +1,12 @@
 package com.harishkannarao.angularjs.rest;
 
+import com.harishkannarao.angularjs.interceptor.security.AllowAllRoles;
+import com.harishkannarao.angularjs.interceptor.security.AllowRoles;
+import com.harishkannarao.angularjs.interceptor.security.DenyAllRoles;
 import com.harishkannarao.angularjs.model.AuthAccessElement;
 import com.harishkannarao.angularjs.model.AuthLoginElement;
-import com.harishkannarao.angularjs.model.User;
 import com.harishkannarao.angularjs.service.AuthService;
 
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -24,7 +24,7 @@ public class AuthResource {
 
     @POST
     @Path("/login")
-    @PermitAll
+    @AllowAllRoles
     public Response login(AuthLoginElement authLoginElement) {
         Optional<AuthAccessElement> authAccessElementOptional = authService.login(authLoginElement);
         if (authAccessElementOptional.isPresent()) {
@@ -36,7 +36,7 @@ public class AuthResource {
 
     @GET
     @Path("/authAccess")
-    @RolesAllowed({"role2", "role3"})
+    @AllowRoles({"role2", "role3"})
     public Response getAuthAccessElement(@Context HttpHeaders hh) {
         MultivaluedMap<String, String> headerParams = hh.getRequestHeaders();
         String username = headerParams.getFirst(AuthAccessElement.PARAM_AUTH_ID);
@@ -49,9 +49,16 @@ public class AuthResource {
         }
     }
 
+    @GET
+    @Path("/superSecret")
+    @DenyAllRoles
+    public Response getSuperSecret() {
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
     @DELETE
     @Path("/logout")
-    @PermitAll
+    @AllowAllRoles
     public Response logout(@Context HttpHeaders hh) {
         MultivaluedMap<String, String> headerParams = hh.getRequestHeaders();
         String username = headerParams.getFirst(AuthAccessElement.PARAM_AUTH_ID);
