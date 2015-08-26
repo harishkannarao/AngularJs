@@ -180,6 +180,24 @@
                             </target>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>waitfor-ping-resource</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipServerStartupCheck}</skip>
+                            <target name="waitfor-ping-resource">
+                                <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
+                                    <http url="${appServerUrl}/restapi/service/ping"/>
+                                </waitfor>
+                                <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
+                                    <http url="${appServerUrl}/angularjs/app/index.html"/>
+                                </waitfor>
+                            </target>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 

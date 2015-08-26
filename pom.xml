@@ -18,6 +18,7 @@
         <skipUnitTest>false</skipUnitTest>
         <skipServerSetup>false</skipServerSetup>
         <skipServerStartup>false</skipServerStartup>
+        <skipServerStartupCheck>false</skipServerStartupCheck>
         <skipFunctionalTest>false</skipFunctionalTest>
         <serverHttpPort>8080</serverHttpPort>
         <serverManagementPort>9990</serverManagementPort>
@@ -57,6 +58,7 @@
                 <skipUnitTest>false</skipUnitTest>
                 <skipServerSetup>true</skipServerSetup>
                 <skipServerStartup>true</skipServerStartup>
+                <skipServerStartupCheck>true</skipServerStartupCheck>
                 <skipFunctionalTest>true</skipFunctionalTest>
             </properties>
         </profile>
@@ -67,6 +69,7 @@
                 <skipUnitTest>true</skipUnitTest>
                 <skipServerSetup>false</skipServerSetup>
                 <skipServerStartup>false</skipServerStartup>
+                <skipServerStartupCheck>true</skipServerStartupCheck>
                 <skipFunctionalTest>true</skipFunctionalTest>
                 <cargo.goal>run</cargo.goal>
             </properties>
@@ -78,6 +81,7 @@
                 <skipUnitTest>true</skipUnitTest>
                 <skipServerSetup>true</skipServerSetup>
                 <skipServerStartup>true</skipServerStartup>
+                <skipServerStartupCheck>true</skipServerStartupCheck>
                 <skipFunctionalTest>false</skipFunctionalTest>
             </properties>
         </profile>
@@ -88,6 +92,7 @@
                 <skipUnitTest>true</skipUnitTest>
                 <skipServerSetup>false</skipServerSetup>
                 <skipServerStartup>false</skipServerStartup>
+                <skipServerStartupCheck>false</skipServerStartupCheck>
                 <skipFunctionalTest>false</skipFunctionalTest>
             </properties>
         </profile>

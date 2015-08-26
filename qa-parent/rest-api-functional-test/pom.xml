@@ -13,30 +13,6 @@
     <packaging>jar</packaging>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>waitfor-ping-resource</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipFunctionalTest}</skip>
-                            <target name="waitfor-ping-resource">
-                                <waitfor maxwait="1" maxwaitunit="minute" checkevery="500">
-                                    <http url="${appServerUrl}/restapi/service/ping"/>
-                                </waitfor>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-
         <testResources>
             <testResource>
                 <directory>src/test/resources</directory>
