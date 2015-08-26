@@ -1,5 +1,6 @@
 package com.harishkannarao.angularjs.service;
 
+import com.harishkannarao.angularjs.constants.Roles;
 import com.harishkannarao.angularjs.model.User;
 import com.harishkannarao.angularjs.model.UserBuilder;
 
@@ -17,14 +18,14 @@ public class UserService {
         User user1 = UserBuilder.newBuilder()
                 .setUsername("user1")
                 .setPassword("pass1")
-                .addAuthRole("role1")
-                .addAuthRole("role2")
-                .addAuthRole("role3")
+                .addAuthRole(Roles.ROLE1)
+                .addAuthRole(Roles.ROLE2)
+                .addAuthRole(Roles.ROLE3)
                 .build();
         User user2 = UserBuilder.newBuilder()
                 .setUsername("user2")
                 .setPassword("pass2")
-                .addAuthRole("role1")
+                .addAuthRole(Roles.ROLE1)
                 .build();
         User user3 = UserBuilder.newBuilder()
                 .setUsername("user3")

@@ -1,5 +1,6 @@
 package com.harishkannarao.angularjs.interceptor.security;
 
+import com.harishkannarao.angularjs.constants.Roles;
 import com.harishkannarao.angularjs.model.AuthAccessElement;
 import com.harishkannarao.angularjs.service.AuthService;
 
@@ -42,7 +43,7 @@ public class AuthSecurityInterceptor implements ContainerRequestFilter {
         Method methodInvoked = resourceInfo.getResourceMethod();
         if (methodInvoked.isAnnotationPresent(AllowRoles.class)) {
             AllowRoles allowRolesAnnotation = methodInvoked.getAnnotation(AllowRoles.class);
-            Set<String> rolesAllowed = new HashSet<>(Arrays.asList(allowRolesAnnotation.value()));
+            Set<Roles> rolesAllowed = new HashSet<>(Arrays.asList(allowRolesAnnotation.value()));
 
             if (!authService.isAuthorized(authId, authToken, rolesAllowed)) {
                 containerRequestContext.abortWith(ACCESS_UNAUTHORIZED);

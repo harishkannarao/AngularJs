@@ -1,5 +1,6 @@
 package com.harishkannarao.angularjs.service;
 
+import com.harishkannarao.angularjs.constants.Roles;
 import com.harishkannarao.angularjs.model.*;
 
 import javax.ejb.Stateless;
@@ -29,7 +30,7 @@ public class AuthService {
             AuthAccessElement authAccessElement = AuthAccessElementBuilder.newBuilder()
                     .setAuthId(user.getUsername())
                     .setAuthToken(userSession.getAuthToken())
-                    .setAuthPermissions(user.getAuthRoles())
+                    .setAuthPermissions(user.getAuthRoles().stream().map(Roles::getValue).collect(Collectors.toList()))
                     .build();
             return Optional.of(authAccessElement);
         } else {
@@ -37,7 +38,7 @@ public class AuthService {
         }
     }
 
-    public boolean isAuthorized(String username, String authToken, Set<String> rolesAllowed) {
+    public boolean isAuthorized(String username, String authToken, Set<Roles> rolesAllowed) {
         boolean authorized = false;
         Optional<UserSession> optionalUserSession = userSessionService.findByUsernameAndAuthToken(username, authToken);
         Optional<User> userOptional = userService.getUser(username);
@@ -58,7 +59,7 @@ public class AuthService {
             AuthAccessElement authAccessElement = AuthAccessElementBuilder.newBuilder()
                     .setAuthId(userOptional.get().getUsername())
                     .setAuthToken(optionalUserSession.get().getAuthToken())
-                    .setAuthPermissions(userOptional.get().getAuthRoles())
+                    .setAuthPermissions(userOptional.get().getAuthRoles().stream().map(Roles::getValue).collect(Collectors.toList()))
                     .build();
             return Optional.of(authAccessElement);
         } else {

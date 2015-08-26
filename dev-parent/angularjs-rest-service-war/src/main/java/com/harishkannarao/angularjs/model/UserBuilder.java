@@ -1,12 +1,14 @@
 package com.harishkannarao.angularjs.model;
 
+import com.harishkannarao.angularjs.constants.Roles;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserBuilder {
     private String username;
     private String password;
-    private List<String> authRoles;
+    private List<Roles> authRoles;
 
     private UserBuilder() {}
 
@@ -32,12 +34,12 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setAuthRoles(List<String> authRoles) {
+    public UserBuilder setAuthRoles(List<Roles> authRoles) {
         this.authRoles = authRoles;
         return this;
     }
 
-    public UserBuilder addAuthRole(String authRole) {
+    public UserBuilder addAuthRole(Roles authRole) {
         if(this.authRoles == null) {
             this.authRoles = new ArrayList<>();
         }

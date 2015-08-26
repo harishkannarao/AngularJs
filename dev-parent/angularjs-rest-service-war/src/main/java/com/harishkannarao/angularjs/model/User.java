@@ -1,11 +1,13 @@
 package com.harishkannarao.angularjs.model;
 
+import com.harishkannarao.angularjs.constants.Roles;
+
 import java.util.List;
 
 public class User {
     private String username;
     private String password;
-    private List<String> authRoles;
+    private List<Roles> authRoles;
 
     public String getUsername() {
         return username;
@@ -23,12 +25,11 @@ public class User {
         this.password = password;
     }
 
-
-    public List<String> getAuthRoles() {
+    public List<Roles> getAuthRoles() {
         return authRoles;
     }
 
-    public void setAuthRoles(List<String> authRoles) {
+    public void setAuthRoles(List<Roles> authRoles) {
         this.authRoles = authRoles;
     }
 }

@@ -1,5 +1,6 @@
 package com.harishkannarao.angularjs.rest;
 
+import com.harishkannarao.angularjs.constants.Roles;
 import com.harishkannarao.angularjs.interceptor.security.AllowAllRoles;
 import com.harishkannarao.angularjs.interceptor.security.AllowRoles;
 import com.harishkannarao.angularjs.interceptor.security.DenyAllRoles;
@@ -36,7 +37,7 @@ public class AuthResource {
 
     @GET
     @Path("/authAccess")
-    @AllowRoles({"role2", "role3"})
+    @AllowRoles({Roles.ROLE2, Roles.ROLE3})
     public Response getAuthAccessElement(@Context HttpHeaders hh) {
         MultivaluedMap<String, String> headerParams = hh.getRequestHeaders();
         String username = headerParams.getFirst(AuthAccessElement.PARAM_AUTH_ID);

@@ -164,6 +164,40 @@
                             </target>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>copy-ear</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipServerSetup}</skip>
+                            <target name="copy-ear">
+                                <dependencyfilesets prefix="mydeps."/>
+                                <copy tofile="${wildfly.deployments}/angularjs-ear.ear">
+                                    <fileset refid="mydeps.com.harishkannarao.angularjs:angularjs-ear:ear" />
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>waitfor-ping-resource</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipServerStartupCheck}</skip>
+                            <target name="waitfor-ping-resource">
+                                <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
+                                    <http url="${appServerUrl}/restapi/service/ping"/>
+                                </waitfor>
+                                <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
+                                    <http url="${appServerUrl}/angularjs/app/index.html"/>
+                                </waitfor>
+                            </target>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -208,47 +242,6 @@
                         <home>${wildfly.server}</home>
                     </configuration>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-ear</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipServerSetup}</skip>
-                            <target name="copy-ear">
-                                <dependencyfilesets prefix="mydeps."/>
-                                <copy tofile="${wildfly.deployments}/angularjs-ear.ear">
-                                    <fileset refid="mydeps.com.harishkannarao.angularjs:angularjs-ear:ear" />
-                                </copy>
-                            </target>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>waitfor-ping-resource</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipServerStartupCheck}</skip>
-                            <target name="waitfor-ping-resource">
-                                <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
-                                    <http url="${appServerUrl}/restapi/service/ping"/>
-                                </waitfor>
-                                <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
-                                    <http url="${appServerUrl}/angularjs/app/index.html"/>
-                                </waitfor>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
