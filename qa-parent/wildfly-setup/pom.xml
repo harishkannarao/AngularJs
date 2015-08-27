@@ -148,56 +148,6 @@
                             </target>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>copy-test-support-war</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipServerSetup}</skip>
-                            <target name="copy-test-support-war">
-                                <dependencyfilesets prefix="mydeps."/>
-                                <copy tofile="${wildfly.deployments}/angularjs-test-support-war.war">
-                                    <fileset refid="mydeps.com.harishkannarao.angularjs:angularjs-test-support-war:war" />
-                                </copy>
-                            </target>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-ear</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipServerSetup}</skip>
-                            <target name="copy-ear">
-                                <dependencyfilesets prefix="mydeps."/>
-                                <copy tofile="${wildfly.deployments}/angularjs-ear.ear">
-                                    <fileset refid="mydeps.com.harishkannarao.angularjs:angularjs-ear:ear" />
-                                </copy>
-                            </target>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>waitfor-ping-resource</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipServerStartupCheck}</skip>
-                            <target name="waitfor-ping-resource">
-                                <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
-                                    <http url="${appServerUrl}/restapi/service/ping"/>
-                                </waitfor>
-                                <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
-                                    <http url="${appServerUrl}/angularjs/app/index.html"/>
-                                </waitfor>
-                            </target>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
 
@@ -241,6 +191,23 @@
                         <type>existing</type>
                         <home>${wildfly.server}</home>
                     </configuration>
+                    <deployables>
+                        <deployable>
+                            <groupId>com.harishkannarao.angularjs</groupId>
+                            <artifactId>angularjs-test-support-war</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>angularjs-test-support-war</context>
+                            </properties>
+                        </deployable>
+                        <deployable>
+                            <groupId>com.harishkannarao.angularjs</groupId>
+                            <artifactId>angularjs-ear</artifactId>
+                            <type>ear</type>
+                            <pingURL>${appServerUrl}/restapi/service/ping</pingURL>
+                            <pingTimeout>120000</pingTimeout>
+                        </deployable>
+                    </deployables>
                 </configuration>
             </plugin>
         </plugins>
