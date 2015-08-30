@@ -31,3 +31,8 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$rou
     };
 }]);
 
+phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope',
+    function($scope, $rootScope) {
+        $rootScope.title = 'Google Phone Gallery: Login';
+        $scope.username = 'Enter Username';
+    }]);
