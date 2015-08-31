@@ -1,4 +1,4 @@
-Feature: Index page feauture
+Feature: Index page feature
 
   Scenario: should load phone details page as default home page
     Given I go to index page
