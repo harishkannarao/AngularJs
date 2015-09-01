@@ -29,3 +29,35 @@ phonecatApp.config(['$routeProvider',
   }
 ]);
 
+phonecatApp.factory('authFactory', ['$rootScope', '$http', function ($rootScope, $http) {
+    var authFactory = {
+        authData: undefined
+    };
+    authFactory.setAuthData = function (authData) {
+        this.authData = {
+            authId: authData.authId,
+            authToken: authData.authToken,
+            authPermission: authData.authPermissions
+        };
+        $rootScope.$broadcast('authChanged');
+    };
+    authFactory.getAuthData = function () {
+        return this.authData;
+    };
+    authFactory.isAuthenticated = function () {
+        return !angular.isUndefined(this.getAuthData());
+    };
+    authFactory.login = function (user) {
+        return $http.post('/restapi/service/auth/login', user);
+    };
+    return authFactory;
+}]);
+
+phonecatApp.run(['$rootScope', '$location', '$anchorScroll', '$routeParams', function($rootScope, $location, $anchorScroll, $routeParams) {
+  //when the route is changed scroll to the proper element
+  $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
+    $location.hash($routeParams.scrollTo);
+    $anchorScroll();
+  });
+}]);
+

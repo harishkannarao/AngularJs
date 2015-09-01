@@ -31,8 +31,20 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$rou
     };
 }]);
 
-phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope',
-    function($scope, $rootScope) {
+phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authFactory',
+    function($scope, $rootScope, authFactory) {
         $rootScope.title = 'Google Phone Gallery: Login';
-        $scope.username = 'Enter Username';
-    }]);
+        $scope.invalidCredential = false;
+        $scope.login = function () {
+            var user = {
+                username: $scope.username,
+                password: $scope.password
+            };
+            authFactory.login(user).success(function (data) {
+                authFactory.setAuthData(data);
+            }).error(function () {
+                $scope.invalidCredential = true;
+            });
+        };
+    }
+]);
