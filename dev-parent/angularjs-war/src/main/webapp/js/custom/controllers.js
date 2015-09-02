@@ -48,3 +48,11 @@ phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authFactor
         };
     }
 ]);
+
+phonecatControllers.controller('FocusExampleCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+        $rootScope.title = 'Google Phone Gallery: Focus Example';
+        $scope.items = [];
+        for(var i=1; i<=200; i++) {
+            $scope.items.push(i);
+        }
+    }]);

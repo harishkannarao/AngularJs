@@ -23,6 +23,10 @@ phonecatApp.config(['$routeProvider',
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl'
       }).
+      when('/focusExample', {
+        templateUrl: 'partials/focus-example.html',
+        controller: 'FocusExampleCtrl'
+      }).
       otherwise({
         redirectTo: '/phones'
       });
@@ -57,7 +61,7 @@ phonecatApp.run(['$rootScope', '$location', '$anchorScroll', '$routeParams', fun
   //when the route is changed scroll to the proper element
   $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
     $location.hash($routeParams.scrollTo);
-    $anchorScroll();
+    $location.replace();
   });
 }]);
 
