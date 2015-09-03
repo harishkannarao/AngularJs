@@ -31,7 +31,7 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$rou
     };
 }]);
 
-phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authFactory', '$http', function($scope, $rootScope, authFactory, $http) {
+phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authService', '$http', function($scope, $rootScope, authService, $http) {
     $rootScope.title = 'Google Phone Gallery: Login';
     $scope.login = function () {
         var user = {
@@ -39,7 +39,7 @@ phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authFactor
             password: $scope.password
         };
         $http.post('/restapi/service/auth/login', user).success(function (data) {
-            authFactory.setAuthData(data);
+            authService.setAuthData(data);
         }).error(function () {
             $scope.invalidCredential = true;
         });

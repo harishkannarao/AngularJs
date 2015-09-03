@@ -36,33 +36,26 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
 
 }]);
 
-phonecatApp.factory('authFactory', ['$rootScope', function ($rootScope) {
-    var authFactory = {
-        authData: undefined
-    };
-    authFactory.setAuthData = function (authData) {
-        this.authData = {
-            authId: authData.authId,
-            authToken: authData.authToken,
-            authPermission: authData.authPermissions
-        };
+phonecatApp.service('authService', ['$rootScope', function ($rootScope) {
+    this.authData = undefined;
+    this.setAuthData = function (authData) {
+        this.authData = authData;
         $rootScope.$broadcast('authChanged');
     };
-    authFactory.getAuthData = function () {
+    this.getAuthData = function () {
         return this.authData;
     };
-    authFactory.isAuthenticated = function () {
+    this.isAuthenticated = function () {
         return !angular.isUndefined(this.getAuthData());
     };
-    return authFactory;
 }]);
 
-phonecatApp.factory('authHttpRequestInterceptor', ['$rootScope', '$injector', 'authFactory', function ($rootScope, $injector, authFactory) {
+phonecatApp.factory('authHttpRequestInterceptor', ['$rootScope', '$injector', 'authService', function ($rootScope, $injector, authService) {
     var authHttpRequestInterceptor = {
         request: function ($request) {
-            if (authFactory.isAuthenticated()) {
-                $request.headers['auth-id'] = authFactory.getAuthData().authId;
-                $request.headers['auth-token'] = authFactory.getAuthData().authToken;
+            if (authService.isAuthenticated()) {
+                $request.headers['auth-id'] = authService.getAuthData().authId;
+                $request.headers['auth-token'] = authService.getAuthData().authToken;
             }
             return $request;
         }
