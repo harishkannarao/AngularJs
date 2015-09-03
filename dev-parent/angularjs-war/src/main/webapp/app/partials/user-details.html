@@ -1,0 +1,11 @@
+<span id="qa-user-details-page-id"></span>
+Username: {{authDetails.authId}}
+<br/>
+AuthToken: {{authDetails.authToken}}
+<br/>
+Permissions:
+<br/>
+<span ng-repeat="authPermission in authDetails.authPermissions">
+    {{authPermission}}
+    <br/>
+</span>

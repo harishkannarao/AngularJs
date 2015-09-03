@@ -33,7 +33,6 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$rou
 
 phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authFactory', '$http', function($scope, $rootScope, authFactory, $http) {
     $rootScope.title = 'Google Phone Gallery: Login';
-    $scope.invalidCredential = false;
     $scope.login = function () {
         var user = {
             username: $scope.username,
@@ -45,6 +44,13 @@ phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authFactor
             $scope.invalidCredential = true;
         });
     };
+}]);
+
+phonecatControllers.controller('UserDetailsCtrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+    $rootScope.title = 'Google Phone Gallery: User Details';
+    $http.get('/restapi/service/auth/authAccess').success(function(data) {
+          $scope.authDetails = data;
+    });
 }]);
 
 phonecatControllers.controller('FocusExampleCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
