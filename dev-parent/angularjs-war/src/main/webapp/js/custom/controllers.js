@@ -31,28 +31,26 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$rou
     };
 }]);
 
-phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authFactory',
-    function($scope, $rootScope, authFactory) {
-        $rootScope.title = 'Google Phone Gallery: Login';
-        $scope.invalidCredential = false;
-        $scope.login = function () {
-            var user = {
-                username: $scope.username,
-                password: $scope.password
-            };
-            authFactory.login(user).success(function (data) {
-                authFactory.setAuthData(data);
-            }).error(function () {
-                $scope.invalidCredential = true;
-            });
+phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authFactory', '$http', function($scope, $rootScope, authFactory, $http) {
+    $rootScope.title = 'Google Phone Gallery: Login';
+    $scope.invalidCredential = false;
+    $scope.login = function () {
+        var user = {
+            username: $scope.username,
+            password: $scope.password
         };
-    }
-]);
+        $http.post('/restapi/service/auth/login', user).success(function (data) {
+            authFactory.setAuthData(data);
+        }).error(function () {
+            $scope.invalidCredential = true;
+        });
+    };
+}]);
 
 phonecatControllers.controller('FocusExampleCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
-        $rootScope.title = 'Google Phone Gallery: Focus Example';
-        $scope.items = [];
-        for(var i=1; i<=200; i++) {
-            $scope.items.push(i);
-        }
-    }]);
+    $rootScope.title = 'Google Phone Gallery: Focus Example';
+    $scope.items = [];
+    for(var i=1; i<=200; i++) {
+        $scope.items.push(i);
+    }
+}]);

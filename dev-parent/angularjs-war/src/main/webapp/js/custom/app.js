@@ -8,8 +8,7 @@ var phonecatApp = angular.module('phonecatApp', [
   'phonecatFilters'
 ]);
 
-phonecatApp.config(['$routeProvider',
-  function($routeProvider) {
+phonecatApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
       when('/phones', {
         templateUrl: 'partials/phone-list.html',
@@ -30,10 +29,10 @@ phonecatApp.config(['$routeProvider',
       otherwise({
         redirectTo: '/phones'
       });
-  }
-]);
 
-phonecatApp.factory('authFactory', ['$rootScope', '$http', function ($rootScope, $http) {
+}]);
+
+phonecatApp.factory('authFactory', ['$rootScope', function ($rootScope) {
     var authFactory = {
         authData: undefined
     };
@@ -51,10 +50,25 @@ phonecatApp.factory('authFactory', ['$rootScope', '$http', function ($rootScope,
     authFactory.isAuthenticated = function () {
         return !angular.isUndefined(this.getAuthData());
     };
-    authFactory.login = function (user) {
-        return $http.post('/restapi/service/auth/login', user);
-    };
     return authFactory;
+}]);
+
+phonecatApp.factory('authHttpRequestInterceptor', ['$rootScope', '$injector', 'authFactory', function ($rootScope, $injector, authFactory) {
+    var authHttpRequestInterceptor = {
+        request: function ($request) {
+            var authFactory = $injector.get('authFactory');
+            if (authFactory.isAuthenticated()) {
+                $request.headers['auth-id'] = authFactory.getAuthData().authId;
+                $request.headers['auth-token'] = authFactory.getAuthData().authToken;
+            }
+            return $request;
+        }
+    }
+    return authHttpRequestInterceptor;
+}]);
+
+phonecatApp.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('authHttpRequestInterceptor');
 }]);
 
 phonecatApp.run(['$rootScope', '$location', '$anchorScroll', '$routeParams', function($rootScope, $location, $anchorScroll, $routeParams) {
