@@ -52,6 +52,10 @@ public class AuthService {
         return authorized;
     }
 
+    public boolean isAuthenticated(String username, String authToken) {
+        return userSessionService.findByUsernameAndAuthToken(username, authToken).isPresent();
+    }
+
     public Optional<AuthAccessElement> getAuthAccessElement(String username, String authToken) {
         Optional<UserSession> optionalUserSession = userSessionService.findByUsernameAndAuthToken(username, authToken);
         Optional<User> userOptional = userService.getUser(username);

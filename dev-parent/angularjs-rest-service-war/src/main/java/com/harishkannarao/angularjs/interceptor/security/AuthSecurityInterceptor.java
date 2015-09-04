@@ -22,7 +22,9 @@ import java.util.Set;
 @Provider
 public class AuthSecurityInterceptor implements ContainerRequestFilter {
     // 401 - Access denied
-    private static final Response ACCESS_UNAUTHORIZED = Response.status(Response.Status.UNAUTHORIZED).entity("Not authorized.").build();
+    private static final Response ACCESS_UNAUTHORIZED = Response.status(Response.Status.UNAUTHORIZED).build();
+    // 403 - Forbidden
+    private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN).build();
 
     @Inject
     private AuthService authService;
@@ -44,12 +46,13 @@ public class AuthSecurityInterceptor implements ContainerRequestFilter {
         if (methodInvoked.isAnnotationPresent(AllowRoles.class)) {
             AllowRoles allowRolesAnnotation = methodInvoked.getAnnotation(AllowRoles.class);
             Set<Roles> rolesAllowed = new HashSet<>(Arrays.asList(allowRolesAnnotation.value()));
-
-            if (!authService.isAuthorized(authId, authToken, rolesAllowed)) {
+            if (!authService.isAuthenticated(authId, authToken)) {
                 containerRequestContext.abortWith(ACCESS_UNAUTHORIZED);
+            } else if (!authService.isAuthorized(authId, authToken, rolesAllowed)) {
+                containerRequestContext.abortWith(ACCESS_FORBIDDEN);
             }
         } else if (methodInvoked.isAnnotationPresent(DenyAllRoles.class)) {
-            containerRequestContext.abortWith(ACCESS_UNAUTHORIZED);
+            containerRequestContext.abortWith(ACCESS_FORBIDDEN);
         } else if (methodInvoked.isAnnotationPresent(AllowAllRoles.class)) {
             //do nothing, allow access to every one
         }
