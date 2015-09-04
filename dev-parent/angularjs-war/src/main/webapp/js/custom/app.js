@@ -36,14 +36,24 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
 
 }]);
 
-phonecatApp.service('authService', ['$rootScope', function ($rootScope) {
-    this.authData = undefined;
+phonecatApp.service('authService', ['$rootScope', '$window', function ($rootScope, $window) {
     this.setAuthData = function (authData) {
-        this.authData = authData;
-        $rootScope.$broadcast('authChanged');
+        if($window.localStorage) {
+            $window.localStorage.setItem('auth-id', authData.authId);
+            $window.localStorage.setItem('auth-token', authData.authToken);
+            $rootScope.$broadcast('authChanged');
+        }
     };
     this.getAuthData = function () {
-        return this.authData;
+        if($window.localStorage && $window.localStorage.getItem('auth-id') && $window.localStorage.getItem('auth-token')) {
+            var authData = {
+                authId: $window.localStorage.getItem('auth-id'),
+                authToken: $window.localStorage.getItem('auth-token')
+            };
+            return authData;
+        } else {
+            return undefined;
+        }
     };
     this.isAuthenticated = function () {
         return !angular.isUndefined(this.getAuthData());
