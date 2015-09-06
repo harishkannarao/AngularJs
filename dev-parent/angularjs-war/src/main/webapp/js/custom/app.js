@@ -30,6 +30,10 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'partials/user-details.html',
         controller: 'UserDetailsCtrl'
       }).
+      when('/error', {
+        templateUrl: 'partials/error-page.html',
+        controller: 'ErrorPageCtrl'
+      }).
       otherwise({
         redirectTo: '/phones'
       });

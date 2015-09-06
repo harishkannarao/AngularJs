@@ -60,3 +60,7 @@ phonecatControllers.controller('FocusExampleCtrl', ['$scope', '$rootScope', func
         $scope.items.push(i);
     }
 }]);
+
+phonecatControllers.controller('ErrorPageCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+    $rootScope.title = 'Google Phone Gallery: Error Page';
+}]);
