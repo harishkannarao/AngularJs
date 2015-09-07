@@ -1,9 +1,9 @@
 package com.harishkannarao.angularjs.rest;
 
 import com.harishkannarao.angularjs.constants.Roles;
-import com.harishkannarao.angularjs.interceptor.security.AllowAllRoles;
-import com.harishkannarao.angularjs.interceptor.security.AllowRoles;
-import com.harishkannarao.angularjs.interceptor.security.DenyAllRoles;
+import com.harishkannarao.angularjs.filter.security.AllowAllRoles;
+import com.harishkannarao.angularjs.filter.security.AllowRoles;
+import com.harishkannarao.angularjs.filter.security.DenyAllRoles;
 import com.harishkannarao.angularjs.model.AuthAccessElement;
 import com.harishkannarao.angularjs.model.AuthLoginElement;
 import com.harishkannarao.angularjs.service.AuthService;

@@ -1,4 +1,4 @@
-package com.harishkannarao.angularjs.interceptor.security;
+package com.harishkannarao.angularjs.filter.security;
 
 import com.harishkannarao.angularjs.constants.Roles;
 

@@ -1,10 +1,9 @@
-package com.harishkannarao.angularjs.interceptor.security;
+package com.harishkannarao.angularjs.filter.security;
 
 import com.harishkannarao.angularjs.constants.Roles;
 import com.harishkannarao.angularjs.model.AuthAccessElement;
 import com.harishkannarao.angularjs.service.AuthService;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -19,12 +18,22 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.harishkannarao.angularjs.constants.HttpHeaderErrorCodes.FORBIDDEN_ERROR;
+import static com.harishkannarao.angularjs.constants.HttpHeaderErrorCodes.UNAUTHORIZED_ERROR;
+import static com.harishkannarao.angularjs.constants.HttpHeaderErrorKeys.ERROR_CODE_KEY;
+import static com.harishkannarao.angularjs.constants.HttpHeaderErrorKeys.ERROR_MESSAGE_KEY;
+
 @Provider
-public class AuthSecurityInterceptor implements ContainerRequestFilter {
+public class AuthSecurityRequestFilter implements ContainerRequestFilter {
     // 401 - Access denied
-    private static final Response ACCESS_UNAUTHORIZED = Response.status(Response.Status.UNAUTHORIZED).build();
-    // 403 - Forbidden
-    private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN).build();
+    private static final Response ACCESS_UNAUTHORIZED = Response.status(Response.Status.UNAUTHORIZED)
+            .header(ERROR_CODE_KEY.getValue(), UNAUTHORIZED_ERROR.getCode())
+            .header(ERROR_MESSAGE_KEY.getValue(), UNAUTHORIZED_ERROR.getMessage())
+            .build();
+    private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN)
+            .header(ERROR_CODE_KEY.getValue(), FORBIDDEN_ERROR.getCode())
+            .header(ERROR_MESSAGE_KEY.getValue(), FORBIDDEN_ERROR.getMessage())
+            .build();
 
     @Inject
     private AuthService authService;
@@ -53,8 +62,6 @@ public class AuthSecurityInterceptor implements ContainerRequestFilter {
             }
         } else if (methodInvoked.isAnnotationPresent(DenyAllRoles.class)) {
             containerRequestContext.abortWith(ACCESS_FORBIDDEN);
-        } else if (methodInvoked.isAnnotationPresent(AllowAllRoles.class)) {
-            //do nothing, allow access to every one
         }
     }
 }
