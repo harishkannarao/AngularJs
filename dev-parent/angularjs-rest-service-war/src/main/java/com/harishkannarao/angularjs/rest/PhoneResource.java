@@ -4,6 +4,8 @@ import com.harishkannarao.angularjs.model.Phone;
 import com.harishkannarao.angularjs.service.PhoneService;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 @Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class PhoneResource {
 
     @Inject
