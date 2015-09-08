@@ -1,4 +1,6 @@
 <span id="{{item}}" ng-repeat="item in items">
     Index: {{$index}} | Value: {{item}}
     <br/><br/>
+    <a href="#/focusExample?scrollTo={{200-$index}}">Go to Value: {{200-$index}}</a>
+    <br/><br/>
 </span>

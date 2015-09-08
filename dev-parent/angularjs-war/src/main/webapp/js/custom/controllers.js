@@ -61,8 +61,9 @@ phonecatControllers.controller('FocusExampleCtrl', ['$scope', 'titleService', fu
     }
 }]);
 
-phonecatControllers.controller('ErrorPageCtrl', ['$scope', 'titleService', function($scope, titleService) {
+phonecatControllers.controller('ErrorPageCtrl', ['$scope', 'titleService', '$location', function($scope, titleService, $location) {
     titleService.setTitle('Error Page');
+    $scope.errorReference = $location.search().errorReference;
 }]);
 
 phonecatControllers.controller('TitleCtrl', ['$scope', '$rootScope', 'titleService', function($scope, $rootScope, titleService){
