@@ -1,29 +1,29 @@
 var phonecatControllers = angular.module('phonecatControllers', []);
 
 phonecatControllers.controller('PhoneListCtrl', [
-        '$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+        '$scope', 'titleService', '$http', function ($scope, titleService, $http) {
             $scope.name = 'World';
             $scope.orderProp = 'age';
             $http.get('/restapi/service/phones').success(function(data) {
                   $scope.phones = data;
             });
             $scope.$watch('query', function(newValue, oldValue) {
-                    if (angular.isUndefined($scope.query)) {
-                        $rootScope.title = 'Google Phone Gallery: ';
+                    if (angular.isUndefined($scope.query) || $scope.query=="") {
+                        titleService.setDefaultTitle();
                     } else {
-                        $rootScope.title = 'Google Phone Gallery: ' + $scope.query;
+                        titleService.setTitle($scope.query);
                     }
                 }
             );
         }
 ]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
-  function($scope, $rootScope, $routeParams, $http) {
+phonecatControllers.controller('PhoneDetailCtrl', ['$scope', 'titleService', '$routeParams', '$http',
+  function($scope, titleService, $routeParams, $http) {
     $scope.phoneId = $routeParams.phoneId;
     $http.get('/restapi/service/phones/' + $routeParams.phoneId).success(function(data) {
       $scope.phone = data;
-      $rootScope.title = 'Google Phone Gallery: ' + $scope.phone.name;
+      titleService.setTitle($scope.phone.name);
       $scope.mainImageUrl = data.images[0];
     });
     $scope.setImage = function(imageUrl) {
@@ -31,8 +31,8 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$rootScope', '$rou
     };
 }]);
 
-phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authService', '$http', function($scope, $rootScope, authService, $http) {
-    $rootScope.title = 'Google Phone Gallery: Login';
+phonecatControllers.controller('LoginCtrl', ['$scope', 'titleService', 'authService', '$http', function($scope, titleService, authService, $http) {
+    titleService.setTitle('Login');
     $scope.login = function () {
         var user = {
             username: $scope.username,
@@ -46,21 +46,28 @@ phonecatControllers.controller('LoginCtrl', ['$scope', '$rootScope', 'authServic
     };
 }]);
 
-phonecatControllers.controller('UserDetailsCtrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
-    $rootScope.title = 'Google Phone Gallery: User Details';
+phonecatControllers.controller('UserDetailsCtrl', ['$scope', 'titleService', '$http', function($scope, titleService, $http) {
+    titleService.setTitle('User Details');
     $http.get('/restapi/service/auth/authAccess').success(function(data) {
           $scope.authDetails = data;
     });
 }]);
 
-phonecatControllers.controller('FocusExampleCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
-    $rootScope.title = 'Google Phone Gallery: Focus Example';
+phonecatControllers.controller('FocusExampleCtrl', ['$scope', 'titleService', function($scope, titleService) {
+    titleService.setTitle('Focus Example');
     $scope.items = [];
     for(var i=1; i<=200; i++) {
         $scope.items.push(i);
     }
 }]);
 
-phonecatControllers.controller('ErrorPageCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
-    $rootScope.title = 'Google Phone Gallery: Error Page';
+phonecatControllers.controller('ErrorPageCtrl', ['$scope', 'titleService', function($scope, titleService) {
+    titleService.setTitle('Error Page');
+}]);
+
+phonecatControllers.controller('TitleCtrl', ['$scope', '$rootScope', 'titleService', function($scope, $rootScope, titleService){
+    $scope.title = titleService.currentTitle;
+    $rootScope.$on('titleChanged', function (event, data) {
+        $scope.title = titleService.currentTitle;
+    });
 }]);

@@ -13,11 +13,11 @@ Feature: Phone List Page Features
 
   Scenario: should display filter query on page title
     Given I go to phone list page
-    Then I should see the title as Google Phone Gallery: on phone list page
+    Then I should see the title as Google Phone Gallery on phone list page
     When I enter query as nexus on phone list page
     Then I should see the title as Google Phone Gallery: nexus on phone list page
     When I clear the query on phone list page
-    Then I should see the title as Google Phone Gallery: on phone list page
+    Then I should see the title as Google Phone Gallery on phone list page
 
   Scenario: should select age as the default sort order
     Given I go to phone list page

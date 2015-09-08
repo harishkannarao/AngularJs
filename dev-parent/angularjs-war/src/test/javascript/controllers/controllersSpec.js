@@ -37,7 +37,7 @@ describe('PhoneCat controllers', function() {
   });
 
   describe('PhoneDetailCtrl', function(){
-    var scope, rootScope, $httpBackend, ctrl, routeParams, controller;
+    var scope, rootScope, $httpBackend, ctrl, routeParams, controller, mockTitleService;
     var xyzPhoneData = function() {
       return {
         name: 'phone xyz',
@@ -48,11 +48,20 @@ describe('PhoneCat controllers', function() {
     // Load our app module definition before each test.
     beforeEach(module('phonecatApp'));
 
-    beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+    beforeEach(
+      module(function($provide){
+        $provide.service('titleService', function(){
+          this.setTitle = jasmine.createSpy('setTitle');
+        });
+      })
+    );
+
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller, titleService) {
       $httpBackend = _$httpBackend_;
       rootScope = $rootScope;
       routeParams = $routeParams;
       controller = $controller;
+      mockTitleService = titleService;
     }));
 
     it('should fetch phone detail', function() {
@@ -60,10 +69,10 @@ describe('PhoneCat controllers', function() {
       expect(scope.phone).toBeUndefined();
       routeParams.phoneId = 'xyz';
       $httpBackend.expectGET('/restapi/service/phones/xyz').respond(xyzPhoneData());
-      ctrl = controller('PhoneDetailCtrl', {$scope: scope});
+      ctrl = controller('PhoneDetailCtrl', {$scope: scope, titleService: mockTitleService});
       $httpBackend.flush();
 
-      expect(rootScope.title).toEqual('Google Phone Gallery: phone xyz');
+      expect(mockTitleService.setTitle).toHaveBeenCalledWith('phone xyz');
       expect(scope.phone).toEqual(xyzPhoneData());
       expect(scope.phoneId).toEqual('xyz');
     });

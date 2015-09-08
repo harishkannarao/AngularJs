@@ -37,7 +37,20 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
       otherwise({
         redirectTo: '/phones'
       });
+}]);
 
+phonecatApp.service('titleService', ['$rootScope', function($rootScope) {
+    this.defaultTitle = function() { return "Google Phone Gallery"};
+    this.delimitedTitle = function() {return this.defaultTitle() + ": "};
+    this.currentTitle = this.defaultTitle();
+    this.setTitle = function(pageTitle) {
+        this.currentTitle = this.delimitedTitle() + pageTitle;
+        $rootScope.$broadcast('titleChanged');
+    };
+    this.setDefaultTitle = function() {
+        this.currentTitle = this.defaultTitle();
+        $rootScope.$broadcast('titleChanged');
+    };
 }]);
 
 phonecatApp.service('authService', ['$rootScope', '$window', function ($rootScope, $window) {
