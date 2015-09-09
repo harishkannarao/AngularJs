@@ -31,8 +31,7 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', 'titleService', '$r
     };
 }]);
 
-phonecatControllers.controller('LoginCtrl', ['$scope', 'titleService', 'authService', '$http', function($scope, titleService, authService, $http) {
-    titleService.setTitle('Login');
+phonecatControllers.controller('LoginCtrl', ['$scope', 'authService', '$http', function($scope, authService, $http) {
     $scope.login = function () {
         var user = {
             username: $scope.username,
@@ -46,28 +45,32 @@ phonecatControllers.controller('LoginCtrl', ['$scope', 'titleService', 'authServ
     };
 }]);
 
-phonecatControllers.controller('UserDetailsCtrl', ['$scope', 'titleService', '$http', function($scope, titleService, $http) {
-    titleService.setTitle('User Details');
+phonecatControllers.controller('UserDetailsCtrl', ['$scope', '$http', function($scope, $http) {
     $http.get('/restapi/service/auth/authAccess').success(function(data) {
           $scope.authDetails = data;
     });
 }]);
 
-phonecatControllers.controller('FocusExampleCtrl', ['$scope', 'titleService', function($scope, titleService) {
-    titleService.setTitle('Focus Example');
+phonecatControllers.controller('FocusExampleCtrl', ['$scope', function($scope) {
     $scope.items = [];
     for(var i=1; i<=200; i++) {
         $scope.items.push(i);
     }
 }]);
 
-phonecatControllers.controller('ErrorPageCtrl', ['$scope', 'titleService', '$location', function($scope, titleService, $location) {
-    titleService.setTitle('Error Page');
+phonecatControllers.controller('ErrorPageCtrl', ['$scope', '$location', function($scope, $location) {
     $scope.errorReference = $location.search().errorReference;
 }]);
 
-phonecatControllers.controller('TitleCtrl', ['$scope', '$rootScope', 'titleService', function($scope, $rootScope, titleService){
-    $scope.title = titleService.currentTitle;
+phonecatControllers.controller('TitleCtrl', ['$scope', '$route', '$rootScope', 'titleService', function($scope, $route, $rootScope, titleService){
+    $scope.title = titleService.defaultTitle();
+    $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
+        if (!angular.isUndefined($route.current.pageTitle)) {
+            $scope.title = titleService.delimitedTitle() + $route.current.pageTitle;
+        } else {
+            $scope.title = titleService.defaultTitle();
+        }
+    });
     $rootScope.$on('titleChanged', function (event, data) {
         $scope.title = titleService.currentTitle;
     });

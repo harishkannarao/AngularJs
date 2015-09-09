@@ -20,19 +20,23 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
       }).
       when('/login', {
         templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginCtrl',
+        pageTitle: "Login"
       }).
       when('/focusExample', {
         templateUrl: 'partials/focus-example.html',
-        controller: 'FocusExampleCtrl'
+        controller: 'FocusExampleCtrl',
+        pageTitle: "Focus Example"
       }).
       when('/userDetails', {
         templateUrl: 'partials/user-details.html',
-        controller: 'UserDetailsCtrl'
+        controller: 'UserDetailsCtrl',
+        pageTitle: "User Details"
       }).
       when('/error', {
         templateUrl: 'partials/error-page.html',
-        controller: 'ErrorPageCtrl'
+        controller: 'ErrorPageCtrl',
+        pageTitle: "Error Page"
       }).
       otherwise({
         redirectTo: '/phones'
