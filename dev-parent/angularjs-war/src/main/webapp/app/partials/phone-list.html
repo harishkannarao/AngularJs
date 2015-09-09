@@ -4,7 +4,7 @@
         <div class="col-md-2">
             <!--Sidebar content-->
 
-            Search: <input id="query" ng-model="query">
+            Search: <input id="query" ng-model="query" ng-change="changeTitle()" >
             Sort by:
             <select id="orderProp" ng-model="orderProp">
                 <option value="name">Alphabetical</option>

@@ -1,25 +1,21 @@
 var phonecatControllers = angular.module('phonecatControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', [
-        '$scope', 'titleService', '$http', function ($scope, titleService, $http) {
-            $scope.name = 'World';
-            $scope.orderProp = 'age';
-            $http.get('/restapi/service/phones').success(function(data) {
-                  $scope.phones = data;
-            });
-            $scope.$watch('query', function(newValue, oldValue) {
-                    if (angular.isUndefined($scope.query) || $scope.query=="") {
-                        titleService.setDefaultTitle();
-                    } else {
-                        titleService.setTitle($scope.query);
-                    }
-                }
-            );
+phonecatControllers.controller('PhoneListCtrl', ['$scope', 'titleService', '$http', function ($scope, titleService, $http) {
+    $scope.name = 'World';
+    $scope.orderProp = 'age';
+    $scope.changeTitle = function() {
+        if (angular.isUndefined($scope.query) || $scope.query=="") {
+            titleService.setDefaultTitle();
+        } else {
+            titleService.setTitle($scope.query);
         }
-]);
+    };
+    $http.get('/restapi/service/phones').success(function(data) {
+          $scope.phones = data;
+    });
+}]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', 'titleService', '$routeParams', '$http',
-  function($scope, titleService, $routeParams, $http) {
+phonecatControllers.controller('PhoneDetailCtrl', ['$scope', 'titleService', '$routeParams', '$http', function($scope, titleService, $routeParams, $http) {
     $scope.phoneId = $routeParams.phoneId;
     $http.get('/restapi/service/phones/' + $routeParams.phoneId).success(function(data) {
       $scope.phone = data;
