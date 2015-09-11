@@ -27,17 +27,24 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', 'titleService', '$r
     };
 }]);
 
-phonecatControllers.controller('LoginCtrl', ['$scope', 'authService', '$http', function($scope, authService, $http) {
+phonecatControllers.controller('LoginCtrl', ['$scope', 'authService', '$http', '$location', function($scope, authService, $http, $location) {
     $scope.login = function () {
         var user = {
             username: $scope.username,
             password: $scope.password
         };
         $http.post('/restapi/service/auth/login', user).success(function (data) {
-            authService.setAuthData(data);
-        }).error(function () {
-            $scope.invalidCredential = true;
-        });
+            authService.setAuthData(data);
+            if (!angular.isUndefined($location.search().redirectTo)) {
+                $location.url($location.search().redirectTo);
+                $location.replace();
+            } else {
+                $location.path("/");
+                $location.replace();
+            }
+        }).error(function () {
+            $scope.invalidCredential = true;
+        });
     };
 }]);
 

@@ -81,7 +81,7 @@ phonecatApp.service('authService', ['$rootScope', '$window', function ($rootScop
     };
 }]);
 
-phonecatApp.factory('authHttpRequestInterceptor', ['$rootScope', '$injector', 'authService', function ($rootScope, $injector, authService) {
+phonecatApp.factory('authHttpRequestInterceptor', ['authService', function (authService) {
     var authHttpRequestInterceptor = {
         request: function ($request) {
             if (authService.isAuthenticated()) {
@@ -94,8 +94,26 @@ phonecatApp.factory('authHttpRequestInterceptor', ['$rootScope', '$injector', 'a
     return authHttpRequestInterceptor;
 }]);
 
+phonecatApp.factory('authHttpResponseInterceptor', ['$q', '$location', function ($q, $location) {
+    var authHttpResponseInterceptor = {
+        responseError: function (rejection) {
+            if (angular.equals(rejection.status, 401)) {
+                var redirectToUrl = $location.url();
+                $location.path('/login').search('redirectTo', redirectToUrl);
+                $location.replace();
+            } else if (angular.equals(rejection.status, 403)) {
+                $location.path('/error').search('errorReference', rejection.headers['com-harishkannarao-angularjs-error-reference']);
+                $location.replace();
+            }
+            return $q.reject(rejection);
+        }
+    }
+    return authHttpResponseInterceptor;
+}]);
+
 phonecatApp.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authHttpRequestInterceptor');
+    $httpProvider.interceptors.push('authHttpResponseInterceptor');
 }]);
 
 phonecatApp.run(['$rootScope', '$location', '$anchorScroll', '$routeParams', function($rootScope, $location, $anchorScroll, $routeParams) {
