@@ -98,12 +98,16 @@ phonecatApp.factory('authHttpResponseInterceptor', ['$q', '$location', function 
     var authHttpResponseInterceptor = {
         responseError: function (rejection) {
             if (angular.equals(rejection.status, 401)) {
-                var redirectToUrl = $location.url();
-                $location.path('/login').search('redirectTo', redirectToUrl);
-                $location.replace();
+                if (!angular.equals($location.path(), '/login')) {
+                    var redirectToUrl = $location.url();
+                    $location.hash('').search({}).path('/login').search('redirectTo', redirectToUrl);
+                    $location.replace();
+                }
             } else {
-                $location.path('/error').search('errorReference', rejection.headers('com-harishkannarao-angularjs-error-reference'));
-                $location.replace();
+                if (!angular.equals($location.path(), '/error')) {
+                    $location.hash('').path('/error').search({}).search('errorReference', rejection.headers('com-harishkannarao-angularjs-error-reference'));
+                    $location.replace();
+                }
             }
             return $q.reject(rejection);
         }

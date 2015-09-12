@@ -15,8 +15,11 @@
     <script src="../js/custom/animations.js"></script>
 </head>
 <body>
+<span ng-controller="LoginElementCtrl">
+    <span id="qa-login-element"><a ng-href="#/login?redirectTo={{$location.url() | escape}}">Login</a></span>
+</span>
 <div class="view-container">
-<div ng-view class="view-frame"></div>
+    <div ng-view class="view-frame"></div>
 </div>
 </body>
 </html>

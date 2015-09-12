@@ -48,6 +48,10 @@ phonecatControllers.controller('LoginCtrl', ['$scope', 'authService', '$http', '
     };
 }]);
 
+phonecatControllers.controller('LoginElementCtrl', ['$scope', '$location', function($scope, $location) {
+    $scope.$location = $location;
+}]);
+
 phonecatControllers.controller('UserDetailsCtrl', ['$scope', '$http', function($scope, $http) {
     $http.get('/restapi/service/auth/authAccess').success(function(data) {
           $scope.authDetails = data;
