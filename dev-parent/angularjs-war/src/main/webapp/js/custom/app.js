@@ -101,7 +101,7 @@ phonecatApp.factory('authHttpResponseInterceptor', ['$q', '$location', function 
                 var redirectToUrl = $location.url();
                 $location.path('/login').search('redirectTo', redirectToUrl);
                 $location.replace();
-            } else if (angular.equals(rejection.status, 403)) {
+            } else {
                 $location.path('/error').search('errorReference', rejection.headers('com-harishkannarao-angularjs-error-reference'));
                 $location.replace();
             }
