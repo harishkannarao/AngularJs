@@ -105,7 +105,7 @@ phonecatApp.factory('authHttpResponseInterceptor', ['$q', '$location', function 
                 }
             } else {
                 if (!angular.equals($location.path(), '/error')) {
-                    $location.hash('').path('/error').search({}).search('errorReference', rejection.headers('com-harishkannarao-angularjs-error-reference'));
+                    $location.hash('').search({}).path('/error').search('errorReference', rejection.headers('com-harishkannarao-angularjs-error-reference'));
                     $location.replace();
                 }
             }
@@ -120,11 +120,4 @@ phonecatApp.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authHttpResponseInterceptor');
 }]);
 
-phonecatApp.run(['$rootScope', '$location', '$anchorScroll', '$routeParams', function($rootScope, $location, $anchorScroll, $routeParams) {
-  //when the route is changed scroll to the proper element
-  $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
-    $location.hash($routeParams.scrollTo);
-    $location.replace();
-  });
-}]);
 
