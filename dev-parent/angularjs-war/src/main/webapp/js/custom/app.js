@@ -94,8 +94,8 @@ phonecatApp.factory('authHttpRequestInterceptor', ['authService', function (auth
     return authHttpRequestInterceptor;
 }]);
 
-phonecatApp.factory('authHttpResponseInterceptor', ['$q', '$location', function ($q, $location) {
-    var authHttpResponseInterceptor = {
+phonecatApp.factory('httpResponseInterceptor', ['$q', '$location', function ($q, $location) {
+    var httpResponseInterceptor = {
         responseError: function (rejection) {
             if (rejection.status==401) {
                 if (!angular.equals($location.path(), '/login')) {
@@ -112,12 +112,12 @@ phonecatApp.factory('authHttpResponseInterceptor', ['$q', '$location', function 
             return $q.reject(rejection);
         }
     }
-    return authHttpResponseInterceptor;
+    return httpResponseInterceptor;
 }]);
 
 phonecatApp.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authHttpRequestInterceptor');
-    $httpProvider.interceptors.push('authHttpResponseInterceptor');
+    $httpProvider.interceptors.push('httpResponseInterceptor');
 }]);
 
 
