@@ -97,13 +97,13 @@ phonecatApp.factory('authHttpRequestInterceptor', ['authService', function (auth
 phonecatApp.factory('authHttpResponseInterceptor', ['$q', '$location', function ($q, $location) {
     var authHttpResponseInterceptor = {
         responseError: function (rejection) {
-            if (angular.equals(rejection.status, 401)) {
+            if (rejection.status==401) {
                 if (!angular.equals($location.path(), '/login')) {
                     var redirectToUrl = $location.url();
                     $location.hash('').search({}).path('/login').search('redirectTo', redirectToUrl);
                     $location.replace();
                 }
-            } else {
+            } else if (rejection.status>=500 || rejection.status==403){
                 if (!angular.equals($location.path(), '/error')) {
                     $location.hash('').search({}).path('/error').search('errorReference', rejection.headers('com-harishkannarao-angularjs-error-reference'));
                     $location.replace();
