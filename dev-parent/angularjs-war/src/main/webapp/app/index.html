@@ -5,7 +5,6 @@
     <title ng-controller="TitleCtrl" ng-bind-template="{{title}}">Google Phone Gallery</title>
     <link rel="stylesheet" href="../css/app.css"/>
     <link rel="stylesheet" href="../css/animations.css"/>
-    <script src="../js/jquery-2.1.4/jquery-2.1.4.min.js"></script>
     <script src="../js/angular-1.4.1/angular.min.js"></script>
     <script src="../js/angular-1.4.1/angular-route.min.js"></script>
     <script src="../js/angular-1.4.1/angular-animate.min.js"></script>
@@ -16,7 +15,7 @@
 </head>
 <body>
 <span ng-controller="LoginElementCtrl">
-    <span id="qa-login-element"><a ng-href="#/login?redirectTo={{$location.url() | escape}}">Login</a></span>
+    <span id="qa-login-element" ng-hide="$route.current.hideLoginElement || isAuthenticated"><a ng-href="#/login?redirectTo={{$location.url() | escape}}">Login</a></span>
 </span>
 <div class="view-container">
     <div ng-view class="view-frame"></div>

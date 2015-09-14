@@ -48,8 +48,13 @@ phonecatControllers.controller('LoginCtrl', ['$scope', 'authService', '$http', '
     };
 }]);
 
-phonecatControllers.controller('LoginElementCtrl', ['$scope', '$location', function($scope, $location) {
+phonecatControllers.controller('LoginElementCtrl', ['$scope', '$location', '$route', 'authService', '$rootScope', function($scope, $location, $route, authService, $rootScope) {
     $scope.$location = $location;
+    $scope.$route = $route;
+    $scope.isAuthenticated = authService.isAuthenticated();
+    $rootScope.$on('authChanged', function(newRoute, oldRoute) {
+        $scope.isAuthenticated = authService.isAuthenticated();
+    });
 }]);
 
 phonecatControllers.controller('UserDetailsCtrl', ['$scope', '$http', function($scope, $http) {

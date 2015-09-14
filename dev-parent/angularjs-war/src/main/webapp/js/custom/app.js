@@ -21,7 +21,8 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
       when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl',
-        pageTitle: "Login"
+        pageTitle: "Login",
+        hideLoginElement: true
       }).
       when('/focusExample', {
         templateUrl: 'partials/focus-example.html',
@@ -36,7 +37,8 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
       when('/error', {
         templateUrl: 'partials/error-page.html',
         controller: 'ErrorPageCtrl',
-        pageTitle: "Error Page"
+        pageTitle: "Error Page",
+        hideLoginElement: true
       }).
       otherwise({
         redirectTo: '/phones'
@@ -76,6 +78,13 @@ phonecatApp.service('authService', ['$rootScope', '$window', function ($rootScop
             return undefined;
         }
     };
+    this.clearAuthData = function () {
+        if($window.localStorage) {
+            $window.localStorage.removeItem('auth-id');
+            $window.localStorage.removeItem('auth-token');
+            $rootScope.$broadcast('authChanged');
+        }
+    };
     this.isAuthenticated = function () {
         return !angular.isUndefined(this.getAuthData());
     };
@@ -94,11 +103,12 @@ phonecatApp.factory('authHttpRequestInterceptor', ['authService', function (auth
     return authHttpRequestInterceptor;
 }]);
 
-phonecatApp.factory('httpResponseInterceptor', ['$q', '$location', function ($q, $location) {
+phonecatApp.factory('httpResponseInterceptor', ['$q', '$location', 'authService', function ($q, $location, authService) {
     var httpResponseInterceptor = {
         responseError: function (rejection) {
             if (rejection.status==401) {
                 if (!angular.equals($location.path(), '/login')) {
+                    authService.clearAuthData();
                     var redirectToUrl = $location.url();
                     $location.hash('').search({}).path('/login').search('redirectTo', redirectToUrl);
                     $location.replace();
