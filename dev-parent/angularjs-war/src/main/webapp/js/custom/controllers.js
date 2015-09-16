@@ -39,7 +39,7 @@ phonecatControllers.controller('LoginCtrl', ['$scope', 'authService', '$http', '
                 $location.url($location.search().redirectTo);
                 $location.replace();
             } else {
-                $location.path("/");
+                $location.path("/phones");
                 $location.replace();
             }
         }).error(function () {
@@ -54,6 +54,21 @@ phonecatControllers.controller('LoginElementCtrl', ['$scope', '$location', '$rou
     $scope.isAuthenticated = authService.isAuthenticated();
     $rootScope.$on('authChanged', function(newRoute, oldRoute) {
         $scope.isAuthenticated = authService.isAuthenticated();
+    });
+}]);
+
+phonecatControllers.controller('LoggedInUserElementCtrl', ['$scope', '$location', '$route', 'authService', '$rootScope', function($scope, $location, $route, authService, $rootScope){
+    $scope.$route = $route;
+    $scope.isNotAuthenticated = !authService.isAuthenticated();
+    $scope.logout = function () {
+        authService.clearAuthData();
+        if (!angular.equals($location.path(), '/phones')) {
+            $location.path("/phones");
+            $location.replace();
+        }
+    };
+    $rootScope.$on('authChanged', function(newRoute, oldRoute) {
+        $scope.isNotAuthenticated = !authService.isAuthenticated();
     });
 }]);
 

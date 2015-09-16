@@ -22,7 +22,8 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl',
         pageTitle: "Login",
-        hideLoginElement: true
+        hideLoginElement: true,
+        hideLoggedInUserElement: true
       }).
       when('/focusExample', {
         templateUrl: 'partials/focus-example.html',
@@ -38,7 +39,8 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'partials/error-page.html',
         controller: 'ErrorPageCtrl',
         pageTitle: "Error Page",
-        hideLoginElement: true
+        hideLoginElement: true,
+        hideLoggedInUserElement: true
       }).
       otherwise({
         redirectTo: '/phones'

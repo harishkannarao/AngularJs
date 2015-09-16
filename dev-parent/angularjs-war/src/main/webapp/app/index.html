@@ -14,8 +14,15 @@
     <script src="../js/custom/animations.js"></script>
 </head>
 <body>
+<a id="qa-home-link" ng-href="#/phones">Home</a>
 <span ng-controller="LoginElementCtrl">
     <span id="qa-login-element" ng-hide="$route.current.hideLoginElement || isAuthenticated"><a ng-href="#/login?redirectTo={{$location.url() | escape}}">Login</a></span>
+</span>
+<span ng-controller="LoggedInUserElementCtrl" ng-hide="$route.current.hideLoggedInUserElement || isNotAuthenticated">
+    <a id="qa-focus-example" ng-href="#/focusExample">FocusExample</a>
+    <a id="qa-focus-example-194" ng-href="#/focusExample#194">FocusExample at the end</a>
+    <a id="qa-user-details" ng-href="#/userDetails">User Details</a>
+    <a id="qa-logout" href="" ng-click="logout()">Logout</a>
 </span>
 <div class="view-container">
     <div ng-view autoscroll class="view-frame"></div>
