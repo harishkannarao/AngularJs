@@ -57,15 +57,17 @@ phonecatControllers.controller('LoginElementCtrl', ['$scope', '$location', '$rou
     });
 }]);
 
-phonecatControllers.controller('LoggedInUserElementCtrl', ['$scope', '$location', '$route', 'authService', '$rootScope', function($scope, $location, $route, authService, $rootScope){
+phonecatControllers.controller('LoggedInUserElementCtrl', ['$scope', '$location', '$route', 'authService', '$rootScope', '$http', function($scope, $location, $route, authService, $rootScope, $http){
     $scope.$route = $route;
     $scope.isNotAuthenticated = !authService.isAuthenticated();
     $scope.logout = function () {
-        authService.clearAuthData();
-        if (!angular.equals($location.path(), '/phones')) {
-            $location.path("/phones");
-            $location.replace();
-        }
+        $http.delete('/restapi/service/auth/logout').success(function (data) {
+            authService.clearAuthData();
+            if (!angular.equals($location.path(), '/phones')) {
+                $location.path("/phones");
+                $location.replace();
+            }
+        });
     };
     $rootScope.$on('authChanged', function(newRoute, oldRoute) {
         $scope.isNotAuthenticated = !authService.isAuthenticated();
