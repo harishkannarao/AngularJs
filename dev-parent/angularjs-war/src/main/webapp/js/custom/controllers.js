@@ -64,7 +64,7 @@ phonecatControllers.controller('LoggedInUserElementCtrl', ['$scope', '$location'
         $http.delete('/restapi/service/auth/logout').success(function (data) {
             authService.clearAuthData();
             if (!angular.equals($location.path(), '/phones')) {
-                $location.path("/phones");
+                $location.hash('').search({}).path("/phones");
                 $location.replace();
             }
         });
