@@ -39,6 +39,11 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder setAuthRolesAsEmptyList() {
+        this.authRoles = new ArrayList<>();
+        return this;
+    }
+
     public UserBuilder addAuthRole(Roles authRole) {
         if(this.authRoles == null) {
             this.authRoles = new ArrayList<>();

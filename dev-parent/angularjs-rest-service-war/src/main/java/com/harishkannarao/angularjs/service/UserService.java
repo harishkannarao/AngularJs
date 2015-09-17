@@ -30,6 +30,7 @@ public class UserService {
         User user3 = UserBuilder.newBuilder()
                 .setUsername("user3")
                 .setPassword("pass3")
+                .setAuthRolesAsEmptyList()
                 .build();
 
         users.put(user1.getUsername(), user1);

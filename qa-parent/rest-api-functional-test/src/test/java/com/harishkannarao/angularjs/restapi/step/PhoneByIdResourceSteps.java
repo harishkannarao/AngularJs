@@ -46,7 +46,7 @@ public class PhoneByIdResourceSteps extends BaseSteps {
 
     @Then("^I should get http response status as (.*) from phone by id resource$")
     public void I_should_get_http_response_status_as_from_phone_by_id_resource(int statusCode) throws Throwable {
-        assertEquals(response.getStatus(), statusCode);;
+        assertEquals(response.getStatus(), statusCode);
     }
 
     @Then("^I should see the additional features as below from phone by id resource$")
