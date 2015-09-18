@@ -12,6 +12,8 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.Optional;
@@ -29,7 +31,10 @@ public class AuthResource {
     @POST
     @Path("/login")
     @AllowAllRoles
-    public Response login(AuthLoginElement authLoginElement) {
+    public Response login(
+            @NotNull(message = "key=login.authLoginElement;message={javax.validation.constraints.NotNull.message}")
+            @Valid
+            AuthLoginElement authLoginElement) {
         Optional<AuthAccessElement> authAccessElementOptional = authService.login(authLoginElement);
         if (authAccessElementOptional.isPresent()) {
             return Response.ok(authAccessElementOptional.get()).build();

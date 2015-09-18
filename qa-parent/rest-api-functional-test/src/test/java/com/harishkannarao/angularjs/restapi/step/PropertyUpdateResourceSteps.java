@@ -16,9 +16,6 @@ public class PropertyUpdateResourceSteps extends BaseSteps {
 
     private static final WebTarget modulePropertiesTarget = testSupportRestApiBaseTarget.path("/properties/module");
 
-    private WebTarget target;
-    private Response response;
-
     @And("^I change \"(.*)\" value to \"(.*)\" on property update resource$")
     public void I_change_value_to_on_property_update_resource(String key, String value) throws Throwable {
         UpdatePropertyEntity updatePropertyEntity = new UpdatePropertyEntity();

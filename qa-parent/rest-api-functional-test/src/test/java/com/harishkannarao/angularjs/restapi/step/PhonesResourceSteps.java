@@ -22,9 +22,6 @@ public class PhonesResourceSteps extends BaseSteps {
 
     private static final WebTarget phonesTarget = restApiBaseTarget.path("/phones");
 
-    private WebTarget target;
-    private Response response;
-
     @Given("^I set the url to phones resource$")
     public void I_set_the_url_to_phones_resource() throws Throwable {
         target = phonesTarget;

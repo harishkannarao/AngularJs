@@ -20,8 +20,6 @@ public class PhoneByIdResourceSteps extends BaseSteps {
 
     private static final WebTarget phoneByIdTarget = restApiBaseTarget.path("/phones/{phoneId}");
 
-    private WebTarget target;
-    private Response response;
     private String phoneId;
 
     private PhoneEntity getPhoneEntity() {

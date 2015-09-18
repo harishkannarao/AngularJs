@@ -56,3 +56,31 @@ Feature: Auth Login Endpoint
     And I set the password as "incorrect_password" to auth login endpoint
     And I make a POST request to auth login endpoint
     Then I should get http response status as 400 from auth login endpoint
+
+  Scenario: should get bad request from login endpoint for empty pay load
+    Given I set the url to auth login endpoint
+    And I set empty pay load to auth login endpoint
+    And I make a POST request to auth login endpoint
+    Then I should get http response status as 400 from auth login endpoint
+    And I should see validation-exception header as "true" from auth login endpoint
+    And I should see validation key as "login.authLoginElement" and message as "may not be null" from auth login endpoint
+
+  Scenario: should get bad request from login endpoint for null username and null password
+    Given I set the url to auth login endpoint
+    And I set the username as null to auth login endpoint
+    And I set the password as null to auth login endpoint
+    And I make a POST request to auth login endpoint
+    Then I should get http response status as 400 from auth login endpoint
+    And I should see validation-exception header as "true" from auth login endpoint
+    And I should see validation key as "authLoginElement.username" and message as "may not be null" from auth login endpoint
+    And I should see validation key as "authLoginElement.password" and message as "may not be null" from auth login endpoint
+
+  Scenario: should get bad request from login endpoint for empty username and empty password
+    Given I set the url to auth login endpoint
+    And I set the username as "" to auth login endpoint
+    And I set the password as "" to auth login endpoint
+    And I make a POST request to auth login endpoint
+    Then I should get http response status as 400 from auth login endpoint
+    And I should see validation-exception header as "true" from auth login endpoint
+    And I should see validation key as "authLoginElement.username" and message as "must match "^.+$"" from auth login endpoint
+    And I should see validation key as "authLoginElement.password" and message as "must match "^.+$"" from auth login endpoint

@@ -19,9 +19,6 @@ public class PropertiesResourceSteps extends BaseSteps {
 
     private static final WebTarget modulePropertiesTarget = restApiBaseTarget.path("/properties/module");
 
-    private WebTarget target;
-    private Response response;
-
     private ApplicationPropertyEntity getApplicationPropertyEntity() {
         return response.readEntity(new GenericType<ApplicationPropertyEntity>() {});
     }

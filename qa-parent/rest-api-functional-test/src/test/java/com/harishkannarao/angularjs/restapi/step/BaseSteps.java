@@ -1,9 +1,13 @@
 package com.harishkannarao.angularjs.restapi.step;
 
 import com.harishkannarao.angularjs.restapi.client.SingletonRestClient;
+import com.harishkannarao.angularjs.restapi.entity.AuthAccessEntity;
+import com.harishkannarao.angularjs.restapi.entity.ValidationResponseEntity;
 import com.harishkannarao.angularjs.restapi.util.PropertiesReference;
 
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 
 public class BaseSteps {
     protected static final String APP_SERVER_URL = PropertiesReference.MAVEN_PROPERTIES.getProperty("appServerUrl");
@@ -16,4 +20,18 @@ public class BaseSteps {
     protected static final WebTarget serverTarget = SingletonRestClient.getInstance().target(APP_SERVER_URL);
     protected static final WebTarget restApiBaseTarget = SingletonRestClient.getInstance().target(APPLICATION_URL + "/service");
     protected static final WebTarget testSupportRestApiBaseTarget = SingletonRestClient.getInstance().target(TEST_SUPPORT_URL + "/rest");
+
+    protected static final String VALIDATION_MESSAGE_FORMAT = "key=%s;message=%s";
+    protected static final String VALIDATION_HEADER_KEY = "validation-exception";
+
+    protected WebTarget target;
+    protected Response response;
+
+    protected ValidationResponseEntity getValidationResponseEntity() {
+        return response.readEntity(new GenericType<ValidationResponseEntity>() {});
+    }
+
+    protected String getFormattedValidationMessage(String key, String message) {
+        return String.format(VALIDATION_MESSAGE_FORMAT, key, message);
+    }
 }
