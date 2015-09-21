@@ -31,10 +31,7 @@ public class AuthResource {
     @POST
     @Path("/login")
     @AllowAllRoles
-    public Response login(
-            @NotNull(message = "key=login.authLoginElement;message={javax.validation.constraints.NotNull.message}")
-            @Valid
-            AuthLoginElement authLoginElement) {
+    public Response login(@NotNull @Valid AuthLoginElement authLoginElement) {
         Optional<AuthAccessElement> authAccessElementOptional = authService.login(authLoginElement);
         if (authAccessElementOptional.isPresent()) {
             return Response.ok(authAccessElementOptional.get()).build();
@@ -75,6 +72,5 @@ public class AuthResource {
         authService.logout(username, authtoken);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
-
 
 }

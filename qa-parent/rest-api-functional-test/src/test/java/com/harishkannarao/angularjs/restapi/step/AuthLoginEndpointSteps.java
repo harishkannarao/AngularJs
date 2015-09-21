@@ -1,10 +1,9 @@
 package com.harishkannarao.angularjs.restapi.step;
 
-import com.fasterxml.jackson.databind.deser.Deserializers;
+import com.harishkannarao.angularjs.restapi.datatable.ParameterViolationDataTable;
 import com.harishkannarao.angularjs.restapi.entity.AuthAccessEntity;
 import com.harishkannarao.angularjs.restapi.entity.AuthLoginEntity;
 import com.harishkannarao.angularjs.restapi.entity.ValidationResponseEntity;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -14,13 +13,10 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 @ApplicationScoped
 public class AuthLoginEndpointSteps extends BaseSteps {
@@ -52,9 +48,19 @@ public class AuthLoginEndpointSteps extends BaseSteps {
         this.username = username;
     }
 
+    @And("^I set the username as null to auth login endpoint$")
+    public void I_set_the_username_as_null_to_auth_login_endpoint() throws Throwable {
+        this.username = null;
+    }
+
     @And("^I set the password as \"(.*)\" to auth login endpoint$")
     public void I_set_the_password_as_to_auth_login_endpoint(String password) throws Throwable {
         this.password = password;
+    }
+
+    @And("^I set the password as null to auth login endpoint$")
+    public void I_set_the_password_as_null_to_auth_login_endpoint() throws Throwable {
+        this.password = null;
     }
 
     @And("^I make a POST request to auth login endpoint$")
@@ -98,11 +104,20 @@ public class AuthLoginEndpointSteps extends BaseSteps {
         assertEquals(authAccessEntity.getAuthPermissions(), authPermissions);
     }
 
-    @And("^I should see validation key as \"(.*)\" and message as \"(.*)\" from auth login endpoint$")
-    public void I_should_see_validation_key_as_and_message_as_from_auth_login_endpoint(String key, String message) throws Throwable {
-        String validationMessage = getFormattedValidationMessage(key, message);
+    @And("^I should see validation response as below from auth login endpoint$")
+    public void I_should_see_validation_response_as_below_from_auth_login_endpoint(List<ParameterViolationDataTable> parameterViolationDataTableList) throws Throwable {
         ValidationResponseEntity validationResponseEntity = getValidationResponseEntity();
-        assertEquals(validationResponseEntity.getParameterViolations().stream().filter(parameterViolation -> parameterViolation.getMessage().equals(validationMessage)).count(), 1, "Unable to find the validation message in the response");
+        assertEquals(validationResponseEntity.getParameterViolations().size(), parameterViolationDataTableList.size());
+        List<ValidationResponseEntity.ParameterViolation> sortedParameterViolation =  validationResponseEntity.getParameterViolations().stream().sorted((o1, o2) -> o1.getPath().compareTo(o2.getPath())).collect(Collectors.toList());
+        List<ParameterViolationDataTable> sortedParameterViolationDataTable = parameterViolationDataTableList.stream().sorted((o1, o2) -> o1.getPath().compareTo(o2.getPath())).collect(Collectors.toList());
+        for (int i=0;i<sortedParameterViolation.size();i++) {
+            ValidationResponseEntity.ParameterViolation currentParameterViolation = sortedParameterViolation.get(i);
+            ParameterViolationDataTable currentParameterViolationDataTable = sortedParameterViolationDataTable.get(i);
+            assertEquals(currentParameterViolation.getConstraintType(), currentParameterViolationDataTable.getConstraintType());
+            assertEquals(currentParameterViolation.getPath(), currentParameterViolationDataTable.getPath());
+            assertEquals(currentParameterViolation.getMessage(), currentParameterViolationDataTable.getMessage());
+            assertEquals(currentParameterViolation.getValue(), currentParameterViolationDataTable.getValue());
+        }
     }
 
     @And("^I should see validation-exception header as \"(.*)\" from auth login endpoint$")
@@ -110,13 +125,4 @@ public class AuthLoginEndpointSteps extends BaseSteps {
         assertEquals(response.getHeaderString(VALIDATION_HEADER_KEY), headerValue);
     }
 
-    @And("^I set the username as null to auth login endpoint$")
-    public void I_set_the_username_as_null_to_auth_login_endpoint() throws Throwable {
-        this.username = null;
-    }
-
-    @And("^I set the password as null to auth login endpoint$")
-    public void I_set_the_password_as_null_to_auth_login_endpoint() throws Throwable {
-        this.password = null;
-    }
 }

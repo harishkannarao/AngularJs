@@ -7,13 +7,6 @@ public class PhoneSummaryDataTable {
     private Long age;
     private String snippet;
 
-    public PhoneSummaryDataTable(Long id, String name, Long age, String snippet) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.snippet = snippet;
-    }
-
     public Long getId() {
         return id;
     }
