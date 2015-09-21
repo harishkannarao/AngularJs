@@ -1,18 +1,17 @@
 package com.harishkannarao.angularjs.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.harishkannarao.angularjs.validation.constraint.NotNullAndNonEmptyString;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class AuthLoginElement {
 
-    @NotNull
-    @Pattern(regexp="^.+$")
+    @NotNullAndNonEmptyString
     @JsonProperty(value = "username")
     private String username;
-    @NotNull
-    @Pattern(regexp="^.+$")
+    @NotNullAndNonEmptyString
     @JsonProperty(value = "password")
     private String password;
 
