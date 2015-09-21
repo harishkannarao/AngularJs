@@ -49,6 +49,7 @@ Feature: Auth Login Endpoint
     And I set the password as "some_password" to auth login endpoint
     And I make a POST request to auth login endpoint
     Then I should get http response status as 400 from auth login endpoint
+    And I should see application-validation-exception header as "true" from auth login endpoint
 
   Scenario: should not be able to login with incorrect password
     Given I set the url to auth login endpoint
@@ -56,12 +57,14 @@ Feature: Auth Login Endpoint
     And I set the password as "incorrect_password" to auth login endpoint
     And I make a POST request to auth login endpoint
     Then I should get http response status as 400 from auth login endpoint
+    And I should see application-validation-exception header as "true" from auth login endpoint
 
   Scenario: should get bad request from login endpoint for empty pay load
     Given I set the url to auth login endpoint
     And I set empty pay load to auth login endpoint
     And I make a POST request to auth login endpoint
     Then I should get http response status as 400 from auth login endpoint
+    And I should see application-validation-exception header as "true" from auth login endpoint
     And I should see validation-exception header as "true" from auth login endpoint
     And I should see validation response as below from auth login endpoint
       | constraintType | path       | message         | value |
@@ -73,6 +76,7 @@ Feature: Auth Login Endpoint
     And I set the password as null to auth login endpoint
     And I make a POST request to auth login endpoint
     Then I should get http response status as 400 from auth login endpoint
+    And I should see application-validation-exception header as "true" from auth login endpoint
     And I should see validation-exception header as "true" from auth login endpoint
     And I should see validation response as below from auth login endpoint
       | constraintType | path                | message                 | value |
@@ -85,6 +89,7 @@ Feature: Auth Login Endpoint
     And I set the password as "" to auth login endpoint
     And I make a POST request to auth login endpoint
     Then I should get http response status as 400 from auth login endpoint
+    And I should see application-validation-exception header as "true" from auth login endpoint
     And I should see validation-exception header as "true" from auth login endpoint
     And I should see validation response as below from auth login endpoint
       | constraintType | path                | message                        | value |

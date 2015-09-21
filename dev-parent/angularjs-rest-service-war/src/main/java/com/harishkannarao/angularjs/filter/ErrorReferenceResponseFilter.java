@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Provider
 public class ErrorReferenceResponseFilter implements ContainerResponseFilter {
     private static final Logger LOGGER = Logger.getLogger(ErrorReferenceResponseFilter.class.getName());
+    private static final String BOOLEAN_TRUE_AS_STRING = Boolean.TRUE.toString().toLowerCase();
 
     @Override
     public void filter(ContainerRequestContext containerRequestContext, ContainerResponseContext containerResponseContext) throws IOException {
@@ -39,6 +40,9 @@ public class ErrorReferenceResponseFilter implements ContainerResponseFilter {
                     .toString();
             LOGGER.severe(errorMessage);
             containerResponseContext.getHeaders().add(HttpHeaderErrorKeys.ERROR_REFERENCE_KEY.getValue(), errorReference);
+        }
+        if (statusFamily.equals(Family.CLIENT_ERROR)) {
+            containerResponseContext.getHeaders().add(HttpHeaderErrorKeys.APPLICATION_VALIDATION_ERROR_KEY.getValue(), BOOLEAN_TRUE_AS_STRING);
         }
     }
 }

@@ -23,6 +23,7 @@ public class BaseSteps {
 
     protected static final String VALIDATION_MESSAGE_FORMAT = "key=%s;message=%s";
     protected static final String VALIDATION_HEADER_KEY = "validation-exception";
+    protected static final String APPLICATION_VALIDATION_HEADER_KEY = "application-validation-exception";
 
     protected WebTarget target;
     protected Response response;

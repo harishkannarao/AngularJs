@@ -125,4 +125,8 @@ public class AuthLoginEndpointSteps extends BaseSteps {
         assertEquals(response.getHeaderString(VALIDATION_HEADER_KEY), headerValue);
     }
 
+    @And("^I should see application-validation-exception header as \"(.*)\" from auth login endpoint$")
+    public void I_should_see_application_validation_exception_header_as_from_auth_login_endpoint(String headerValue) throws Throwable {
+        assertEquals(response.getHeaderString(APPLICATION_VALIDATION_HEADER_KEY), headerValue);
+    }
 }
