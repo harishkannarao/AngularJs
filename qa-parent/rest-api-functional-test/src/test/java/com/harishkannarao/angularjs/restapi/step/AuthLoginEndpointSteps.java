@@ -4,11 +4,13 @@ import com.harishkannarao.angularjs.restapi.datatable.ParameterViolationDataTabl
 import com.harishkannarao.angularjs.restapi.entity.AuthAccessEntity;
 import com.harishkannarao.angularjs.restapi.entity.AuthLoginEntity;
 import com.harishkannarao.angularjs.restapi.entity.ValidationResponseEntity;
+import com.harishkannarao.angularjs.restapi.holder.EntityHolder;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -23,17 +25,19 @@ public class AuthLoginEndpointSteps extends BaseSteps {
 
     private static final WebTarget authLoginEndpoint = restApiBaseTarget.path("/auth/login");
 
-
     private boolean emptyPayLoad;
     private String username;
     private String password;
+
+    @Inject
+    private EntityHolder entityHolder;
 
     private AuthAccessEntity getAuthAccessEntity() {
         return response.readEntity(new GenericType<AuthAccessEntity>() {});
     }
 
     @Given("^I set the url to auth login endpoint$")
-    public void I_set_the_url_to_auth_login_endpoint() throws Throwable {
+    public void setUrl() throws Throwable {
         this.target = authLoginEndpoint;
     }
 
@@ -44,7 +48,7 @@ public class AuthLoginEndpointSteps extends BaseSteps {
     }
 
     @And("^I set the username as \"(.*)\" to auth login endpoint$")
-    public void I_set_the_username_as_to_auth_login_endpoint(String username) throws Throwable {
+    public void setUsername(String username) throws Throwable {
         this.username = username;
     }
 
@@ -54,7 +58,7 @@ public class AuthLoginEndpointSteps extends BaseSteps {
     }
 
     @And("^I set the password as \"(.*)\" to auth login endpoint$")
-    public void I_set_the_password_as_to_auth_login_endpoint(String password) throws Throwable {
+    public void setPassword(String password) throws Throwable {
         this.password = password;
     }
 
@@ -64,7 +68,7 @@ public class AuthLoginEndpointSteps extends BaseSteps {
     }
 
     @And("^I make a POST request to auth login endpoint$")
-    public void I_make_a_POST_request_to_auth_login_endpoint() throws Throwable {
+    public void makePostRequest() throws Throwable {
         AuthLoginEntity authLoginEntity = null;
         if (!emptyPayLoad) {
             authLoginEntity = new AuthLoginEntity();
@@ -128,5 +132,14 @@ public class AuthLoginEndpointSteps extends BaseSteps {
     @And("^I should see application-validation-exception header as \"(.*)\" from auth login endpoint$")
     public void I_should_see_application_validation_exception_header_as_from_auth_login_endpoint(String headerValue) throws Throwable {
         assertEquals(response.getHeaderString(APPLICATION_VALIDATION_HEADER_KEY), headerValue);
+    }
+
+    @Given("^I authenticate with user \"(.*)\" and password \"(.*)\" with auth login endpoint$")
+    public void I_authenticate_with_user_and_password_with_auth_login_endpoint(String user, String password) throws Throwable {
+        setUrl();
+        setUsername(user);
+        setPassword(password);
+        makePostRequest();
+        entityHolder.setAuthAccessEntity(getAuthAccessEntity());
     }
 }

@@ -21,18 +21,16 @@ public class BaseSteps {
     protected static final WebTarget restApiBaseTarget = SingletonRestClient.getInstance().target(APPLICATION_URL + "/service");
     protected static final WebTarget testSupportRestApiBaseTarget = SingletonRestClient.getInstance().target(TEST_SUPPORT_URL + "/rest");
 
-    protected static final String VALIDATION_MESSAGE_FORMAT = "key=%s;message=%s";
     protected static final String VALIDATION_HEADER_KEY = "validation-exception";
     protected static final String APPLICATION_VALIDATION_HEADER_KEY = "application-validation-exception";
+
+    protected static final String AUTH_ID_HEADER_KEY = "auth-id";
+    protected static final String AUTH_TOKEN_HEADER_KEY = "auth-token";
 
     protected WebTarget target;
     protected Response response;
 
     protected ValidationResponseEntity getValidationResponseEntity() {
         return response.readEntity(new GenericType<ValidationResponseEntity>() {});
-    }
-
-    protected String getFormattedValidationMessage(String key, String message) {
-        return String.format(VALIDATION_MESSAGE_FORMAT, key, message);
     }
 }
