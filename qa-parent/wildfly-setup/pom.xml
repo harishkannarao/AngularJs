@@ -87,6 +87,7 @@
                                     <fileset dir="${wildfly.configuration}" includes="standalone-full-ha.xml" />
                                     <fileset dir="${wildfly.configuration}" includes="standalone-ha.xml" />
                                     <fileset dir="${wildfly.configuration}" includes="mgmt-users.properties" />
+                                    <fileset dir="${wildfly.configuration}" includes="my.jks" />
                                 </delete>
                             </target>
                         </configuration>
@@ -102,6 +103,7 @@
                             <target name="copy-wildfly-standalone-configurations">
                                 <copy file="${project.basedir}/configuration/standalone-full.xml" tofile="${wildfly.configuration}/standalone-full.xml" />
                                 <copy file="${project.basedir}/configuration/mgmt-users.properties" tofile="${wildfly.configuration}/mgmt-users.properties" />
+                                <copy file="${project.basedir}/configuration/my.jks" tofile="${wildfly.configuration}/my.jks" />
                             </target>
                         </configuration>
                     </execution>
