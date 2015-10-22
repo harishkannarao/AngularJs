@@ -195,7 +195,7 @@
                                     <http url="${appServerUrl}/restapi/service/ping"/>
                                 </waitfor>
                                 <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
-                                    <http url="${appServerUrl}/angularjs/app/index.html"/>
+                                    <http url="${appServerUrl}/angularjs/ping.html"/>
                                 </waitfor>
                             </target>
                         </configuration>
