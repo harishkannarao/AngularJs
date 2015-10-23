@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class PhoneListPage extends BasePage {
 
     public void navigate() {
-        webDriver.navigate().to(APPLICATION_URL + "/app/index.html#/phones");
+        webDriver.navigate().to(APPLICATION_SSL_URL + "/app/index.html#/phones");
         webDriver.navigate().refresh();
     }
 

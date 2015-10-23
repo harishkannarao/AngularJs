@@ -7,6 +7,11 @@ public class GenericPage extends BasePage {
     }
 
     public void navigateToHomePage() {
+        webDriver.navigate().to(APPLICATION_SSL_URL);
+        webDriver.navigate().refresh();
+    }
+
+    public void navigateToHomePageOnHttp() {
         webDriver.navigate().to(APPLICATION_URL);
         webDriver.navigate().refresh();
     }

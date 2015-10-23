@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class PhoneDetailsPage extends BasePage{
 
     public void navigate(Long phoneId) {
-        webDriver.navigate().to(APPLICATION_URL + "/app/index.html#/phones/" + phoneId);
+        webDriver.navigate().to(APPLICATION_SSL_URL + "/app/index.html#/phones/" + phoneId);
         webDriver.navigate().refresh();
     }
 
