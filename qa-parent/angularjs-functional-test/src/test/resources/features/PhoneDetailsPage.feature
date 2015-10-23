@@ -103,10 +103,10 @@ Feature: Phone Details Page Features
   Scenario: should display image list of phone on phone details page
     Given I go to phone details page with phone id as 1
     Then I should see image list as below on phone details page
-      | http://localhost:8080/restapi/img/phones/nexus-s.0.jpg   |
-      | http://localhost:8080/restapi/img/phones/nexus-s.1.jpg   |
-      | http://localhost:8080/restapi/img/phones/nexus-s.2.jpg   |
-      | http://localhost:8080/restapi/img/phones/nexus-s.3.jpg   |
+      | https://localhost:8443/restapi/img/phones/nexus-s.0.jpg   |
+      | https://localhost:8443/restapi/img/phones/nexus-s.1.jpg   |
+      | https://localhost:8443/restapi/img/phones/nexus-s.2.jpg   |
+      | https://localhost:8443/restapi/img/phones/nexus-s.3.jpg   |
 
   Scenario: should display name of phone on phone details page
     Given I go to phone details page with phone id as 1
@@ -127,9 +127,9 @@ Feature: Phone Details Page Features
 
   Scenario: should display first image as default main image on phone details page
     Given I go to phone details page with phone id as 1
-    Then I should see the main image url as "http://localhost:8080/restapi/img/phones/nexus-s.0.jpg" on phone details page
+    Then I should see the main image url as "https://localhost:8443/restapi/img/phones/nexus-s.0.jpg" on phone details page
 
   Scenario: should change main image by clicking on other image on phone details page
     Given I go to phone details page with phone id as 1
-    When I click on image with url as "http://localhost:8080/restapi/img/phones/nexus-s.2.jpg" on phone details page
-    Then I should see the main image url as "http://localhost:8080/restapi/img/phones/nexus-s.2.jpg" on phone details page
+    When I click on image with url as "https://localhost:8443/restapi/img/phones/nexus-s.2.jpg" on phone details page
+    Then I should see the main image url as "https://localhost:8443/restapi/img/phones/nexus-s.2.jpg" on phone details page

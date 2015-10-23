@@ -4,6 +4,8 @@ import com.harishkannarao.angularjs.webapp.util.PropertiesReference;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -34,7 +36,10 @@ public class SingletonWebDriver {
                     driver = new FirefoxDriver();
                     driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
                 } else if (PHANTOMJS_DRIVER.equals(driverType)) {
-                    driver = new PhantomJSDriver();
+                    DesiredCapabilities phantomjsCapabilities = DesiredCapabilities.phantomjs();
+                    String [] phantomJsArgs = {"--ignore-ssl-errors=true","--ssl-protocol=any"};
+                    phantomjsCapabilities.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomJsArgs);
+                    driver = new PhantomJSDriver(phantomjsCapabilities);
                     driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
                 }
                 return driver;

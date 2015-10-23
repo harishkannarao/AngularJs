@@ -10,7 +10,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 public class BaseSteps {
-    protected static final String APP_SERVER_URL = PropertiesReference.MAVEN_PROPERTIES.getProperty("appServerUrl");
+    protected static final String APP_SERVER_URL = PropertiesReference.MAVEN_PROPERTIES.getProperty("appServerSslUrl");
     protected static final String APPLICATION_CONTEXT = "restapi";
     protected static final String TEST_SUPPORT_CONTEXT = "angularjs-test-support-war";
     protected static final String PATH_SEPARATOR = "/";

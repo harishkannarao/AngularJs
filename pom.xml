@@ -21,12 +21,15 @@
         <skipServerStartupCheck>false</skipServerStartupCheck>
         <skipFunctionalTest>false</skipFunctionalTest>
         <serverHttpPort>8080</serverHttpPort>
+        <serverHttpsPort>8443</serverHttpsPort>
         <serverManagementPort>9990</serverManagementPort>
         <serverDebugPort>8787</serverDebugPort>
         <serverPortOffset>0</serverPortOffset>
         <appServerProtocol>http</appServerProtocol>
+        <appServerSslProtocol>https</appServerSslProtocol>
         <appServerHost>localhost</appServerHost>
         <appServerUrl>${appServerProtocol}://${appServerHost}:${serverHttpPort}</appServerUrl>
+        <appServerSslUrl>${appServerSslProtocol}://${appServerHost}:${serverHttpsPort}</appServerSslUrl>
         <cargo.goal>start</cargo.goal>
         <jasmine.runner.port>8234</jasmine.runner.port>
         <driver>phantomjs</driver>
