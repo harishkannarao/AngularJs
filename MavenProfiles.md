@@ -13,6 +13,8 @@ This article explains the available profile and the steps executed with each pro
 ### Compile and Deploy
 **mvn clean install -P run-apps**
 
+Application Url: https://localhost:8443/angularjs
+
 ### Compile and Functional Test
 **mvn clean install -P functional-tests**
 
