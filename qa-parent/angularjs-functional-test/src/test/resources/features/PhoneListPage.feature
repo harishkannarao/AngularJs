@@ -3,8 +3,10 @@ Feature: Phone List Page Features
     Given I go to phone list page
     Then I should see total number of phones as 3 on phone list page
     When I enter query as nexus on phone list page
+    And I wait for 1 seconds
     Then I should see total number of phones as 1 on phone list page
     When I enter query as motorola on phone list page
+    And I wait for 1 seconds
     Then I should see total number of phones as 2 on phone list page
 
   Scenario: should display greeting on the pone list page

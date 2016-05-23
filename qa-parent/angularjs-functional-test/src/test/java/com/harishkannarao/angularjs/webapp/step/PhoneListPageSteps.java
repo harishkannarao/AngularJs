@@ -12,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -40,6 +41,11 @@ public class PhoneListPageSteps {
     public void I_enter_query_as_on_index_page(String query) throws Throwable {
         phoneListPage.enterQuery(query);
         phoneListPage.waitForAngularRequestsToFinish();
+    }
+
+    @And("^I wait for (\\d+) seconds$")
+    public void I_wait_for_seconds(long seconds) throws Throwable {
+        TimeUnit.SECONDS.sleep(seconds);
     }
 
     @Then("^I should see the name as (.*) on phone list page")
