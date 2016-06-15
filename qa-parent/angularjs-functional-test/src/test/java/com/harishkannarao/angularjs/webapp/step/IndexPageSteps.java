@@ -2,6 +2,7 @@ package com.harishkannarao.angularjs.webapp.step;
 
 import com.harishkannarao.angularjs.webapp.page.IndexPage;
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -23,5 +24,10 @@ public class IndexPageSteps {
     @Given("^I go to a non-existing page$")
     public void I_go_to_a_non_existing_page() throws Throwable {
         indexPage.navigateToPath(SOME_JUNK_URL);
+    }
+
+    @And("^I click on Login link$")
+    public void iClickOnLoginLink() throws Throwable {
+        indexPage.clickLogin();
     }
 }
