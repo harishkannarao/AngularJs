@@ -20,4 +20,19 @@ public class LoginPageSteps {
     public void iShouldBeOnLoginPage() throws Throwable {
         assertTrue(loginPage.isOnValidPage(), "Is not on Login page");
     }
+
+    @And("^I enter username as \"([^\"]*)\"$")
+    public void iEnterUsernameAs(String userName) throws Throwable {
+        loginPage.enterUserName(userName);
+    }
+
+    @And("^I enter password as \"([^\"]*)\"$")
+    public void iEnterPasswordAs(String password) throws Throwable {
+        loginPage.enterPassword(password);
+    }
+
+    @And("^I click on Login button$")
+    public void iClickOnLoginButton() throws Throwable {
+        loginPage.clickLoginButton();
+    }
 }

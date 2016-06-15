@@ -16,4 +16,16 @@ public class IndexPage extends BasePage {
     public void clickLogin() {
         webDriver.findElement(By.linkText("Login")).click();
     }
+
+    public boolean isLinkDisplayed(String linkText) {
+        return !webDriver.findElements(By.linkText(linkText)).isEmpty();
+    }
+
+    public boolean isLoggedIn() {
+        return !webDriver.findElements(By.linkText("Logout")).isEmpty();
+    }
+
+    public void clickLogout() {
+        webDriver.findElement(By.linkText("Logout")).click();
+    }
 }
