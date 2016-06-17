@@ -24,4 +24,13 @@ public class LoginPage extends BasePage {
     public void clickLoginButton() {
         webDriver.findElement(By.id("login")).click();
     }
+
+    public void navigate() {
+        webDriver.navigate().to(APPLICATION_SSL_URL + "/app/index.html#/login");
+        webDriver.navigate().refresh();
+    }
+
+    public void clickOnLink(String linkText) {
+        webDriver.findElement(By.linkText(linkText)).click();
+    }
 }

@@ -3,6 +3,7 @@ package com.harishkannarao.angularjs.webapp.step;
 import com.harishkannarao.angularjs.webapp.page.LoginPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -34,5 +35,15 @@ public class LoginPageSteps {
     @And("^I click on Login button$")
     public void iClickOnLoginButton() throws Throwable {
         loginPage.clickLoginButton();
+    }
+
+    @Given("^I go to login page$")
+    public void iGoToLoginPage() throws Throwable {
+        loginPage.navigate();
+    }
+
+    @And("^I click on \"([^\"]*)\" link on login page$")
+    public void iClickOnLinkOnLoginPage(String linkText) throws Throwable {
+        loginPage.clickOnLink(linkText);
     }
 }

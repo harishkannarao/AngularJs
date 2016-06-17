@@ -43,10 +43,7 @@ public class PhoneListPageSteps {
         phoneListPage.waitForAngularRequestsToFinish();
     }
 
-    @And("^I wait for (\\d+) seconds$")
-    public void I_wait_for_seconds(long seconds) throws Throwable {
-        TimeUnit.SECONDS.sleep(seconds);
-    }
+
 
     @Then("^I should see the name as (.*) on phone list page")
     public void I_should_see_the_name_as(String expectedName) throws Throwable {
