@@ -43,3 +43,20 @@ Feature: Login page feature
     And I click on Login button
     And I wait for 1 seconds
     Then I should be on phone list page
+
+  Scenario: should be able to perform login from a specific page and redirected back to the specific page after login
+    Given I go to index page
+    And I logout if already logged in
+    Given I go to phone details page with phone id as 1
+    Then I should be on phone details page
+    Then I should see "Login" link
+    And I click on Login link
+    Then I should be on login page
+    And I enter username as "user1"
+    And I enter password as "pass1"
+    And I click on Login button
+    And I wait for 1 seconds
+    Then I should be on phone details page
+    And I should see "Logout" link
+    And I click on Logout link
+    Then I should be on phone list page
