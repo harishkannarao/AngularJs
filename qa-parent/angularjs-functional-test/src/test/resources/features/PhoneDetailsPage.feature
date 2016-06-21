@@ -2,6 +2,7 @@ Feature: Phone Details Page Features
 
   Scenario: should display phone name in the title on phone details page
     Given I go to phone details page with phone id as 1
+    And I wait for 1 seconds
     Then I should see the title as "Google Phone Gallery: Nexus S" on phone details page
 
   Scenario: should display additional features of phone on phone details page
