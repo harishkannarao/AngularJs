@@ -13,6 +13,8 @@ Feature: User Details page feature
     Then I should be on user details page
     And I should see Username as "<username>"
     And I should see some auth token
+    And I should see roles as "<roles>"
     Examples:
-      | username  | password  |
-      | user1     | pass1     |
+      | username  | password  | roles             |
+      | user1     | pass1     | role1,role2,role3 |
+      | user4     | pass4     | role3             |
