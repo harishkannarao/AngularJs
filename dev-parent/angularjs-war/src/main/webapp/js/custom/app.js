@@ -105,18 +105,28 @@ phonecatApp.factory('authHttpRequestInterceptor', ['authService', function (auth
     return authHttpRequestInterceptor;
 }]);
 
-phonecatApp.factory('httpResponseInterceptor', ['$q', '$location', 'authService', function ($q, $location, authService) {
+phonecatApp.factory('httpResponseInterceptor', ['$q', '$location', 'authService', '$log', function ($q, $location, authService, $log) {
     var httpResponseInterceptor = {
         responseError: function (rejection) {
-            if (rejection.status==401) {
-                if (!angular.equals($location.path(), '/login')) {
-                    authService.clearAuthData();
-                    var redirectToUrl = $location.url();
-                    $location.hash('').search({}).path('/login').search('redirectTo', redirectToUrl);
-                    $location.replace();
-                }
-            } else if (rejection.status>=500 || rejection.status==403){
+            $log.log('Rejection status: '+rejection.status + ' For Path: '+$location.path());
+            $log.log("Header Value: "+ rejection.headers('com-harishkannarao-angularjs-forbidden'));
+            var forbidden = angular.equals(rejection.headers('com-harishkannarao-angularjs-forbidden'), "true");
+            $log.log("Forbidden: "+forbidden);
+            $log.log(rejection.status);
+            if (rejection.status==401 && !angular.equals($location.path(), '/login') && !forbidden) {
+                $log.log('Inside breakpoint 1');
+                authService.clearAuthData();
+                var redirectToUrl = $location.url();
+                $location.hash('').search({}).path('/login').search('redirectTo', redirectToUrl);
+                $location.replace();
+            } else if (rejection.status==401 && !angular.equals($location.path(), '/error') && forbidden) {
+                   $log.log('Inside breakpoint 2');
+                   $location.hash('').search({}).path('/error').search('errorReference', rejection.headers('com-harishkannarao-angularjs-error-reference'));
+                   $location.replace();
+               } else if (rejection.status>=500){
+                $log.log('Inside breakpoint 3');
                 if (!angular.equals($location.path(), '/error')) {
+                    $log.log('Inside breakpoint 4');
                     $location.hash('').search({}).path('/error').search('errorReference', rejection.headers('com-harishkannarao-angularjs-error-reference'));
                     $location.replace();
                 }

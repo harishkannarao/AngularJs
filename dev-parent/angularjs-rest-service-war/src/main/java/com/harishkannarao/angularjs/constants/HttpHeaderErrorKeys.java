@@ -4,6 +4,7 @@ public enum HttpHeaderErrorKeys {
     ERROR_CODE_KEY("com-harishkannarao-angularjs-error-code"),
     ERROR_MESSAGE_KEY("com-harishkannarao-angularjs-error-message"),
     ERROR_REFERENCE_KEY("com-harishkannarao-angularjs-error-reference"),
+    FORBIDDEN_KEY("com-harishkannarao-angularjs-forbidden"),
     APPLICATION_VALIDATION_ERROR_KEY("application-validation-exception");
 
     private final String value;

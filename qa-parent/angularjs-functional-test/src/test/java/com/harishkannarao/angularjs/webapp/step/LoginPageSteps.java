@@ -1,10 +1,11 @@
 package com.harishkannarao.angularjs.webapp.step;
 
+import com.harishkannarao.angularjs.webapp.page.GenericPage;
 import com.harishkannarao.angularjs.webapp.page.LoginPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.openqa.selenium.logging.LogEntries;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -16,9 +17,12 @@ public class LoginPageSteps {
 
     @Inject
     private LoginPage loginPage;
+    @Inject
+    private GenericPage genericPage;
 
     @Then("^I should be on login page$")
     public void iShouldBeOnLoginPage() throws Throwable {
+        LogEntries logs = genericPage.getLogEntries();
         assertTrue(loginPage.isOnValidPage(), "Is not on Login page");
     }
 

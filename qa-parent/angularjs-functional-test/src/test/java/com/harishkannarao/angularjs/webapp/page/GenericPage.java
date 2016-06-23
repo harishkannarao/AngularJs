@@ -1,5 +1,7 @@
 package com.harishkannarao.angularjs.webapp.page;
 
+import org.openqa.selenium.logging.LogEntries;
+
 public class GenericPage extends BasePage {
 
     public String getCurrentUrl() {
@@ -14,5 +16,9 @@ public class GenericPage extends BasePage {
     public void navigateToHomePageOnHttp() {
         webDriver.navigate().to(APPLICATION_URL);
         webDriver.navigate().refresh();
+    }
+
+    public LogEntries getLogEntries() {
+        return webDriver.manage().logs().get("browser");
     }
 }

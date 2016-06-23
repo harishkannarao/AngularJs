@@ -22,6 +22,7 @@ import static com.harishkannarao.angularjs.constants.HttpHeaderErrorCodes.FORBID
 import static com.harishkannarao.angularjs.constants.HttpHeaderErrorCodes.UNAUTHORIZED_ERROR;
 import static com.harishkannarao.angularjs.constants.HttpHeaderErrorKeys.ERROR_CODE_KEY;
 import static com.harishkannarao.angularjs.constants.HttpHeaderErrorKeys.ERROR_MESSAGE_KEY;
+import static com.harishkannarao.angularjs.constants.HttpHeaderErrorKeys.FORBIDDEN_KEY;
 
 @Provider
 public class AuthSecurityRequestFilter implements ContainerRequestFilter {
@@ -31,9 +32,10 @@ public class AuthSecurityRequestFilter implements ContainerRequestFilter {
             .header(ERROR_MESSAGE_KEY.getValue(), UNAUTHORIZED_ERROR.getMessage())
             .build();
     // 403 - Forbidden
-    private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN)
+    private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.UNAUTHORIZED)
             .header(ERROR_CODE_KEY.getValue(), FORBIDDEN_ERROR.getCode())
             .header(ERROR_MESSAGE_KEY.getValue(), FORBIDDEN_ERROR.getMessage())
+            .header(FORBIDDEN_KEY.getValue(), "true")
             .build();
 
     @Inject

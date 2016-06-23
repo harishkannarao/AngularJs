@@ -16,6 +16,8 @@ import java.util.UUID;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static com.harishkannarao.angularjs.constants.HttpHeaderErrorKeys.FORBIDDEN_KEY;
+
 @Provider
 public class ErrorReferenceResponseFilter implements ContainerResponseFilter {
     private static final Logger LOGGER = Logger.getLogger(ErrorReferenceResponseFilter.class.getName());
@@ -25,7 +27,8 @@ public class ErrorReferenceResponseFilter implements ContainerResponseFilter {
     public void filter(ContainerRequestContext containerRequestContext, ContainerResponseContext containerResponseContext) throws IOException {
         Family statusFamily = containerResponseContext.getStatusInfo().getFamily();
         Status status = Status.fromStatusCode(containerResponseContext.getStatus());
-        if (statusFamily.equals(Family.SERVER_ERROR) || status.equals(Status.FORBIDDEN)) {
+        boolean forbidden = Boolean.valueOf(containerResponseContext.getHeaderString(FORBIDDEN_KEY.getValue()));
+        if (statusFamily.equals(Family.SERVER_ERROR) || (status.equals(Status.UNAUTHORIZED) && forbidden)) {
             String errorReference = UUID.randomUUID().toString();
             String acceptTypes = containerRequestContext.getAcceptableMediaTypes().stream().map(MediaType::getType).collect(Collectors.joining(","));
             String errorMessage = new StringJoiner(":", "[", "]")

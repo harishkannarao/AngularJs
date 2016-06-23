@@ -37,11 +37,17 @@ public class UserService {
                 .setPassword("pass4")
                 .addAuthRole(Roles.ROLE3)
                 .build();
+        User user5 = UserBuilder.newBuilder()
+                .setUsername("user5")
+                .setPassword("pass5")
+                .addAuthRole(Roles.ROLE2)
+                .build();
 
         users.put(user1.getUsername(), user1);
         users.put(user2.getUsername(), user2);
         users.put(user3.getUsername(), user3);
         users.put(user4.getUsername(), user4);
+        users.put(user5.getUsername(), user5);
 
         return users;
     }
