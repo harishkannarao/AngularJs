@@ -24,14 +24,13 @@ Feature: User Details page feature
   Scenario Outline: should display error page for a user with role1 or empty roles
     Given I go to index page
     And I logout if already logged in
-    And I go to login page
+    And I go to user details page
+    And I wait for 1 seconds
+    And I print console output
     Then I should be on login page
     And I enter username as "<username>"
     And I enter password as "<password>"
     And I click on Login button
-    And I wait for 1 seconds
-    Then I should be on phone list page
-    And I go to user details page
     And I print console output
     And I wait for 1 seconds
     And I print console output

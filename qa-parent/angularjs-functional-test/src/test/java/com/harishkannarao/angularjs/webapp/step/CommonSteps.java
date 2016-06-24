@@ -7,9 +7,12 @@ import org.openqa.selenium.logging.LogEntries;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class CommonSteps {
+
+    private static final Logger LOGGER = Logger.getLogger(CommonSteps.class.getName());
     @Inject
     private GenericPage genericPage;
 
@@ -23,7 +26,7 @@ public class CommonSteps {
         LogEntries logEntries = genericPage.getLogEntries();
 
         logEntries.forEach(logEntry -> {
-            System.out.println(logEntry.toString());
+            LOGGER.info(logEntry.toString());
         });
     }
 }
