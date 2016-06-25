@@ -2,7 +2,9 @@ package com.harishkannarao.angularjs.webapp.step;
 
 import com.harishkannarao.angularjs.webapp.page.ErrorPage;
 import com.harishkannarao.angularjs.webapp.page.GenericPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.logging.LogEntries;
 
@@ -30,5 +32,10 @@ public class ErrorPageSteps {
         String errorReference = errorPage.getErrorReference();
         assertNotNull(errorReference);
         assertFalse(errorReference.trim().isEmpty());
+    }
+
+    @Given("^I go to error page$")
+    public void iGoToErrorPage() throws Throwable {
+        errorPage.navigate();
     }
 }

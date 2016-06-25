@@ -1,5 +1,6 @@
 package com.harishkannarao.angularjs.webapp.page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.logging.LogEntries;
 
 public class GenericPage extends BasePage {
@@ -20,5 +21,9 @@ public class GenericPage extends BasePage {
 
     public LogEntries getLogEntries() {
         return webDriver.manage().logs().get("browser");
+    }
+
+    public void clickOnLinkText(String linkText) {
+        webDriver.findElement(By.linkText(linkText)).click();
     }
 }

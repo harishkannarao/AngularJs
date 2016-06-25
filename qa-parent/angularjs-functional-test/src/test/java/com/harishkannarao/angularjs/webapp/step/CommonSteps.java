@@ -29,4 +29,9 @@ public class CommonSteps {
             LOGGER.info(logEntry.toString());
         });
     }
+
+    @And("^I click on \"([^\"]*)\" link$")
+    public void iClickOnLink(String linkText) throws Throwable {
+        genericPage.clickOnLinkText(linkText);
+    }
 }
