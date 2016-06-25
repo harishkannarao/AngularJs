@@ -32,7 +32,7 @@ public class AuthSecurityRequestFilter implements ContainerRequestFilter {
             .header(ERROR_MESSAGE_KEY.getValue(), UNAUTHORIZED_ERROR.getMessage())
             .build();
     // 403 - Forbidden
-    private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.UNAUTHORIZED)
+    private static final Response ACCESS_UNAUTHORIZED_AND_FORBIDDEN = Response.status(Response.Status.UNAUTHORIZED)
             .header(ERROR_CODE_KEY.getValue(), FORBIDDEN_ERROR.getCode())
             .header(ERROR_MESSAGE_KEY.getValue(), FORBIDDEN_ERROR.getMessage())
             .header(FORBIDDEN_KEY.getValue(), "true")
@@ -61,10 +61,10 @@ public class AuthSecurityRequestFilter implements ContainerRequestFilter {
             if (!authService.isAuthenticated(authId, authToken)) {
                 containerRequestContext.abortWith(ACCESS_UNAUTHORIZED);
             } else if (!authService.isAuthorized(authId, authToken, rolesAllowed)) {
-                containerRequestContext.abortWith(ACCESS_FORBIDDEN);
+                containerRequestContext.abortWith(ACCESS_UNAUTHORIZED_AND_FORBIDDEN);
             }
         } else if (methodInvoked.isAnnotationPresent(DenyAllRoles.class)) {
-            containerRequestContext.abortWith(ACCESS_FORBIDDEN);
+            containerRequestContext.abortWith(ACCESS_UNAUTHORIZED_AND_FORBIDDEN);
         }
     }
 }
