@@ -18,7 +18,7 @@ import static org.testng.Assert.*;
 
 @ApplicationScoped
 public class AuthAccessEndpointSteps extends BaseSteps {
-    private static final WebTarget authAccessEndpoint = restApiBaseTarget.path("/auth/authAccess");
+    public static final WebTarget authAccessEndpoint = restApiBaseTarget.path("/auth/authAccess");
     private static final String FORBIDDEN_HEADER = "com-harishkannarao-angularjs-forbidden";
 
     @Inject

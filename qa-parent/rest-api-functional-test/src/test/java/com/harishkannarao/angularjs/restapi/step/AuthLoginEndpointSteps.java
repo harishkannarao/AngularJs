@@ -23,7 +23,7 @@ import static org.testng.Assert.*;
 @ApplicationScoped
 public class AuthLoginEndpointSteps extends BaseSteps {
 
-    private static final WebTarget authLoginEndpoint = restApiBaseTarget.path("/auth/login");
+    public static final WebTarget authLoginEndpoint = restApiBaseTarget.path("/auth/login");
 
     private boolean emptyPayLoad;
     private String username;
