@@ -31,7 +31,6 @@ public class AuthSecurityRequestFilter implements ContainerRequestFilter {
             .header(ERROR_CODE_KEY.getValue(), UNAUTHORIZED_ERROR.getCode())
             .header(ERROR_MESSAGE_KEY.getValue(), UNAUTHORIZED_ERROR.getMessage())
             .build();
-    // 403 - Forbidden
     private static final Response ACCESS_UNAUTHORIZED_AND_FORBIDDEN = Response.status(Response.Status.UNAUTHORIZED)
             .header(ERROR_CODE_KEY.getValue(), FORBIDDEN_ERROR.getCode())
             .header(ERROR_MESSAGE_KEY.getValue(), FORBIDDEN_ERROR.getMessage())
