@@ -33,7 +33,7 @@
         <cargo.goal>start</cargo.goal>
         <jasmine.runner.port>8234</jasmine.runner.port>
         <driver>phantomjs</driver>
-
+        <phantomjs.version>2.1.1</phantomjs.version>
         <java.ee.version>7.0</java.ee.version>
         <testng.version>6.9.4</testng.version>
         <junit.version>4.12</junit.version>
@@ -173,7 +173,13 @@
                 <plugin>
                     <groupId>com.github.searls</groupId>
                     <artifactId>jasmine-maven-plugin</artifactId>
-                    <version>2.0</version>
+                    <version>2.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.github.klieber</groupId>
+                    <artifactId>phantomjs-maven-plugin</artifactId>
+                    <version>0.7</version>
                 </plugin>
             </plugins>
         </pluginManagement>
