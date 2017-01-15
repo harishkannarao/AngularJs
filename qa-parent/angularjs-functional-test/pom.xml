@@ -40,7 +40,9 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
                     <!-- ${phantomjs.binary} is set by phantomjs-maven-plugin -->
-                    <argLine>-Dphantomjs.binary.path=${phantomjs.binary}</argLine>
+                    <systemPropertyVariables>
+                        <phantomjs.binary.path>${phantomjs.binary}</phantomjs.binary.path>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
